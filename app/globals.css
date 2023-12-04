@@ -25,3 +25,16 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* Style for input field text color in dark mode */
+@media (prefers-color-scheme: dark) {
+  input {
+    color: #000000; /* Set the text color of the input field in dark mode */
+  }
+  label {
+    color: #ffffff !important; /* Set the text color of labels in dark mode */
+  }
+  p {
+    color: #ffffff; /* Set the text color of labels in dark mode */
+  }
+}

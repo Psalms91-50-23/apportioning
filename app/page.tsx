@@ -1,4 +1,3 @@
-import Image from 'next/image'
 import { PWCApportioning, Apportioning } from '@/components'
 
 export default function Home() {

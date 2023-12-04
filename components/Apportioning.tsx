@@ -52,7 +52,7 @@ const Apportioning = () => {
       start: "",
       end: ""
     });
-
+    const [isFireFox, setIsFireFox] = useState<boolean>(false);
     const [isWPSelected, setIsWPSelected] = useState<boolean>(false);
     const [isAllFieldEntered, setIsAllFieldEntered] = useState<boolean>(false);
  
@@ -445,8 +445,6 @@ const Apportioning = () => {
 
   }
 
- 
-
   useEffect(() => {
     const isAtLeastOneDaySelected = (pattern: PatternOfWork): boolean => {
       return Object.values(pattern).some((value) => value === true);
@@ -461,6 +459,19 @@ const Apportioning = () => {
 
   }, [workPattern]);
   
+  useEffect(() => {
+    const isFirefox = navigator.userAgent.includes('Firefox');
+    
+    if (isFirefox) {
+      // Code to handle Firefox-specific styling
+      console.log('This is Firefox!');
+      setIsFireFox(true);
+    }
+    else {
+      setIsFireFox(false);
+    }
+  }, []);
+
   const { start, end } = dateRangeWithPWC;
 
 //   const information = `Normal wages date range \n${grossEarningsStartDate} - ${grossEarningsEndDate}\nDays counted for date range above: ${daysCounted} \t\tDays counted based on work pattern: ${workPatternDaysCounted} \nSingle day gross earnings based on work pattern calculations: ${grossEarnings} / ${workPatternDaysCounted} = $${singleDayGrossWP}This is the information you want users to copy and paste.`;
