@@ -58,7 +58,7 @@ const formatDate = (input: string, setError: Function) => {
   };
 
   //format for creating date yyyy-mm-dd or dd/mm/yyyy does not count april 2023 month correctly only this format yyyy/mm/dd does
-  const createDateFromFormat = (dateString: string | Date) => {
+  const createDateFromFormat = (dateString: string | Date): Date | undefined => {
     //yyyy/mm/dd
     let formatOne = /^\d{4}\/\d{2}\/\d{2}$/.test(dateString as string);
     //dd/mm/yyyy
@@ -72,7 +72,7 @@ const formatDate = (input: string, setError: Function) => {
       let formattedDate = `${year}/${month}/${day}`
       return new Date(formattedDate);
     }else if( dateString instanceof Date ){
-      let year = dateString.getYear();
+      let year = dateString.getFullYear();
       let month = dateString.getMonth()+1;
       let day = dateString.getDate();
       return new Date(`${year}/${month}/${day}`);
@@ -135,12 +135,12 @@ const formatDate = (input: string, setError: Function) => {
   const formatStringNumberWithCommas = (stringValue: string): string => {
     // Convert the string to a number, then format it with commas
     const numberValue = parseFloat(stringValue).toFixed(2);
-    if (!isNaN(numberValue)) {
-      return numberValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    } else {
-      // Handle the case where the input is not a valid number
-      return stringValue;
-    }
+    return numberValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    // if (!isNaN(numberValue)) {
+    // } else {
+    //   // Handle the case where the input is not a valid number
+    //   return stringValue;
+    // }
   };
 
   export default {

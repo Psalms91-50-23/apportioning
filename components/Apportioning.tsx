@@ -51,7 +51,6 @@ const Apportioning = () => {
       start: "",
       end: ""
     });
-    const [isFireFox, setIsFireFox] = useState<boolean>(false);
     const [isWPSelected, setIsWPSelected] = useState<boolean>(false);
     const [isAllFieldEntered, setIsAllFieldEntered] = useState<boolean>(false);
  
@@ -74,8 +73,6 @@ const Apportioning = () => {
         }));
       };
 
-
-    
       const validateAndSetGrossEarnings = (inputValue: string, setGrossEarnings: Function, setErrorGrossEarnings: Function): void => {
         // Only show an error if there is an input
         if (inputValue.trim().length > 0) {
@@ -88,8 +85,7 @@ const Apportioning = () => {
             setGrossEarningsFormat(false);
             return;
           }
-        }
-      
+        }      
         // Update state only if there is no error
         setGrossEarnings(inputValue);
         setErrorGrossEarnings(false);
@@ -108,11 +104,10 @@ const Apportioning = () => {
 
     const countDays = (startDateString: string, endDateString: string): number => {
 
-        let tempStartDate = createDateFromFormat(startDateString);
-        let tempEndDate = createDateFromFormat(endDateString);
-        let newTempStartDate = new Date(tempStartDate);
-        let newTempEndDate = new Date(tempEndDate);
-        let daysCounted: number = (differenceInDays(newTempEndDate, newTempStartDate))+includeLastDay;
+        let tempStartDate = createDateFromFormat(startDateString) ?? new Date(startDateString);
+        let tempEndDate = createDateFromFormat(endDateString) ?? new Date(endDateString);
+
+        let daysCounted: number = (differenceInDays(tempEndDate, tempStartDate))+includeLastDay;
         return daysCounted;
     }; 
 
@@ -192,7 +187,6 @@ const Apportioning = () => {
         setGrossEarningsFormat(true);
     };
     
-
     const grossStartDateOnBlur = () => {
         
         if(grossEarningsStartDate == ""){
@@ -300,10 +294,10 @@ const Apportioning = () => {
 
     const overlapDateRangeString = (grossStartDate: string, grossEndDate: string, pwcStartDate: string, pwcEndDate: string ) => {
       
-      let tempGrossStartDate = createDateFromFormat(grossStartDate);
-      let tempGrossEndDate = createDateFromFormat(grossEndDate);
-      let tempPWCStartDate = createDateFromFormat(pwcStartDate);
-      let tempPWCEndDate = createDateFromFormat(pwcEndDate);
+      let tempGrossStartDate = createDateFromFormat(grossStartDate) ?? new Date(grossStartDate);
+      let tempGrossEndDate = createDateFromFormat(grossEndDate) ?? new Date(grossEndDate);
+      let tempPWCStartDate = createDateFromFormat(pwcStartDate) ?? new Date(pwcStartDate);
+      let tempPWCEndDate = createDateFromFormat(pwcEndDate) ?? new Date(pwcEndDate);
       let tempObj = {
         start: "",
         end: ""
@@ -395,9 +389,9 @@ const Apportioning = () => {
           let daysCountNoWp;
           let daysCountWp;
           daysCountNoWp = await countDays(grossEarningsStartDate, grossEarningsEndDate);
-          setDaysCounted(daysCountNoWp);
-          let grossDateStart = await createDateFromFormat(grossEarningsStartDate);
-          let grossDateEnd = await createDateFromFormat(grossEarningsEndDate);
+          setDaysCounted(daysCountNoWp.toString());
+          let grossDateStart = await createDateFromFormat(grossEarningsStartDate) ?? new Date(grossEarningsStartDate);
+          let grossDateEnd = await createDateFromFormat(grossEarningsEndDate) ?? new Date(grossEarningsEndDate);
           daysCountWp = await countWorkDays(grossDateStart,grossDateEnd, workPattern);
           // let grossEarningsNum = Number(replaceValues(grossEarnings));
           let grossEarningsNum = Number(replaceCommas(grossEarnings));
@@ -405,9 +399,9 @@ const Apportioning = () => {
           let singleDayGrossWP = Number(grossEarningsNum/daysCountWp);
           setSingleDayGrossWP(singleDayGrossWP.toString());
           let tempTotalGrossReduction = Number(singleDayGrossWP * daysCountWp);
-          setTotalGrossForPeriodReduction(tempTotalGrossReduction);
+          setTotalGrossForPeriodReduction(tempTotalGrossReduction.toString());
 
-          setWorkPatternDaysCounted(daysCountWp); 
+          setWorkPatternDaysCounted(daysCountWp.toString()); 
           let tempOject = await overlapDateRangeString(grossEarningsStartDate,grossEarningsEndDate, pwcStartDate, pwcEndDate);
           setDateRangeWithPWC({
             start: tempOject.start,
@@ -417,8 +411,8 @@ const Apportioning = () => {
           let end = new Date(tempOject.end);
           let wage_pwc_overlap_days = await countWorkDays(start, end, workPattern);
           let totalOverlapReduction = singleDayGrossWP * wage_pwc_overlap_days;
-          setCountDaysOverlapWithPWC(wage_pwc_overlap_days);
-          setTotalGrossForPeriodReduction(totalOverlapReduction);
+          setCountDaysOverlapWithPWC(wage_pwc_overlap_days.toString());
+          setTotalGrossForPeriodReduction(totalOverlapReduction.toString());
           setIsAllFieldEntered(true);
 
         }catch(error){
