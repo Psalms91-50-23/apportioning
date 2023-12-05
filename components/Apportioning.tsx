@@ -10,7 +10,6 @@ import { PatternOfWork } from "../types";
 const Apportioning = () => {
     const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(?:[0-9]{2})?[0-9]{2}$/;
     let includeLastDay = 1;
-
     //gross earnings and wp checkbox
     const [grossEarnings, setGrossEarnings] = useState<string>("0.00");
     const [grossEarningsFormat, setGrossEarningsFormat] = useState<boolean>(false);
@@ -40,7 +39,6 @@ const Apportioning = () => {
     //counted days for work pattern 1 day
     const [singleDayGrossWP, setSingleDayGrossWP] = useState<string>("0");
     //include last day
-    const [isLastDayChecked, setIsLastDayChecked] = useState<boolean>(false);
     const [totalGrossForPeriodReduction, setTotalGrossForPeriodReduction] = useState<string>("0");
     // const [isTotalGrossReductionCompleted, setIsTotalGrossReductionCompleted] = useState<boolean>(false);
 
