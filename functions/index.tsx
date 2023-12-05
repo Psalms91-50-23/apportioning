@@ -57,11 +57,26 @@ const formatDate = (input: string, setError: Function) => {
     return `${day.padStart(2, '0')}/${month.padStart(2, '0')}/${formattedYear}`;
   };
 
-  const createDateFromFormat = (dateString: string) => {
-    // console.log({dateString});
-      const [day, month, year] = dateString.split('/');
-      let formattedDate = `${year}-${month}-${day}`
+  //format for creating date yyyy-mm-dd or dd/mm/yyyy does not count april 2023 month correctly only this format yyyy/mm/dd does
+  const createDateFromFormat = (dateString: string | Date) => {
+    //yyyy/mm/dd
+    let formatOne = /^\d{4}\/\d{2}\/\d{2}$/.test(dateString as string);
+    //dd/mm/yyyy
+    let formatTwo = /^\d{2}\/\d{2}\/\d{4}$/.test(dateString as string);
+    if(typeof dateString === 'string' && formatOne){
+      const [year, month, day] = dateString.split('/');
+      let formattedDate = `${year}/${month}/${day}`
       return new Date(formattedDate);
+    }else if(typeof dateString === 'string' && formatTwo){
+      const [day, month, year] = dateString.split('/');
+      let formattedDate = `${year}/${month}/${day}`
+      return new Date(formattedDate);
+    }else if( dateString instanceof Date ){
+      let year = dateString.getYear();
+      let month = dateString.getMonth()+1;
+      let day = dateString.getDate();
+      return new Date(`${year}/${month}/${day}`);
+    }   
   }
 
   const validateDate = (input: string): boolean => {
@@ -89,10 +104,52 @@ const formatDate = (input: string, setError: Function) => {
     }
   }
   
+  const replaceCommas = (value: string | null | undefined): string => {
+    // Check if value is a string
+    if (typeof value === "string") {
+        // Replace all commas with an empty string
+        return value.replace(/,/g, "");
+    }
+
+    // Handle other cases, e.g., return an empty string or handle differently
+    return "";
+};
+
+  const  formatNumberWithCommas = (number: number): string => {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  const numberWithCommas = (value: string): string => {
+    const parts = value.split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  
+    // If there is a decimal part, format it separately
+    if (parts[1]) {
+      parts[1] = parts[1].slice(0, 2); // Limit decimal part to two digits
+      return parts.join('.');
+    }
+  
+    return parts[0];
+  };
+  
+  const formatStringNumberWithCommas = (stringValue: string): string => {
+    // Convert the string to a number, then format it with commas
+    const numberValue = parseFloat(stringValue).toFixed(2);
+    if (!isNaN(numberValue)) {
+      return numberValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    } else {
+      // Handle the case where the input is not a valid number
+      return stringValue;
+    }
+  };
+
   export default {
     formatDate,
     createDateFromFormat,
     validateDate,
     getLesserDate,
-    getGreaterDate
+    getGreaterDate,
+    replaceCommas,
+    numberWithCommas,
+    formatStringNumberWithCommas
   }

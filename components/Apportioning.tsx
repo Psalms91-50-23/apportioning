@@ -1,11 +1,10 @@
 'use client';
 
-import React, { useState,useEffect, ChangeEvent } from 'react';
+import React, { useState,useEffect } from 'react';
 import {  differenceInDays } from "date-fns";
-import Decimal from 'decimal.js';
 import functions from "../functions";
-const { createDateFromFormat, formatDate, validateDate, getGreaterDate, getLesserDate } = functions;
-import { PatternOfWork, DateRange, OverlapDates } from "../types";
+const { createDateFromFormat, formatDate, validateDate, getGreaterDate, getLesserDate, replaceCommas, numberWithCommas,formatStringNumberWithCommas } = functions;
+import { PatternOfWork } from "../types";
 
 
 const Apportioning = () => {
@@ -39,15 +38,15 @@ const Apportioning = () => {
     const [pwcEndCompleted, setPwcEndCompleted] = useState<boolean>(false);
 
     //counted days for work pattern 1 day
-    const [singleDayGrossWP, setSingleDayGrossWP] = useState<number>(0);
+    const [singleDayGrossWP, setSingleDayGrossWP] = useState<string>("0");
     //include last day
     const [isLastDayChecked, setIsLastDayChecked] = useState<boolean>(false);
-    const [totalGrossForPeriodReduction, setTotalGrossForPeriodReduction] = useState<number>(0);
+    const [totalGrossForPeriodReduction, setTotalGrossForPeriodReduction] = useState<string>("0");
     // const [isTotalGrossReductionCompleted, setIsTotalGrossReductionCompleted] = useState<boolean>(false);
 
-    const [daysCounted, setDaysCounted] = useState<number>(0);
-    const [workPatternDaysCounted, setWorkPatternDaysCounted] = useState<number>(0);
-    const [countDaysOverlapWithPWC, setCountDaysOverlapWithPWC] = useState<number>(0);
+    const [daysCounted, setDaysCounted] = useState<string>("0");
+    const [workPatternDaysCounted, setWorkPatternDaysCounted] = useState<string>("0");
+    const [countDaysOverlapWithPWC, setCountDaysOverlapWithPWC] = useState<string>("0");
     const [dateRangeWithPWC, setDateRangeWithPWC] = useState({
       start: "",
       end: ""
@@ -75,18 +74,7 @@ const Apportioning = () => {
         }));
       };
 
-      const numberWithCommas = (value: string): string => {
-        const parts = value.split('.');
-        parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      
-        // If there is a decimal part, format it separately
-        if (parts[1]) {
-          parts[1] = parts[1].slice(0, 2); // Limit decimal part to two digits
-          return parts.join('.');
-        }
-      
-        return parts[0];
-      };
+
     
       const validateAndSetGrossEarnings = (inputValue: string, setGrossEarnings: Function, setErrorGrossEarnings: Function): void => {
         // Only show an error if there is an input
@@ -96,7 +84,7 @@ const Apportioning = () => {
       
           if (!regex.test(inputValue)) {
             setGrossEarnings('');
-            setErrorGrossEarnings('Invalid gross earnings format');
+            setErrorGrossEarnings(true);
             setGrossEarningsFormat(false);
             return;
           }
@@ -119,6 +107,7 @@ const Apportioning = () => {
       };
 
     const countDays = (startDateString: string, endDateString: string): number => {
+
         let tempStartDate = createDateFromFormat(startDateString);
         let tempEndDate = createDateFromFormat(endDateString);
         let newTempStartDate = new Date(tempStartDate);
@@ -128,10 +117,8 @@ const Apportioning = () => {
     }; 
 
     const countWorkDays = (startDate: Date, endDate: Date, workPattern: PatternOfWork): number => {
-
         let count = 0;
         let currentDate = new Date(startDate);
-      
         while (currentDate <= endDate) {
           const dayOfWeek = currentDate.getDay();
           const dayKey = Object.keys(workPattern)[dayOfWeek] as keyof PatternOfWork;
@@ -168,13 +155,6 @@ const Apportioning = () => {
         validateAndSetGrossEarnings(grossEarnings, setGrossEarnings, setErrorGrossEarnings);
         let formattedInput = grossEarnings.trim(); // Trim leading/trailing whitespaces
         
-        // if (!/^[0-9.]*$/.test(formattedInput)) {
-        //     // The string contains characters other than 0-9 and a dot
-        //     // Add your logic here
-        //     setGrossEarningsInputError(false);
-        //     setGrossEarnings("0.00");
-        //     return;
-        //   }
         if (!formattedInput) {
             // If input is empty, set default value
             formattedInput = '0.00';
@@ -207,7 +187,6 @@ const Apportioning = () => {
     
         formattedInput = numberWithCommas(formattedInput);
         // Update state
-  
         setErrorGrossEarnings(false);
         setGrossEarnings(formattedInput);
         setGrossEarningsFormat(true);
@@ -238,7 +217,6 @@ const Apportioning = () => {
           // If it doesn't match, set isComplete to false and setError to true
           setIsGrossStartDateCompleted(false);
           setGrossStartDateError(true);
-
         }
       }
 
@@ -340,12 +318,12 @@ const Apportioning = () => {
       year = greater.getFullYear();
       month = greater.getMonth()+1;
       day = greater.getDate();
-      tempStringDateStart = `${day}/${month}/${year}`;
+      tempStringDateStart = `${year}/${month}/${day}`;
       
       year2 = lesser.getFullYear();
       month2 = lesser.getMonth()+1;
       day2 = lesser.getDate();
-      tempStringDateEnd = `${day2}/${month2}/${year2}`;
+      tempStringDateEnd = `${year2}/${month2}/${day2}`;
       
       tempObj = {
         start: tempStringDateStart,
@@ -385,7 +363,7 @@ const Apportioning = () => {
           tempStringDateEnd = `${day}/${month}/${year}`;
         }
   
-        if( grossEndDate >= pwcEndDate){
+        if( grossEndDate >= pwcEndDate ){
           year = pwcEndDate.getFullYear();
           month = pwcEndDate.getMonth()+1;
           day = pwcEndDate.getDate();
@@ -404,7 +382,7 @@ const Apportioning = () => {
       return isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected
     }
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
 
       if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected){
 
@@ -412,33 +390,40 @@ const Apportioning = () => {
           return value.replace(/,/g, '');
         };
 
-        let daysCountNoWp;
-        let daysCountWp;
-        daysCountNoWp = countDays(grossEarningsStartDate, grossEarningsEndDate);
-        setDaysCounted(daysCountNoWp);
-        let grossDateStart = createDateFromFormat(grossEarningsStartDate);
-        let grossDateEnd = createDateFromFormat(grossEarningsEndDate);
-        daysCountWp = countWorkDays(grossDateStart,grossDateEnd, workPattern);
-        let grossEarningsNum = Number(grossEarnings);
-        let singleDayGrossWP = Number(grossEarningsNum / daysCountWp);
-        setSingleDayGrossWP(singleDayGrossWP);
-        let tempTotalGrossReduction = Number(singleDayGrossWP * daysCountWp);
-        setTotalGrossForPeriodReduction(tempTotalGrossReduction);
-        setWorkPatternDaysCounted(daysCountWp); 
-        let tempOject = overlapDateRangeString(grossEarningsStartDate,grossEarningsEndDate, pwcStartDate, pwcEndDate);
-        setDateRangeWithPWC({
-          start: tempOject.start,
-          end: tempOject.end
-        });
-        let start  = createDateFromFormat(tempOject.start);
-        let end = createDateFromFormat(tempOject.end);
+        try{
 
-        let wage_pwc_overlap_days = countWorkDays(start, end, workPattern);
-        let totalOverlapReduction = singleDayGrossWP * wage_pwc_overlap_days;
-        setCountDaysOverlapWithPWC(wage_pwc_overlap_days);
-        setTotalGrossForPeriodReduction(totalOverlapReduction);
-        setIsAllFieldEntered(true);
- 
+          let daysCountNoWp;
+          let daysCountWp;
+          daysCountNoWp = await countDays(grossEarningsStartDate, grossEarningsEndDate);
+          setDaysCounted(daysCountNoWp);
+          let grossDateStart = await createDateFromFormat(grossEarningsStartDate);
+          let grossDateEnd = await createDateFromFormat(grossEarningsEndDate);
+          daysCountWp = await countWorkDays(grossDateStart,grossDateEnd, workPattern);
+          // let grossEarningsNum = Number(replaceValues(grossEarnings));
+          let grossEarningsNum = Number(replaceCommas(grossEarnings));
+          // let grossEarningsNum = Number(grossEarnings.replace(/,/g,""));
+          let singleDayGrossWP = Number(grossEarningsNum/daysCountWp);
+          setSingleDayGrossWP(singleDayGrossWP.toString());
+          let tempTotalGrossReduction = Number(singleDayGrossWP * daysCountWp);
+          setTotalGrossForPeriodReduction(tempTotalGrossReduction);
+
+          setWorkPatternDaysCounted(daysCountWp); 
+          let tempOject = await overlapDateRangeString(grossEarningsStartDate,grossEarningsEndDate, pwcStartDate, pwcEndDate);
+          setDateRangeWithPWC({
+            start: tempOject.start,
+            end: tempOject.end
+          });
+          let start  = new Date(tempOject.start);
+          let end = new Date(tempOject.end);
+          let wage_pwc_overlap_days = await countWorkDays(start, end, workPattern);
+          let totalOverlapReduction = singleDayGrossWP * wage_pwc_overlap_days;
+          setCountDaysOverlapWithPWC(wage_pwc_overlap_days);
+          setTotalGrossForPeriodReduction(totalOverlapReduction);
+          setIsAllFieldEntered(true);
+
+        }catch(error){
+          console.error(" Error ", error);
+        }
     }else {
       setIsAllFieldEntered(true);
     }
@@ -458,27 +443,12 @@ const Apportioning = () => {
     }
 
   }, [workPattern]);
-  
-  useEffect(() => {
-    const isFirefox = navigator.userAgent.includes('Firefox');
-    
-    if (isFirefox) {
-      // Code to handle Firefox-specific styling
-      console.log('This is Firefox!');
-      setIsFireFox(true);
-    }
-    else {
-      setIsFireFox(false);
-    }
-  }, []);
 
   const { start, end } = dateRangeWithPWC;
 
-//   const information = `Normal wages date range \n${grossEarningsStartDate} - ${grossEarningsEndDate}\nDays counted for date range above: ${daysCounted} \t\tDays counted based on work pattern: ${workPatternDaysCounted} \nSingle day gross earnings based on work pattern calculations: ${grossEarnings} / ${workPatternDaysCounted} = $${singleDayGrossWP}This is the information you want users to copy and paste.`;
-        
   return (
     <div className="flex flex-1 box-border min-h-screen flex-col">
-      <p className='font-bold italic'>PWC Apportioning</p>
+      <p className='text-2xl font-bold italic mb-5'>PWC Apportioning</p>
       <div className="flex flex-col flex-wrap">
         <div className="flex flex-row flex-wrap items-center">
           {Object.keys(workPattern).map((day) => (
@@ -519,7 +489,7 @@ const Apportioning = () => {
         </div>
         {grossEarningsInputError && (
           <div className="my-3">
-          <p className="text-red-500 text-xs italic">Invalid input format</p>
+            <p className="text-red-500 text-xs italic">Invalid input format</p>
           </div>
         )}
       </div>
@@ -652,7 +622,7 @@ const Apportioning = () => {
                     Single day gross earnings based on work pattern calculations: 
                 </p>
                 <p>
-                    ${grossEarnings} / {workPatternDaysCounted} = ${singleDayGrossWP}
+                    ${grossEarnings} / {workPatternDaysCounted} = ${formatStringNumberWithCommas(singleDayGrossWP)}
                 </p>
               </div>
             </div>
@@ -666,8 +636,8 @@ const Apportioning = () => {
               <p className="font-bold">
                 Normal wage and previous weekly compensation date overlap
               </p>
-              <p>{start} — {end}   {countDaysOverlapWithPWC} day overlap based on work pattern</p> 
-              <p>{countDaysOverlapWithPWC} * ${singleDayGrossWP} = ${totalGrossForPeriodReduction}</p>
+              <p>{start} — {end}   {formatStringNumberWithCommas(countDaysOverlapWithPWC)} {Number(countDaysOverlapWithPWC) > 1 ? "days" : "day"} overlap based on work pattern</p> 
+              <p>{countDaysOverlapWithPWC} * ${formatStringNumberWithCommas(singleDayGrossWP)} = ${formatStringNumberWithCommas(totalGrossForPeriodReduction)}</p>
             </div>
           </div>
         ):
