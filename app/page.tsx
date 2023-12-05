@@ -1,4 +1,4 @@
-import { PWCApportioning, Apportioning } from '@/components'
+import { Apportioning } from '@/components'
 
 export default function Home() {
   return (

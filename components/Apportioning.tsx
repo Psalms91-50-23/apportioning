@@ -102,9 +102,9 @@ const Apportioning = () => {
 
     const countDays = (startDateString: string, endDateString: string): number => {
 
-        let tempStartDate = createDateFromFormat(startDateString) ?? new Date(startDateString);
+        let tempStartDate = createDateFromFormat(startDateString) ?? new Date(startDateString) ;
         let tempEndDate = createDateFromFormat(endDateString) ?? new Date(endDateString);
-
+        
         let daysCounted: number = (differenceInDays(tempEndDate, tempStartDate))+includeLastDay;
         return daysCounted;
     }; 
@@ -628,7 +628,7 @@ const Apportioning = () => {
               <p className="font-bold">
                 Normal wage and previous weekly compensation date overlap
               </p>
-              <p>{start} — {end}   {formatStringNumberWithCommas(countDaysOverlapWithPWC)} {Number(countDaysOverlapWithPWC) > 1 ? "days" : "day"} overlap based on work pattern</p> 
+              <p>{start} — {end}  {formatStringNumberWithCommas(countDaysOverlapWithPWC)} {Number(countDaysOverlapWithPWC) > 1 ? "days" : "day"} overlap based on work pattern</p> 
               <p>{countDaysOverlapWithPWC} * ${formatStringNumberWithCommas(singleDayGrossWP)} = ${formatStringNumberWithCommas(totalGrossForPeriodReduction)}</p>
             </div>
           </div>

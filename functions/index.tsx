@@ -77,6 +77,7 @@ const formatDate = (input: string, setError: Function) => {
       let day = dateString.getDate();
       return new Date(`${year}/${month}/${day}`);
     }   
+    return undefined;
   }
 
   const validateDate = (input: string): boolean => {
