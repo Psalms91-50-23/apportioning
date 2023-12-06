@@ -7,7 +7,6 @@ const { createDateFromFormat, formatDate, validateDate, getGreaterDate, getLesse
   formatStringNumberWithCommas, sanitizeInput, convertToInitialDateFormat } = functions;
 import { PatternOfWork } from "../types";
 
-
 const Apportioning = () => {
     const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(?:[0-9]{2})?[0-9]{2}$/;
     let includeLastDay = 1;
@@ -97,17 +96,6 @@ const Apportioning = () => {
         setErrorGrossEarnings(false);
       };
 
-      const isWorkDay = (date: Date, workPattern: PatternOfWork, startOfWeek: number): boolean => {
-        const dayOfWeek = date.getDay();
-        const adjustedDayOfWeek = (dayOfWeek - startOfWeek + 7) % 7;
-        // Ensure adjustedDayOfWeek is within the valid range
-        if (adjustedDayOfWeek >= 0 && adjustedDayOfWeek < Object.keys(workPattern).length) {
-          const dayKey = Object.keys(workPattern)[adjustedDayOfWeek] as keyof PatternOfWork;
-          return workPattern[dayKey];
-        }
-        return false;
-      };
-
     const countDays = (startDateString: string, endDateString: string): number => {
 
         let tempStartDate = createDateFromFormat(startDateString) ?? new Date(startDateString) ;
@@ -186,10 +174,10 @@ const Apportioning = () => {
                 formattedInput = formattedInput.replace(/^0+/, ''); // Remove leading zeros
             }
         }
-        
+        //removing unwanted $ sign
         let santizedGrossInputs = sanitizeInput(formattedInput);
+        //adding commas to make it separate for each 1,000
         formattedInput = numberWithCommas(santizedGrossInputs);
-
         // Update state
         setErrorGrossEarnings(false);
         setGrossEarnings(formattedInput);
@@ -335,85 +323,31 @@ const Apportioning = () => {
       return tempObj;
     }
 
-    const overlapRange = (grossStartDate: Date, grossEndDate:Date, pwcStartDate: Date, pwcEndDate: Date ) => {
-
-        let tempObj = {
-          start: "",
-          end: ""
-        }
-        let year, month, day;
-        let tempStringDateStart = "";
-        let tempStringDateEnd = "";
-        if(grossStartDate <= pwcStartDate){
-          year = pwcStartDate.getFullYear();
-          month = pwcStartDate.getMonth()+1;
-          day = pwcStartDate.getDate();
-          tempStringDateStart = `${day}/${month}/${year}`;
-  
-        }
-        
-        if(grossStartDate > pwcStartDate){
-          year = grossStartDate.getFullYear();
-          month = grossStartDate.getMonth()+1;
-          day = grossStartDate.getDate();
-          tempStringDateStart = `${day}/${month}/${year}`;
-        }
-  
-        if( grossEndDate < pwcEndDate){
-          year = grossEndDate.getFullYear();
-          month = grossEndDate.getMonth()+1;
-          day = grossEndDate.getDate();
-          tempStringDateEnd = `${day}/${month}/${year}`;
-        }
-  
-        if( grossEndDate >= pwcEndDate ){
-          year = pwcEndDate.getFullYear();
-          month = pwcEndDate.getMonth()+1;
-          day = pwcEndDate.getDate();
-          tempStringDateEnd = `${day}/${month}/${year}`;
-        }
-        
-        tempObj = {
-          start: tempStringDateStart,
-          end: tempStringDateEnd
-        }
-        return tempObj;
-
-      }
-
-    const isAllFieldCompleted = ():boolean  => {
-      return isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected
-    }
-
     const onSubmit = async () => {
 
-
-
       if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected){
-
-        const removeCommas = (value: string): string => {
-          return value.replace(/,/g, '');
-        };
-          let daysCountNoWp;
-          let daysCountWp;
-          daysCountNoWp =  countDays(grossEarningsStartDate, grossEarningsEndDate);
+          const daysCountNoWp = countDays(grossEarningsStartDate, grossEarningsEndDate);
           setDaysCounted(daysCountNoWp.toString());
-          let grossDateStart =  createDateFromFormat(grossEarningsStartDate) ?? new Date(grossEarningsStartDate);
-          let grossDateEnd =  createDateFromFormat(grossEarningsEndDate) ?? new Date(grossEarningsEndDate);
-          daysCountWp =  countWorkDays(grossDateStart,grossDateEnd, workPattern);
-          let grossEarningsNum = Number(replaceCommas(grossEarnings));
-          let singleDayGrossWP = Number(grossEarningsNum/daysCountWp);
+          //convert date format from dd/mm/yyy to yyyy/mm/dd as it is more accurate for counting days, eg april was 1 day off using original format
+          const grossDateStart =  createDateFromFormat(grossEarningsStartDate) ?? new Date(grossEarningsStartDate);
+          const grossDateEnd =  createDateFromFormat(grossEarningsEndDate) ?? new Date(grossEarningsEndDate);
+          const daysCountWp =  countWorkDays(grossDateStart,grossDateEnd, workPattern);
+          //converting string to number and replacing commas with empty string for the purpose of calculating
+          const grossEarningsNum = Number(replaceCommas(grossEarnings));
+          const singleDayGrossWP = Number(grossEarningsNum/daysCountWp);
           setSingleDayGrossWP(singleDayGrossWP.toString());
-          let tempTotalGrossReduction = Number(singleDayGrossWP * daysCountWp);
+          const tempTotalGrossReduction = Number(singleDayGrossWP * daysCountWp);
           setTotalGrossForPeriodReduction(tempTotalGrossReduction.toString());
           setWorkPatternDaysCounted(daysCountWp.toString()); 
-          let tempOject =  overlapDateRangeString(grossEarningsStartDate,grossEarningsEndDate, pwcStartDate, pwcEndDate);
-          let start  = new Date(tempOject.start);
-          let end = new Date(tempOject.end);
-          let wage_pwc_overlap_days =  countWorkDays(start, end, workPattern);
-          let totalOverlapReduction = singleDayGrossWP * wage_pwc_overlap_days;
+          //finding start and end date for overlap
+          const tempOject =  overlapDateRangeString(grossEarningsStartDate,grossEarningsEndDate, pwcStartDate, pwcEndDate);
+          const start  = new Date(tempOject.start);
+          const end = new Date(tempOject.end);
+          const wage_pwc_overlap_days =  countWorkDays(start, end, workPattern);
+          const totalOverlapReduction = singleDayGrossWP * wage_pwc_overlap_days;
           setCountDaysOverlapWithPWC(wage_pwc_overlap_days.toString());
           setTotalGrossForPeriodReduction(totalOverlapReduction.toString());
+          //converting date format back to original format dd/mm/yyyy
           const originalDateFormat = convertToInitialDateFormat(tempOject.start, tempOject.end);
           setDateRangeWithPWC({
             start: originalDateFormat.start,
