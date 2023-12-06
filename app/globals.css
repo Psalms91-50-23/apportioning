@@ -37,4 +37,9 @@ body {
   p {
     color: #ffffff; /* Set the text color of labels in dark mode */
   }
+  /* Button styles on hover */
+  button:hover {
+    border: 2px solid #ffffff; /* Set the border color on hover */
+  }
+
 }
