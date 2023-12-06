@@ -111,7 +111,6 @@ const formatDate = (input: string, setError: Function) => {
         // Replace all commas with an empty string
         return value.replace(/,/g, "");
     }
-
     // Handle other cases, e.g., return an empty string or handle differently
     return "";
 };
@@ -137,12 +136,32 @@ const formatDate = (input: string, setError: Function) => {
     // Convert the string to a number, then format it with commas
     const numberValue = parseFloat(stringValue).toFixed(2);
     return numberValue.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    // if (!isNaN(numberValue)) {
-    // } else {
-    //   // Handle the case where the input is not a valid number
-    //   return stringValue;
-    // }
+
   };
+
+  const sanitizeInput = (input: string): string => {
+    // Use a regular expression to keep only digits and dots
+    const sanitizedInput = input.replace(/[^\d.]/g, "");
+  
+    return sanitizedInput;
+  };
+
+  const convertToInitialDateFormat = (startDate: string, endDate: string ) => {
+
+    const year1 = new Date(startDate).getFullYear();
+    const month1 = new Date(startDate).getMonth()+1;
+    const day1 = new Date(startDate).getDate();
+
+    const year2 = new Date(endDate).getFullYear();
+    const month2 = new Date(endDate).getMonth()+1;
+    const day2 = new Date(endDate).getDate();
+
+    return {
+      start: `${day1}/${month1}/${year1}`,
+      end: `${day2}/${month2}/${year2}`
+    }
+
+  }
 
   export default {
     formatDate,
@@ -152,5 +171,7 @@ const formatDate = (input: string, setError: Function) => {
     getGreaterDate,
     replaceCommas,
     numberWithCommas,
-    formatStringNumberWithCommas
+    formatStringNumberWithCommas,
+    sanitizeInput,
+    convertToInitialDateFormat
   }

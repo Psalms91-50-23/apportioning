@@ -1,9 +1,10 @@
 'use client';
 
-import React, { useState,useEffect } from 'react';
+import React, { useState,useEffect, useRef } from 'react';
 import {  differenceInDays } from "date-fns";
 import functions from "../functions";
-const { createDateFromFormat, formatDate, validateDate, getGreaterDate, getLesserDate, replaceCommas, numberWithCommas,formatStringNumberWithCommas } = functions;
+const { createDateFromFormat, formatDate, validateDate, getGreaterDate, getLesserDate, replaceCommas, numberWithCommas,
+  formatStringNumberWithCommas, sanitizeInput, convertToInitialDateFormat } = functions;
 import { PatternOfWork } from "../types";
 
 
@@ -41,6 +42,13 @@ const Apportioning = () => {
     //include last day
     const [totalGrossForPeriodReduction, setTotalGrossForPeriodReduction] = useState<string>("0");
     // const [isTotalGrossReductionCompleted, setIsTotalGrossReductionCompleted] = useState<boolean>(false);
+    const [focusedInput, setFocusedInput] = useState(null);
+    const inputRefs = {
+      input1: useRef(null),
+      input2: useRef(null),
+      input3: useRef(null),
+      input4: useRef(null),
+    };
 
     const [daysCounted, setDaysCounted] = useState<string>("0");
     const [workPatternDaysCounted, setWorkPatternDaysCounted] = useState<string>("0");
@@ -128,6 +136,7 @@ const Apportioning = () => {
     // setGrossEarnings(addDotIfNotPresent(sanitizedInput));
     const handleFocus = () => {
         setIsAllFieldEntered(false);
+        
     }
     
     const handleGrossEarningsFocus = (): void => {
@@ -147,7 +156,7 @@ const Apportioning = () => {
       const handleGrossEarningsBlur = (grossEarnings: string, setGrossEarnings: Function, setErrorGrossEarnings: Function): void => {
         validateAndSetGrossEarnings(grossEarnings, setGrossEarnings, setErrorGrossEarnings);
         let formattedInput = grossEarnings.trim(); // Trim leading/trailing whitespaces
-        
+
         if (!formattedInput) {
             // If input is empty, set default value
             formattedInput = '0.00';
@@ -177,8 +186,10 @@ const Apportioning = () => {
                 formattedInput = formattedInput.replace(/^0+/, ''); // Remove leading zeros
             }
         }
-    
-        formattedInput = numberWithCommas(formattedInput);
+        
+        let santizedGrossInputs = sanitizeInput(formattedInput);
+        formattedInput = numberWithCommas(santizedGrossInputs);
+
         // Update state
         setErrorGrossEarnings(false);
         setGrossEarnings(formattedInput);
@@ -376,46 +387,39 @@ const Apportioning = () => {
 
     const onSubmit = async () => {
 
+
+
       if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected){
 
         const removeCommas = (value: string): string => {
           return value.replace(/,/g, '');
         };
-
-        try{
-
           let daysCountNoWp;
           let daysCountWp;
-          daysCountNoWp = await countDays(grossEarningsStartDate, grossEarningsEndDate);
+          daysCountNoWp =  countDays(grossEarningsStartDate, grossEarningsEndDate);
           setDaysCounted(daysCountNoWp.toString());
-          let grossDateStart = await createDateFromFormat(grossEarningsStartDate) ?? new Date(grossEarningsStartDate);
-          let grossDateEnd = await createDateFromFormat(grossEarningsEndDate) ?? new Date(grossEarningsEndDate);
-          daysCountWp = await countWorkDays(grossDateStart,grossDateEnd, workPattern);
-          // let grossEarningsNum = Number(replaceValues(grossEarnings));
+          let grossDateStart =  createDateFromFormat(grossEarningsStartDate) ?? new Date(grossEarningsStartDate);
+          let grossDateEnd =  createDateFromFormat(grossEarningsEndDate) ?? new Date(grossEarningsEndDate);
+          daysCountWp =  countWorkDays(grossDateStart,grossDateEnd, workPattern);
           let grossEarningsNum = Number(replaceCommas(grossEarnings));
-          // let grossEarningsNum = Number(grossEarnings.replace(/,/g,""));
           let singleDayGrossWP = Number(grossEarningsNum/daysCountWp);
           setSingleDayGrossWP(singleDayGrossWP.toString());
           let tempTotalGrossReduction = Number(singleDayGrossWP * daysCountWp);
           setTotalGrossForPeriodReduction(tempTotalGrossReduction.toString());
-
           setWorkPatternDaysCounted(daysCountWp.toString()); 
-          let tempOject = await overlapDateRangeString(grossEarningsStartDate,grossEarningsEndDate, pwcStartDate, pwcEndDate);
-          setDateRangeWithPWC({
-            start: tempOject.start,
-            end: tempOject.end
-          });
+          let tempOject =  overlapDateRangeString(grossEarningsStartDate,grossEarningsEndDate, pwcStartDate, pwcEndDate);
           let start  = new Date(tempOject.start);
           let end = new Date(tempOject.end);
-          let wage_pwc_overlap_days = await countWorkDays(start, end, workPattern);
+          let wage_pwc_overlap_days =  countWorkDays(start, end, workPattern);
           let totalOverlapReduction = singleDayGrossWP * wage_pwc_overlap_days;
           setCountDaysOverlapWithPWC(wage_pwc_overlap_days.toString());
           setTotalGrossForPeriodReduction(totalOverlapReduction.toString());
+          const originalDateFormat = convertToInitialDateFormat(tempOject.start, tempOject.end);
+          setDateRangeWithPWC({
+            start: originalDateFormat.start,
+            end: originalDateFormat.end
+          });
           setIsAllFieldEntered(true);
-
-        }catch(error){
-          console.error(" Error ", error);
-        }
     }else {
       setIsAllFieldEntered(true);
     }
