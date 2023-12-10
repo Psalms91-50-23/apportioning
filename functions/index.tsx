@@ -1,3 +1,6 @@
+import {  differenceInDays } from "date-fns";
+const includeLastDay = 1;
+
 const formatDate = (input: string, setError: Function) => {
     const numericInput = input.replace(/\D/g, '');
     const ddmmyyRegex = /^(\d{2})(\d{2})(\d{2})$/;
@@ -81,7 +84,7 @@ const formatDate = (input: string, setError: Function) => {
   }
 
   const validateDate = (input: string): boolean => {
-    const numericInput = input.replace(/\D/g, '');
+    // const numericInput = input.replace(/\D/g, '');
     const dateRegex = /^((\d{2})(\d{2})(\d{2}))|((\d{2})(\d{2})(\d{4}))|((\d{1,2})\/(\d{1,2})\/(\d{2}))|((\d{2})\/(\d{2})\/(\d{2}))|((\d{2})\/(\d{2})\/(\d{4}))|((\d{1,2})\/(\d{2})\/(\d{4}))$/;
     if(dateRegex.test(input)){
         return true;
@@ -142,7 +145,6 @@ const formatDate = (input: string, setError: Function) => {
   const sanitizeInput = (input: string): string => {
     // Use a regular expression to keep only digits and dots
     const sanitizedInput = input.replace(/[^\d.]/g, "");
-  
     return sanitizedInput;
   };
 
@@ -163,6 +165,124 @@ const formatDate = (input: string, setError: Function) => {
 
   }
 
+  const overlapDateRangeString = (grossStartDate: string, grossEndDate: string, pwcStartDate: string, pwcEndDate: string ) => {
+      
+    let tempGrossStartDate = createDateFromFormat(grossStartDate) ?? new Date(grossStartDate);
+    let tempGrossEndDate = createDateFromFormat(grossEndDate) ?? new Date(grossEndDate);
+    let tempPWCStartDate = createDateFromFormat(pwcStartDate) ?? new Date(pwcStartDate);
+    let tempPWCEndDate = createDateFromFormat(pwcEndDate) ?? new Date(pwcEndDate);
+    let tempObj = {
+      start: "",
+      end: ""
+    }
+    let greater = getGreaterDate(tempGrossStartDate, tempPWCStartDate);
+    let lesser = getLesserDate(tempGrossEndDate, tempPWCEndDate);
+    let year, month, day;
+    let year2, month2, day2;
+    let tempStringDateStart = "";
+    let tempStringDateEnd = "";
+
+    year = greater.getFullYear();
+    month = greater.getMonth()+1;
+    day = greater.getDate();
+    tempStringDateStart = `${year}/${month}/${day}`;
+    
+    year2 = lesser.getFullYear();
+    month2 = lesser.getMonth()+1;
+    day2 = lesser.getDate();
+    tempStringDateEnd = `${year2}/${month2}/${day2}`;
+    
+    tempObj = {
+      start: tempStringDateStart,
+      end: tempStringDateEnd
+    }
+    return tempObj;
+  }
+
+  const countDays = (startDateString: string, endDateString: string): number => {
+    let tempStartDate = createDateFromFormat(startDateString) ?? new Date(startDateString) ;
+    let tempEndDate = createDateFromFormat(endDateString) ?? new Date(endDateString);
+    
+    let daysCounted: number = (differenceInDays(tempEndDate, tempStartDate))+includeLastDay;
+      return daysCounted;
+  }; 
+
+  const formatNumber = (input: string): string => {
+    // Remove all non-digit characters
+    const numericInput = input.replace(/\D/g, '');
+  
+    // If the input is empty or non-numeric, return an empty string
+    if (!numericInput) {
+      return '';
+    }
+  
+    // If the input has only one or two digits, format it without commas
+    if (numericInput.length <= 2) {
+      return `0.${numericInput.padEnd(2, '0')}`;
+    }
+  
+    // Otherwise, format the input with commas for thousands and add a dot and two zeros after it
+    const integralPart = numericInput.slice(0, -2);
+    const decimalPart = numericInput.slice(-2);
+    const formattedNumber = integralPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  
+    return `${formattedNumber}.${decimalPart}`;
+  };
+  
+
+  const formatInputValue = (inputValue: string) => {
+    // Remove any existing commas from the value
+    inputValue = inputValue.replace(/,/g, '');
+
+    // Check if the value has a dot and handle accordingly
+    if (inputValue.includes('.')) {
+        // If there is one digit after the dot, add a zero
+        inputValue = inputValue.replace(/\.(\d)$/, '.$10');
+
+        // If there are two digits after the dot, keep it as is
+        inputValue = inputValue.replace(/\.(\d{2})$/, '.$1');
+
+        // If there is no dot, add a dot and two zeros
+    } else {
+        inputValue += '.00';
+    }
+
+    // Add commas for thousands separator
+    inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+
+    // Return the formatted value
+    return inputValue;
+  }
+
+  const grossEarningInputValueConverted = (input: string): string => {
+    // Replace all characters except commas, dots, and numbers with an empty string
+    const sanitizedInput = input.replace(/[^\d.,]/g, "");
+    // Remove any existing commas from the sanitized value
+    let formattedValue = sanitizedInput.replace(/,/g, '');
+
+    // If input is ".00", replace with "0.00"
+    if (formattedValue === '.00') {
+        return '0.00';
+    }
+    // If there is more than two digits after the dot, truncate to two digits
+    formattedValue = formattedValue.replace(/\.(\d{2}).*$/, '.$1');
+
+    // If there are no digits after the dot, add two zeros
+    formattedValue = formattedValue.replace(/\.(\D*)$/, '.$100');
+
+    // If there is one digit after the dot, add a zero
+    formattedValue = formattedValue.replace(/\.(\d)$/, '.$10');
+
+    // If there is no dot, add a dot and two zeros
+    if (!formattedValue.includes('.')) {
+        formattedValue += '.00';
+    }
+    // Add commas for thousands separator
+    formattedValue = formattedValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    // Return the final formatted value
+    return formattedValue;
+ };
+
   export default {
     formatDate,
     createDateFromFormat,
@@ -173,5 +293,10 @@ const formatDate = (input: string, setError: Function) => {
     numberWithCommas,
     formatStringNumberWithCommas,
     sanitizeInput,
-    convertToInitialDateFormat
+    convertToInitialDateFormat,
+    overlapDateRangeString,
+    countDays,
+    formatNumber,
+    formatInputValue,
+    grossEarningInputValueConverted
   }

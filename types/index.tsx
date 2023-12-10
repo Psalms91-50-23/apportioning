@@ -92,9 +92,3 @@ export type BlurHandlerProps = {
   setError: (hasError: boolean) => void;
 };
 
-
-
-// export interface DateOverlapResult {
-//   overlapStartDate: string | null;
-//   overlapEndDate: string | null;
-// }

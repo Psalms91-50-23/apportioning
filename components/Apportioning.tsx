@@ -1,24 +1,28 @@
 'use client';
 
-import React, { useState,useEffect, useRef } from 'react';
+import React, { useState,useEffect, ChangeEvent, useRef, RefObject } from 'react';
 import {  differenceInDays } from "date-fns";
 import functions from "../functions";
-const { createDateFromFormat, formatDate, validateDate, getGreaterDate, getLesserDate, replaceCommas, numberWithCommas,
-  formatStringNumberWithCommas, sanitizeInput, convertToInitialDateFormat } = functions;
+const { createDateFromFormat, formatDate, validateDate, replaceCommas, formatStringNumberWithCommas, sanitizeInput, overlapDateRangeString,  convertToInitialDateFormat, grossEarningInputValueConverted } = functions;
 import { PatternOfWork } from "../types";
 
 const Apportioning = () => {
     const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(?:[0-9]{2})?[0-9]{2}$/;
+    const earningsRegex = /^(\d{1,3}(,\d{3})*(\.\d{1,2})?|\d+(\.\d{1,2})?|\.\d{1,2})$/ ;
     let includeLastDay = 1;
     //gross earnings and wp checkbox
     const [grossEarnings, setGrossEarnings] = useState<string>("0.00");
-    const [grossEarningsFormat, setGrossEarningsFormat] = useState<boolean>(false);
+    // const [grossEarningsFormat, setGrossEarningsFormat] = useState<boolean>(false);
     const daysOfWeek: string[] = ['Sun','Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    
+    const earningsRef = useRef<HTMLInputElement>(null);
+    const grossStartDateRef = useRef<HTMLInputElement>(null);
+    const grossEndDateRef = useRef<HTMLInputElement>(null);
+    const pwcStartDateRef = useRef<HTMLInputElement>(null);
+    const pwcEndDateRef = useRef<HTMLInputElement>(null);
     //input dates gross earnings
     const [grossEarningsStartDate, setGrossEarningsStartDate] = useState<string>('');
     const [grossEarningsEndDate, setGrossEarningsEndDate] = useState<string>('');
-
+    const [isGrossEarningCompleted, setIsGrossEarningCompleted] = useState<boolean>(false);
     //gross input date errors
     const [grossEarningsInputError, setGrossEarningsInputError] = useState<boolean>(false);
     const [grossStartDateError, setGrossStartDateError] = useState<boolean>(false)
@@ -38,16 +42,8 @@ const Apportioning = () => {
 
     //counted days for work pattern 1 day
     const [singleDayGrossWP, setSingleDayGrossWP] = useState<string>("0");
-    //include last day
     const [totalGrossForPeriodReduction, setTotalGrossForPeriodReduction] = useState<string>("0");
     // const [isTotalGrossReductionCompleted, setIsTotalGrossReductionCompleted] = useState<boolean>(false);
-    const [focusedInput, setFocusedInput] = useState(null);
-    const inputRefs = {
-      input1: useRef(null),
-      input2: useRef(null),
-      input3: useRef(null),
-      input4: useRef(null),
-    };
 
     const [daysCounted, setDaysCounted] = useState<string>("0");
     const [workPatternDaysCounted, setWorkPatternDaysCounted] = useState<string>("0");
@@ -69,66 +65,74 @@ const Apportioning = () => {
         saturday: false,
       };
 
-      const [workPattern, setWorkPattern] = useState<PatternOfWork>(initialWorkPattern);
+    const [workPattern, setWorkPattern] = useState<PatternOfWork>(initialWorkPattern);
 
-      const handleWorkPatternChange = (day: keyof PatternOfWork): void => {
-        setWorkPattern((prevWorkPattern) => ({
-          ...prevWorkPattern,
-          [day]: !prevWorkPattern[day],
-        }));
-      };
+    const handleWorkPatternChange = (day: keyof PatternOfWork): void => {
+      setWorkPattern((prevWorkPattern) => ({
+        ...prevWorkPattern,
+        [day]: !prevWorkPattern[day],
+      }));
+    };
 
-      const validateAndSetGrossEarnings = (inputValue: string, setGrossEarnings: Function, setErrorGrossEarnings: Function): void => {
-        // Only show an error if there is an input
-        if (inputValue.trim().length > 0) {
-          // Assume you want to allow only numbers with a maximum of two decimal places
-          const regex = /^\d+(\.\d{1,})?$/;
-      
-          if (!regex.test(inputValue)) {
-            setGrossEarnings('');
-            setErrorGrossEarnings(true);
-            setGrossEarningsFormat(false);
-            return;
-          }
-        }      
-        // Update state only if there is no error
-        setGrossEarnings(inputValue);
-        setErrorGrossEarnings(false);
-      };
+    const validateAndSetGrossEarnings = (inputValue: string, setGrossEarnings: Function, setErrorGrossEarnings: Function): void => {
+      // Only show an error if there is an input
+      if (inputValue.trim().length > 0) {
+        // Assume you want to allow only numbers with a maximum of two decimal places
+        const regex = /^\d+(\.\d{1,})?$/;
+    
+        if (!regex.test(inputValue)) {
+          setGrossEarnings('');
+          setErrorGrossEarnings(true);
+          setGrossEarningsInputError(false);
+          // setGrossEarningsFormat(false);
+          return;
+        }
+      }      
+      // Update state only if there is no error
+      setGrossEarnings(inputValue);
+      setErrorGrossEarnings(false);
+    };
 
     const countDays = (startDateString: string, endDateString: string): number => {
 
-        let tempStartDate = createDateFromFormat(startDateString) ?? new Date(startDateString) ;
-        let tempEndDate = createDateFromFormat(endDateString) ?? new Date(endDateString);
-        
-        let daysCounted: number = (differenceInDays(tempEndDate, tempStartDate))+includeLastDay;
-        return daysCounted;
+      let tempStartDate = createDateFromFormat(startDateString) ?? new Date(startDateString) ;
+      let tempEndDate = createDateFromFormat(endDateString) ?? new Date(endDateString);
+      
+      let daysCounted: number = (differenceInDays(tempEndDate, tempStartDate))+includeLastDay;
+      return daysCounted;
     }; 
 
+    const isAllFieldCompleted = ():boolean => {
+      if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected){
+        return true;
+      }else{
+        return false;
+      }
+    }
+
     const countWorkDays = (startDate: Date, endDate: Date, workPattern: PatternOfWork): number => {
-        let count = 0;
-        let currentDate = new Date(startDate);
-        while (currentDate <= endDate) {
-          const dayOfWeek = currentDate.getDay();
-          const dayKey = Object.keys(workPattern)[dayOfWeek] as keyof PatternOfWork;
-      
-          if (workPattern[dayKey]) {
-            count++;
-          }
-          // Increment the date by one day
-          currentDate.setDate(currentDate.getDate() + 1);
+      let count = 0;
+      let currentDate = new Date(startDate);
+      while (currentDate <= endDate) {
+        const dayOfWeek = currentDate.getDay();
+        const dayKey = Object.keys(workPattern)[dayOfWeek] as keyof PatternOfWork;
+    
+        if (workPattern[dayKey]) {
+          count++;
         }
-        return count;
-      };   
-  
-    // setGrossEarnings(addDotIfNotPresent(sanitizedInput));
+        // Increment the date by one day
+        currentDate.setDate(currentDate.getDate() + 1);
+      }
+      return count;
+    };  
+
     const handleFocus = () => {
-        setIsAllFieldEntered(false);
-        
+        setIsAllFieldEntered(false);       
     }
     
     const handleGrossEarningsFocus = (): void => {
         setIsAllFieldEntered(false);
+        setGrossEarningsInputError(false);
         // Clear the input if the value is '0.00'
         if (grossEarnings === '0.00' ||  grossEarnings === "NaN" || grossEarnings === "NaN.00" || grossEarnings === ".00" ) {
             setGrossEarnings('');
@@ -139,133 +143,162 @@ const Apportioning = () => {
             // Add '.00' if no dot and decimal places are present
             setGrossEarnings(`${grossEarnings}.00`);
         }
-        };
-
-      const handleGrossEarningsBlur = (grossEarnings: string, setGrossEarnings: Function, setErrorGrossEarnings: Function): void => {
-        validateAndSetGrossEarnings(grossEarnings, setGrossEarnings, setErrorGrossEarnings);
-        let formattedInput = grossEarnings.trim(); // Trim leading/trailing whitespaces
-
-        if (!formattedInput) {
-            // If input is empty, set default value
-            formattedInput = '0.00';
-        } 
-        else {
-            // Add a dot with two zeros if there is no dot in the input
-            if (!formattedInput.includes('.')) {
-                formattedInput += '.00';
-            }
-            // Handle decimal part
-            const decimalIndex = formattedInput.indexOf('.');
-            const digitsAfterDecimal = formattedInput.length - decimalIndex - 1;
+    };
     
-            if (digitsAfterDecimal === 0) {
-                // Add '00' if there are no digits after the decimal point
-                formattedInput += '00';
-            } else if (digitsAfterDecimal === 1) {
-                // Add '0' if there is only one digit after the decimal point
-                formattedInput += '0';
-            } else if (digitsAfterDecimal > 2) {
-                // Round the number to two decimal places if more than 2 digits after the decimal point
-                formattedInput = `${(+formattedInput).toFixed(2)}`;
-            }
-    
-            // Add the new condition to remove leading zeros for specific cases
-            if (/^0+\d[1-9]\.\d$/.test(formattedInput)) {
-                formattedInput = formattedInput.replace(/^0+/, ''); // Remove leading zeros
-            }
+    const onChange = (e: ChangeEvent<HTMLInputElement>, setValue: Function, inputRef: RefObject<HTMLInputElement>, setError: Function, setCompleted?: Function) => {
+      let inputValue = e.target.value;
+      if(inputRef.current === earningsRef.current){
+        if(inputValue === ""){
+          inputValue = "0.00";
         }
-        //removing unwanted $ sign
-        let santizedGrossInputs = sanitizeInput(formattedInput);
-        //adding commas to make it separate for each 1,000
-        formattedInput = numberWithCommas(santizedGrossInputs);
-        // Update state
-        setErrorGrossEarnings(false);
-        setGrossEarnings(formattedInput);
-        setGrossEarningsFormat(true);
+        setError(false);
+        setValue(inputValue);
+      }
+      else if(setCompleted && inputRef.current){
+        setValue(inputValue);
+        setCompleted(true);  
+      }
+    }
+
+    const handleGrossEarningsBlur = (grossEarnings: string, setGrossEarnings: Function,   setErrorGrossEarnings: Function): void => {
+      validateAndSetGrossEarnings(grossEarnings, setGrossEarnings, setErrorGrossEarnings);
+      let formattedInput = grossEarnings.trim(); // Trim leading/trailing whitespaces
+      formattedInput = grossEarningInputValueConverted(formattedInput);
+      // let finalValue = formatNumber(formattedInput);
+      if (!formattedInput || !earningsRegex.test(formattedInput)){
+          // If input is empty, set default value
+          formattedInput = '0.00';
+          setGrossEarnings(formattedInput);
+          setGrossEarningsInputError(true);
+          setIsGrossEarningCompleted(false);
+          return;
+      }
+      else {
+          // Add a dot with two zeros if there is no dot in the input
+          if (!formattedInput.includes('.')) {
+              formattedInput += '.00';
+          }
+          // Handle decimal part
+          const decimalIndex = formattedInput.indexOf('.');
+          const digitsAfterDecimal = formattedInput.length - decimalIndex - 1;
+  
+          if (digitsAfterDecimal === 0) {
+              // Add '00' if there are no digits after the decimal point
+              formattedInput += '00';
+          } else if (digitsAfterDecimal === 1) {
+              // Add '0' if there is only one digit after the decimal point
+              formattedInput += '0';
+          } else if (digitsAfterDecimal > 2) {
+              // Round the number to two decimal places if more than 2 digits after the decimal point
+              formattedInput = `${(+formattedInput).toFixed(2)}`;
+          }
+          // Add the new condition to remove leading zeros for specific cases
+          if (/^0+\d[1-9]\.\d$/.test(formattedInput)) {
+              formattedInput = formattedInput.replace(/^0+/, ''); // Remove leading zeros
+          }
+      }
+      //removing unwanted $ sign
+      let santizedGrossInputs = sanitizeInput(formattedInput);
+      //adding commas to make it separate for each 1,000
+      // formattedInput = numberWithCommas(santizedGrossInputs);
+      formattedInput = grossEarningInputValueConverted(santizedGrossInputs);
+      // Update state
+      setErrorGrossEarnings(false);
+      setGrossEarnings(formattedInput);
+      setIsGrossEarningCompleted(true);
+      setGrossEarningsInputError(false);
     };
     
     const grossStartDateOnBlur = () => {
         
-        if(grossEarningsStartDate == ""){
-          return;
-        }
-        
-        let isDateValid = validateDate(grossEarningsStartDate);
-        if(!isDateValid){
-          setGrossStartDateError(true);
-        }
+      if(grossEarningsStartDate === ""){
         setGrossStartDateError(false);
-        // Remove whitespaces and format the input
-        const formattedInput = grossEarningsStartDate.replace(/\s/g, '');
-        let dateFormatted = formatDate(formattedInput, setGrossStartDateError);
-        // Test if the input matches any of the specified formats
-        if (dateRegex.test(dateFormatted)) {
-          // If it matches, set isComplete to true and update the input state
-          setIsGrossStartDateCompleted(true);
-          setGrossEarningsStartDate(dateFormatted);
-          setGrossStartDateError(false);
-        } else {
-          // If it doesn't match, set isComplete to false and setError to true
-          setIsGrossStartDateCompleted(false);
-          setGrossStartDateError(true);
-        }
+        setIsGrossStartDateCompleted(false);
+        return;
       }
-
-      const grossEndDateOnBlur = () => {
-        
-        if(grossEarningsEndDate === ""){
-          return;
-        }
-        let isDateValid = validateDate(grossEarningsEndDate);
-        if(!isDateValid){
-          setGrossEndDateError(true);
-        }
-        setGrossEndDateError(false);
-        // Remove whitespaces and format the input
-        const formattedInput = grossEarningsEndDate.replace(/\s/g, '');
-        let dateFormatted = formatDate(formattedInput,setGrossEndDateError);
-        // Test if the input matches any of the specified formats
-        if (dateRegex.test(dateFormatted)) {
-          // If it matches, set isComplete to true and update the input state
-          setIsGrossEndDateCompleted(true);
-          setGrossEarningsEndDate(dateFormatted);
-          setGrossEndDateError(false);
-        } else {
-            // If it doesn't match, set isComplete to false and setError to true
-          setIsGrossEndDateCompleted(false);
-          setGrossEndDateError(true);
-        }
-      }       
-
-      const pwcStartDateOnBlur = () => {
       
-        if(pwcStartDate === ""){
-          return;
-        }
-        let isDateValid = validateDate(pwcStartDate);
-        if(!isDateValid){
-          setPwcStartError(true);
-        }
-        setPwcStartError(false);
-        // Remove whitespaces and format the input
-        const formattedInput = pwcStartDate.replace(/\s/g, '');
-        let dateFormatted = formatDate(formattedInput, setPwcStartError);
-        // Test if the input matches any of the specified formats
-        if (dateRegex.test(dateFormatted)) {
-          // If it matches, set isComplete to true and update the input state
-          setPwcStartCompleted(true);
-          setPwcStartDate(dateFormatted);
-          setPwcStartError(false);
-        } else {
+      let isDateValid = validateDate(grossEarningsStartDate);
+      if(!isDateValid){
+        setGrossStartDateError(true);
+      }
+      setGrossStartDateError(false);
+      // Remove whitespaces and format the input
+      const formattedInput = grossEarningsStartDate.replace(/\s/g, '');
+      let dateFormatted = formatDate(formattedInput, setGrossStartDateError);
+      // Test if the input matches any of the specified formats
+      if (dateRegex.test(dateFormatted)) {
+        // If it matches, set isComplete to true and update the input state
+        setIsGrossStartDateCompleted(true);
+        setGrossEarningsStartDate(dateFormatted);
+        setGrossStartDateError(false);
+      } else {
+        // If it doesn't match, set isComplete to false and setError to true
+        setIsGrossStartDateCompleted(false);
+        setGrossStartDateError(true);
+      }
+    }
+
+    const grossEndDateOnBlur = () => {
+      
+      if(grossEarningsEndDate === ""){
+        setGrossEndDateError(false);
+        setIsGrossEndDateCompleted(false);
+        return;
+      }
+      let isDateValid = validateDate(grossEarningsEndDate);
+      if(!isDateValid){
+        setGrossEndDateError(true);
+      }
+      setGrossEndDateError(false);
+      // Remove whitespaces and format the input
+      const formattedInput = grossEarningsEndDate.replace(/\s/g, '');
+      let dateFormatted = formatDate(formattedInput,setGrossEndDateError);
+      // Test if the input matches any of the specified formats
+      if (dateRegex.test(dateFormatted)) {
+        // If it matches, set isComplete to true and update the input state
+        setIsGrossEndDateCompleted(true);
+        setGrossEarningsEndDate(dateFormatted);
+        setGrossEndDateError(false);
+      } else {
           // If it doesn't match, set isComplete to false and setError to true
-          setPwcStartCompleted(false);
-          setPwcStartError(true);
-        }
-      };
+        setIsGrossEndDateCompleted(false);
+        setGrossEndDateError(true);
+      }
+    }       
+
+    const pwcStartDateOnBlur = () => {
+    
+      if(pwcStartDate === ""){
+        setPwcStartError(false);
+        setPwcStartCompleted(false);
+        return;
+      }
+      let isDateValid = validateDate(pwcStartDate);
+      if(!isDateValid){
+        setPwcStartError(true);
+      }
+      setPwcStartError(false);
+      // Remove whitespaces and format the input
+      const formattedInput = pwcStartDate.replace(/\s/g, '');
+      let dateFormatted = formatDate(formattedInput, setPwcStartError);
+      // Test if the input matches any of the specified formats
+      if (dateRegex.test(dateFormatted)) {
+        // If it matches, set isComplete to true and update the input state
+        setPwcStartCompleted(true);
+        setPwcStartDate(dateFormatted);
+        setPwcStartError(false);
+      } else {
+        // If it doesn't match, set isComplete to false and setError to true
+        setPwcStartCompleted(false);
+        setPwcStartError(true);
+      }
+    };
 
     const pwcEndDateOnBlur = () => {
       
       if(pwcEndDate === ""){
+        setPwcEndError(false);
+        setPwcEndCompleted(false);
         return;
       }
       let isDateValid = validateDate(pwcEndDate);
@@ -289,42 +322,35 @@ const Apportioning = () => {
       }
     };
 
-    const overlapDateRangeString = (grossStartDate: string, grossEndDate: string, pwcStartDate: string, pwcEndDate: string ) => {
-      
-      let tempGrossStartDate = createDateFromFormat(grossStartDate) ?? new Date(grossStartDate);
-      let tempGrossEndDate = createDateFromFormat(grossEndDate) ?? new Date(grossEndDate);
-      let tempPWCStartDate = createDateFromFormat(pwcStartDate) ?? new Date(pwcStartDate);
-      let tempPWCEndDate = createDateFromFormat(pwcEndDate) ?? new Date(pwcEndDate);
-      let tempObj = {
-        start: "",
-        end: ""
+    const onSubmitErrorSet = () => {
+      if(!earningsRegex.test(grossEarnings) || grossEarnings === "0.00"){
+        setGrossEarningsInputError(true);
       }
-      let greater = getGreaterDate(tempGrossStartDate, tempPWCStartDate);
-      let lesser = getLesserDate(tempGrossEndDate, tempPWCEndDate);
-      let year, month, day;
-      let year2, month2, day2;
-      let tempStringDateStart = "";
-      let tempStringDateEnd = "";
-
-      year = greater.getFullYear();
-      month = greater.getMonth()+1;
-      day = greater.getDate();
-      tempStringDateStart = `${year}/${month}/${day}`;
-      
-      year2 = lesser.getFullYear();
-      month2 = lesser.getMonth()+1;
-      day2 = lesser.getDate();
-      tempStringDateEnd = `${year2}/${month2}/${day2}`;
-      
-      tempObj = {
-        start: tempStringDateStart,
-        end: tempStringDateEnd
+      if(isGrossStartDateCompleted === false){
+        setGrossStartDateError(true);
       }
-      return tempObj;
+      if(isGrossEndDateCompleted === false){
+        setGrossEndDateError(true);
+      }
+      if(pwcStartCompleted === false){
+        setPwcStartError(true);
+      }
+      if(pwcEndCompleted === false){
+        setPwcEndError(true);
+      }
+      return;
+    }
+  
+    const isCompleted = ():boolean => {
+      if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isGrossEarningCompleted){
+        return true;
+      }
+      return false;
     }
 
     const onSubmit = async () => {
-
+      onSubmitErrorSet();
+      let isAllFilled = isAllFieldCompleted();
       if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected){
           const daysCountNoWp = countDays(grossEarningsStartDate, grossEarningsEndDate);
           setDaysCounted(daysCountNoWp.toString());
@@ -355,7 +381,7 @@ const Apportioning = () => {
           });
           setIsAllFieldEntered(true);
     }else {
-      setIsAllFieldEntered(true);
+      setIsAllFieldEntered(false);
     }
 
   }
@@ -409,8 +435,10 @@ const Apportioning = () => {
           <input
             type="text"
             id="grossEarnings"
+            ref={earningsRef}
             value={grossEarnings}
-            onChange={(e) => setGrossEarnings(e.target.value)}
+            onChange={(e) => onChange(e, setGrossEarnings, earningsRef, setGrossEarningsInputError)}
+            // onChange={(e) => setGrossEarnings(e.target.value)}
             onBlur={() => handleGrossEarningsBlur(grossEarnings,setGrossEarnings,setGrossEarningsInputError)}
             onFocus={handleGrossEarningsFocus}
             className={`w-full border rounded py-2 px-3 text-black-500${grossEarningsInputError ? ' border-red-500' : ''}`}
@@ -419,14 +447,14 @@ const Apportioning = () => {
         </div>
         {grossEarningsInputError && (
           <div className="my-3">
-            <p className="text-red-500 text-xs italic">Invalid input format</p>
+            <p className="text-red-500 font-bold text-xs italic">Please add a value</p>
           </div>
         )}
       </div>
       <div className="flex flex-col">
         <div className="mb-5">
-            <p className='font-bold mb-2'>Acceptable date formats for input field</p>
-            <p className='text-xs italic'>011123 or 01112023 or 1/11/2023 or 1/11/23 or 01/11/23 or 01/11/2023</p>
+          <p className='font-bold mb-2'>Acceptable date formats for input field</p>
+          <p className='text-xs italic'>011123 or 01112023 or 1/11/2023 or 1/11/23 or 01/11/23 or 01/11/2023</p>
         </div>
         <div className="flex flex-row w-full mb-4 space-x-5">
           <div className='flex flex-col' style={{ maxWidth: "300px" }}>
@@ -434,17 +462,19 @@ const Apportioning = () => {
                 Gross Earnings Start Date
             </label>
             <input
-                type="text"
-                id="grossEarningsStartDate"
-                value={grossEarningsStartDate}
-                onChange={(e) => setGrossEarningsStartDate(e.target.value)}
-                onBlur={grossStartDateOnBlur}
-                onFocus={handleFocus}
-                className={`w-full border rounded py-2 px-3 text-black-500${grossStartDateError ? ' border-red-500' : ''}`}
+              type="text"
+              id="grossEarningsStartDate"
+              value={grossEarningsStartDate}
+              onChange={(e) => onChange(e, setGrossEarningsStartDate, grossStartDateRef,setGrossStartDateError, setIsGrossStartDateCompleted)}
+              ref={grossStartDateRef}
+              // onChange={(e) => setGrossEarningsStartDate(e.target.value)}
+              onBlur={grossStartDateOnBlur}
+              onFocus={handleFocus}
+              className={`w-full border rounded py-2 px-3 text-black-500${grossStartDateError ? ' border-red-500' : ''}`}
             />
             {grossStartDateError && (
               <div className="my-3">
-              <p className="text-red-500 text-xs italic">Invalid input format</p>
+              <p className="text-red-500 font-bold text-xs italic">Invalid input format</p>
               </div>
             )}
           </div>
@@ -457,14 +487,16 @@ const Apportioning = () => {
                 type="text"
                 id="grossEarningsEndDate"
                 value={grossEarningsEndDate}
-                onChange={(e) => setGrossEarningsEndDate(e.target.value)}
+                onChange={(e) => onChange(e, setGrossEarningsEndDate, grossEndDateRef,setGrossEndDateError, setIsGrossEndDateCompleted)}
+                ref={grossEndDateRef}
+                // onChange={(e) => setGrossEarningsEndDate(e.target.value)}
                 onBlur={grossEndDateOnBlur}
                 onFocus={handleFocus}
                 className={`w-full border rounded py-2 px-3 text-black-500${grossEndDateError ? ' border-red-500' : ''}`}
               />
             {grossEndDateError && (
               <div className="my-3">
-              <p className="text-red-500 text-xs italic">Invalid input format</p>
+              <p className="text-red-500 font-bold text-xs italic">Invalid input format</p>
               </div>
             )}
             </div>
@@ -480,7 +512,9 @@ const Apportioning = () => {
                 type="text"
                 id="pwcStartDate"
                 value={pwcStartDate}
-                onChange={(e) => setPwcStartDate(e.target.value)}
+                onChange={(e) => onChange(e, setPwcStartDate, grossEndDateRef,setPwcStartError, setPwcStartCompleted)}
+                ref={pwcStartDateRef}
+                // onChange={(e) => setPwcStartDate(e.target.value)}
                 onBlur={pwcStartDateOnBlur}
                 onFocus={handleFocus}
                 className={`w-full border rounded py-2 px-3 text-black-500${pwcStartError ? ' border-red-500' : ''}`}
@@ -488,7 +522,7 @@ const Apportioning = () => {
               />
             {pwcStartError && (
               <div className="my-3">
-              <p className="text-red-500 text-xs italic">Invalid input format</p>
+              <p className="text-red-500 font-bold text-xs italic">Invalid input format</p>
               </div>
             )}
             </div>
@@ -502,7 +536,9 @@ const Apportioning = () => {
                 type="text"
                 id="pwcEndDate"
                 value={pwcEndDate}
-                onChange={(e) => setPwcEndDate(e.target.value)}
+                onChange={(e) => onChange(e, setPwcEndDate, pwcEndDateRef,setPwcEndError, setPwcEndCompleted)}
+                ref={pwcEndDateRef}
+                // onChange={(e) => setPwcEndDate(e.target.value)}
                 onBlur={pwcEndDateOnBlur}
                 onFocus={handleFocus}
                 className={`w-full border rounded py-2 px-3 text-black-500${pwcEndError ? ' border-red-500' : ''}`}
@@ -510,7 +546,7 @@ const Apportioning = () => {
               />
               {pwcEndError && (
                 <div className="my-3">
-                <p className="text-red-500 text-xs italic">Invalid input format</p>
+                <p className="text-red-500 font-bold text-xs italic">Invalid input format</p>
                 </div>
               )}
             </div>
@@ -531,20 +567,20 @@ const Apportioning = () => {
             <div className="flex flex-col">
               <div className="flex flex-row space-x-5">
                 <div className="flex flex-row">
-                    <p className="font-bold">
-                        Days counted for above dates: 
-                    </p>
-                    <p className="italic ml-3">
-                        {daysCounted}
-                    </p>
+                  <p className="font-bold">
+                      Days counted for above dates: 
+                  </p>
+                  <p className="italic ml-3">
+                      {daysCounted}
+                  </p>
                 </div>
                 <div className="flex flex-row">
-                    <p className="font-bold">
-                        Days counted for above dates based on work pattern: 
-                    </p>
-                    <p className="italic ml-3">
-                        {workPatternDaysCounted}
-                    </p>
+                  <p className="font-bold">
+                      Days counted for above dates based on work pattern: 
+                  </p>
+                  <p className="italic ml-3">
+                      {workPatternDaysCounted}
+                  </p>
                 </div>
               </div>
               <div>
@@ -573,7 +609,7 @@ const Apportioning = () => {
         ):
         (
           <div className="">
-            <p> Please fill out all input fields </p>
+            <p className={`font-bold ${!isAllFieldEntered? 'text-red-500' : 'text-black-900'}`}> Please fill out all input fields </p>
           </div>
         )
        }

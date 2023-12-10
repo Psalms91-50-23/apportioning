@@ -26,6 +26,10 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+label {
+  color: #000000 !important;
+}
+
 /* Style for input field text color in dark mode */
 @media (prefers-color-scheme: dark) {
   input {
