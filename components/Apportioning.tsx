@@ -414,7 +414,7 @@ const Apportioning = () => {
                 id={`workPatternDay${day}`}
                 checked={workPattern[day as keyof PatternOfWork]}
                 onChange={() => handleWorkPatternChange(day as keyof PatternOfWork)}
-                className="mr-2 text-black-500"
+                className="mr-2 text-black-900"
               />
               <label htmlFor={`workPatternDay${day}`}>{day.charAt(0).toUpperCase() + day.slice(1)}</label>
             </div>
@@ -429,7 +429,7 @@ const Apportioning = () => {
       </div>
       <div className="flex flex-col w-full mb-4 space-x-4" style={{ maxWidth: "300px" }}>
         <div className="">
-          <label htmlFor="grossEarnings" className="block text-gray-700 text-sm font-bold mb-2">
+          <label htmlFor="grossEarnings" className="block text-black-900 text-sm font-bold mb-2">
           Gross Earnings
           </label>
           <input
@@ -441,13 +441,13 @@ const Apportioning = () => {
             // onChange={(e) => setGrossEarnings(e.target.value)}
             onBlur={() => handleGrossEarningsBlur(grossEarnings,setGrossEarnings,setGrossEarningsInputError)}
             onFocus={handleGrossEarningsFocus}
-            className={`w-full border rounded py-2 px-3 text-black-500${grossEarningsInputError ? ' border-red-500' : ''}`}
+            className={`w-full border rounded py-2 px-3 text-black-900${grossEarningsInputError ? ' border-red-500' : ''}`}
             style={{ maxWidth: "300px" }}
           />
         </div>
         {grossEarningsInputError && (
           <div className="my-3">
-            <p className="text-red-500 font-bold text-xs italic">Please add a value</p>
+            <p className="text-red-700 font-bold text-xs italic">Please add a value</p>
           </div>
         )}
       </div>
@@ -458,7 +458,7 @@ const Apportioning = () => {
         </div>
         <div className="flex flex-row w-full mb-4 space-x-5">
           <div className='flex flex-col' style={{ maxWidth: "300px" }}>
-            <label htmlFor="grossEarningsStartDate" className="block text-gray-700 text-sm font-bold mb-2">
+            <label htmlFor="grossEarningsStartDate" className="block text-black-900 text-sm font-bold mb-2">
                 Gross Earnings Start Date
             </label>
             <input
@@ -470,17 +470,17 @@ const Apportioning = () => {
               // onChange={(e) => setGrossEarningsStartDate(e.target.value)}
               onBlur={grossStartDateOnBlur}
               onFocus={handleFocus}
-              className={`w-full border rounded py-2 px-3 text-black-500${grossStartDateError ? ' border-red-500' : ''}`}
+              className={`w-full border rounded py-2 px-3 text-black-900${grossStartDateError ? ' border-red-500' : ''}`}
             />
             {grossStartDateError && (
               <div className="my-3">
-              <p className="text-red-500 font-bold text-xs italic">Invalid input format</p>
+              <p className="text-red-700 font-bold text-xs italic">Invalid input format</p>
               </div>
             )}
           </div>
           <div className="flex flex-row w-full mb-4" style={{ maxWidth: "300px" }}>
             <div className="flex flex-col">
-              <label htmlFor="grossEarningsEndDate" className="block text-gray-700 text-sm font-bold mb-2">
+              <label htmlFor="grossEarningsEndDate" className="block text-black-900 text-sm font-bold mb-2">
                   Gross Earnings End Date
               </label>
               <input
@@ -492,11 +492,11 @@ const Apportioning = () => {
                 // onChange={(e) => setGrossEarningsEndDate(e.target.value)}
                 onBlur={grossEndDateOnBlur}
                 onFocus={handleFocus}
-                className={`w-full border rounded py-2 px-3 text-black-500${grossEndDateError ? ' border-red-500' : ''}`}
+                className={`w-full border rounded py-2 px-3 text-black-900${grossEndDateError ? ' border-red-500' : ''}`}
               />
             {grossEndDateError && (
               <div className="my-3">
-              <p className="text-red-500 font-bold text-xs italic">Invalid input format</p>
+              <p className="text-red-700 font-bold text-xs italic">Invalid input format</p>
               </div>
             )}
             </div>
@@ -505,7 +505,7 @@ const Apportioning = () => {
         <div className="flex flex-row space-x-5">
           <div className="flex flex-row mb-4 ">
             <div  className="flex flex-col w-full"style={{ maxWidth: "300px" }}>
-              <label htmlFor="pwcStartDate" className="block text-gray-700 text-sm font-bold mb-2">
+              <label htmlFor="pwcStartDate" className="block text-black-900 text-sm font-bold mb-2">
                   PWC Start Date
               </label>
               <input
@@ -517,19 +517,19 @@ const Apportioning = () => {
                 // onChange={(e) => setPwcStartDate(e.target.value)}
                 onBlur={pwcStartDateOnBlur}
                 onFocus={handleFocus}
-                className={`w-full border rounded py-2 px-3 text-black-500${pwcStartError ? ' border-red-500' : ''}`}
+                className={`w-full border rounded py-2 px-3 text-black-900${pwcStartError ? ' border-red-500' : ''}`}
                 style={{ maxWidth: "300px" }}
               />
             {pwcStartError && (
               <div className="my-3">
-              <p className="text-red-500 font-bold text-xs italic">Invalid input format</p>
+              <p className="text-red-700 font-bold text-xs italic">Invalid input format</p>
               </div>
             )}
             </div>
           </div>
           <div className="flex flex-row w-full space-x-4 mb-9" style={{ maxWidth: "300px" }}>
             <div className="flex flex-col">
-              <label htmlFor="pwcEndDate" className="block text-gray-700 text-sm font-bold mb-2">
+              <label htmlFor="pwcEndDate" className="block text-black-900 text-sm font-bold mb-2">
                   PWC End Date
               </label>
               <input
@@ -541,12 +541,12 @@ const Apportioning = () => {
                 // onChange={(e) => setPwcEndDate(e.target.value)}
                 onBlur={pwcEndDateOnBlur}
                 onFocus={handleFocus}
-                className={`w-full border rounded py-2 px-3 text-black-500${pwcEndError ? ' border-red-500' : ''}`}
+                className={`w-full border rounded py-2 px-3 text-black-900${pwcEndError ? ' border-red-500' : ''}`}
                 style={{ maxWidth: "300px" }}
               />
               {pwcEndError && (
                 <div className="my-3">
-                <p className="text-red-500 font-bold text-xs italic">Invalid input format</p>
+                <p className="text-red-700 font-bold text-xs italic">Invalid input format</p>
                 </div>
               )}
             </div>
@@ -609,7 +609,7 @@ const Apportioning = () => {
         ):
         (
           <div className="">
-            <p className={`font-bold ${!isAllFieldEntered? 'text-red-500' : 'text-black-900'}`}> Please fill out all input fields </p>
+            <p className={`font-bold ${!isAllFieldEntered? 'text-red-700' : 'text-black-900'}`}> Please fill out all input fields </p>
           </div>
         )
        }

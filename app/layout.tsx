@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="display:relative flex w-full h-full items-center justify-center bg-green-300">{children}</body>
+      <body className="display:relative flex w-full h-full items-center justify-center bg-green-400">{children}</body>
     </html>
   )
 }
