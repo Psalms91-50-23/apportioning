@@ -103,7 +103,7 @@ const Apportioning = () => {
     }; 
 
     const isAllFieldCompleted = ():boolean => {
-      if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected){
+      if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected && grossEarnings !== "0.00"){
         return true;
       }else{
         return false;
@@ -351,7 +351,7 @@ const Apportioning = () => {
     const onSubmit = async () => {
       onSubmitErrorSet();
       let isAllFilled = isAllFieldCompleted();
-      if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected){
+      if(isAllFilled){
           const daysCountNoWp = countDays(grossEarningsStartDate, grossEarningsEndDate);
           setDaysCounted(daysCountNoWp.toString());
           //convert date format from dd/mm/yyy to yyyy/mm/dd as it is more accurate for counting days, eg april was 1 day off using original format
