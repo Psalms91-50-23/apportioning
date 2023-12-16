@@ -1,5 +1,8 @@
 import {  differenceInDays } from "date-fns";
 const includeLastDay = 1;
+const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(?:[0-9]{2})?[0-9]{2}$/;
+const earningsRegex = /^(\d{1,3}(,\d{3})*(\.\d{1,2})?|\d+(\.\d{1,2})?|\.\d{1,2})$/ ;
+import { onBlurDate } from "@/types";
 
 const formatDate = (input: string, setError: Function) => {
     const numericInput = input.replace(/\D/g, '');
@@ -283,6 +286,104 @@ const formatDate = (input: string, setError: Function) => {
     return formattedValue;
  };
 
+ const validateAndSetGrossEarnings = (inputValue: string, setBackPayment: Function, setBackPaymentError: Function, setBackPaymentStartDateError: Function): void => {
+  // Only show an error if there is an input
+  if (inputValue.trim().length > 0) {
+    // Assume you want to allow only numbers with a maximum of two decimal places
+    const regex = /^\d+(\.\d{1,})?$/;
+
+    if (!regex.test(inputValue)) {
+      setBackPayment('');
+      setBackPaymentError(true);
+      setBackPaymentStartDateError(false);
+      // setGrossEarningsFormat(false);
+      return;
+    }
+  }      
+  // Update state only if there is no error
+  setBackPayment(inputValue);
+  setBackPaymentError(false);
+};
+
+ const handleEarningsOnBlur = (earnings: string, setEarnings: Function,   setEarningsError: Function, setEarningsStartDateError: Function, setCompleted: Function): void => {
+
+  validateAndSetGrossEarnings(earnings, setEarnings, setEarningsError, setEarningsStartDateError);
+  let formattedInput = earnings.trim(); // Trim leading/trailing whitespaces
+  formattedInput = grossEarningInputValueConverted(formattedInput);
+  // let finalValue = formatNumber(formattedInput);
+  if (!formattedInput || !earningsRegex.test(formattedInput)){
+      // If input is empty, set default value
+      formattedInput = '0.00';
+      setEarnings(formattedInput);
+      setEarningsStartDateError(true);
+      setCompleted(false);
+      // setIsGrossEarningCompleted(false);
+      return;
+  }
+  else {
+      // Add a dot with two zeros if there is no dot in the input
+      if (!formattedInput.includes('.')) {
+          formattedInput += '.00';
+      }
+      // Handle decimal part
+      const decimalIndex = formattedInput.indexOf('.');
+      const digitsAfterDecimal = formattedInput.length - decimalIndex - 1;
+
+      if (digitsAfterDecimal === 0) {
+          // Add '00' if there are no digits after the decimal point
+          formattedInput += '00';
+      } else if (digitsAfterDecimal === 1) {
+          // Add '0' if there is only one digit after the decimal point
+          formattedInput += '0';
+      } else if (digitsAfterDecimal > 2) {
+          // Round the number to two decimal places if more than 2 digits after the decimal point
+          formattedInput = `${(+formattedInput).toFixed(2)}`;
+      }
+      // Add the new condition to remove leading zeros for specific cases
+      if (/^0+\d[1-9]\.\d$/.test(formattedInput)) {
+          formattedInput = formattedInput.replace(/^0+/, ''); // Remove leading zeros
+      }
+  }
+  //removing unwanted $ sign
+  let santizedGrossInputs = sanitizeInput(formattedInput);
+  //adding commas to make it separate for each 1,000
+  // formattedInput = numberWithCommas(santizedGrossInputs);
+  formattedInput = grossEarningInputValueConverted(santizedGrossInputs);
+  // Update state
+  setEarningsError(false);
+  setEarnings(formattedInput);
+  setCompleted(true);
+  // setIsGrossEarningCompleted(true);
+  // setBackPaymentStartDateError(false);
+};
+
+const dateOnBlur = ({ dateValue, setDateValue, setDateError, setDateCompleted }:onBlurDate) => {
+  if(dateValue === ""){
+    setDateError(false);
+    setDateCompleted(false);
+    return;
+  }
+  let isDateValid = validateDate(dateValue);
+  if(!isDateValid){
+    setDateError(true);
+  }
+  setDateError(false);
+  // Remove whitespaces and format the input
+  const formattedInput = dateValue.replace(/\s/g, '');
+  let dateFormatted = formatDate(formattedInput, setDateCompleted);
+  // Test if the input matches any of the specified formats
+  if (dateRegex.test(dateFormatted)) {
+    // If it matches, set isComplete to true and update the input state
+    setDateCompleted(true);
+    setDateValue(dateFormatted);
+    setDateError(false);
+  } else {
+    // If it doesn't match, set isComplete to false and setError to true
+    setDateCompleted(false);
+    setDateError(true);
+  }
+}
+
   export default {
     formatDate,
     createDateFromFormat,
@@ -298,5 +399,11 @@ const formatDate = (input: string, setError: Function) => {
     countDays,
     formatNumber,
     formatInputValue,
-    grossEarningInputValueConverted
+    grossEarningInputValueConverted,
+    dateRegex,
+    earningsRegex,
+    includeLastDay,
+    dateOnBlur,
+    handleEarningsOnBlur,
+    validateAndSetGrossEarnings
   }

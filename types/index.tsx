@@ -1,5 +1,5 @@
 
-import { MouseEventHandler, FocusEvent } from "react";
+import React, { MouseEventHandler, FocusEvent, ChangeEvent, RefObject, FocusEventHandler } from "react";
 
 export interface CustomButtonProps {
     title: String,
@@ -65,6 +65,10 @@ export interface FindDateOverlapProps {
   pwcEndDate: string,
 }
 
+export interface BackPayments {
+  isClicked: boolean,
+}
+
 export type PatternOfWork = {
   sunday: boolean;
   monday: boolean;
@@ -92,3 +96,37 @@ export type BlurHandlerProps = {
   setError: (hasError: boolean) => void;
 };
 
+export interface DateInputProps {
+  inputTitle: string;
+  inputValue: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onBlur: (e: FocusEvent<HTMLInputElement>) => void;
+  error: boolean | null;
+  inputRef?: React.RefObject<HTMLInputElement>;
+  className?: string;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>;
+  id: string;
+}
+
+export interface onBlurDate {
+  dateValue: string;
+  setDateValue: (value: string) => void;
+  setDateError: (error: boolean) => void;
+  setDateCompleted: (completed: boolean) => void;
+  // onFocus?: () => void;
+}
+
+export type result = {
+  grossEarnings: string;
+  grossEarningsStartDate: string;
+  grossEarningsEndDate: string;
+  daysCounted: string;
+  workPatternDaysCounted: string;
+  pwcStartDate: string;
+  pwcEndDate: string;
+  start: string;
+  end: string;
+  countDaysOverlapWithPWC: string;
+  totalGrossForPeriodReduction: string;
+  singleDayGrossWP: string;
+}
