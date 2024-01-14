@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState,useEffect, ChangeEvent, useRef, RefObject } from 'react';
 import {  differenceInDays } from "date-fns";
 import functions from "../functions";
@@ -246,7 +245,7 @@ const Apportioning = () => {
           </label>
           <input
             type="text"
-            id={`${grossEarnings}`}
+            id={`grossEarnings`}
             ref={earningsRef}
             value={grossEarnings}
             onChange={(e) => onChange(e, setGrossEarnings, earningsRef, setGrossEarningsInputError)}
@@ -273,13 +272,17 @@ const Apportioning = () => {
             inputTitle="Gross Earnings Start Date" inputValue={grossEarningsStartDate} 
             onChange={(e) => onChange( e, setGrossEarningsStartDate,  grossStartDateRef, setGrossStartDateError, setIsGrossStartDateCompleted )} 
             onBlur={() => dateOnBlur({ dateValue: grossEarningsStartDate, setDateValue: setGrossEarningsStartDate, setDateError: setGrossStartDateError, setDateCompleted: setIsGrossStartDateCompleted })} 
-            error={grossStartDateError} inputRef={grossStartDateRef} id={`${grossEarningsStartDate}`} onFocus={handleFocus}
+            error={grossStartDateError} inputRef={grossStartDateRef} 
+            // id={`${1}`} 
+            onFocus={handleFocus}
           />
           <DateInput 
             inputTitle="Gross Earnings End Date" inputValue={grossEarningsEndDate} 
             onChange={(e) => onChange( e, setGrossEarningsEndDate,  grossEndDateRef, setGrossEndDateError, setIsGrossEndDateCompleted )} 
             onBlur={() => dateOnBlur({ dateValue: grossEarningsEndDate, setDateValue: setGrossEarningsEndDate, setDateError: setGrossEndDateError, setDateCompleted: setIsGrossEndDateCompleted })} 
-            error={grossEndDateError} inputRef={grossEndDateRef} id={`${grossEarningsEndDate}`} onFocus={handleFocus}
+            error={grossEndDateError} inputRef={grossEndDateRef} 
+            // id={`${2}`} 
+            onFocus={handleFocus}
           />
         </div>
         <div className="flex flex-row w-full mb-4 space-x-5">
@@ -287,13 +290,17 @@ const Apportioning = () => {
             inputTitle="PWC Start Date" inputValue={pwcStartDate} 
             onChange={(e) => onChange( e, setPwcStartDate,  pwcStartDateRef, setPwcStartError, setPwcStartCompleted )} 
             onBlur={() => dateOnBlur({ dateValue: pwcStartDate, setDateValue: setPwcStartDate, setDateError: setPwcStartError, setDateCompleted: setPwcStartCompleted })} 
-            error={pwcStartError} inputRef={pwcStartDateRef} id={`${pwcStartDate}`} onFocus={handleFocus}
+            error={pwcStartError} inputRef={pwcStartDateRef} 
+            // id={`${3}`} 
+            onFocus={handleFocus}
           />
           <DateInput 
             inputTitle="PWC  End Date" inputValue={pwcEndDate} 
             onChange={(e) => onChange( e, setPwcEndDate,  pwcEndDateRef, setPwcEndError, setPwcEndCompleted )} 
             onBlur={() => dateOnBlur({ dateValue: pwcEndDate, setDateValue: setPwcEndDate, setDateError: setPwcEndError, setDateCompleted: setPwcEndCompleted })} 
-            error={pwcEndError} inputRef={pwcEndDateRef} id={`${pwcEndDate}`} onFocus={handleFocus}
+            error={pwcEndError} inputRef={pwcEndDateRef} 
+            // id={`${4}`} 
+            onFocus={handleFocus}
           />
         </div>
         <div className='mb-5'>

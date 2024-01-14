@@ -1,16 +1,23 @@
 import React from 'react';
 import { DateInputProps } from '@/types';
 
-const DateInput = ({ inputTitle, inputValue, onChange, onBlur, error, inputRef, id, onFocus }:DateInputProps) => {
+const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef, onFocus }:DateInputProps) => {
+
+    const handleDragStart = (event: React.DragEvent<HTMLInputElement>) => {
+    event.preventDefault();
+  };
+
+  const inputId = `dateInput_${inputTitle}`;
   return (
     <div className="flex flex-row mb-4 box-content" style={{ maxWidth: "300px" }}>
     <div className="flex flex-col">
-      <label htmlFor="grossEarningsEndDate" className="block text-black-900 text-sm font-bold mb-2">
+      <label htmlFor={inputTitle} className="block text-black-900 text-sm font-bold mb-2">
         {inputTitle}
       </label>
       <input
         type="text"
-        id={id}
+        id={inputTitle}
+        name={inputTitle}
         value={inputValue}
         onChange={onChange}
         ref={inputRef}

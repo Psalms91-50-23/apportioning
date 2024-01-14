@@ -105,7 +105,7 @@ export interface DateInputProps {
   inputRef?: React.RefObject<HTMLInputElement>;
   className?: string;
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
-  id: string;
+  // id: string;
 }
 
 export interface onBlurDate {
