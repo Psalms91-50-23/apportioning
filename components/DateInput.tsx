@@ -7,9 +7,9 @@ const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef,
     event.preventDefault();
   };
 
-  const inputId = `dateInput_${inputTitle}`;
+
   return (
-    <div className="flex flex-row mb-4 box-content" style={{ maxWidth: "300px" }}>
+    <div className="flex flex-row mb-4 box-content" style={{ maxWidth: "300px" }} draggable onDragStart={handleDragStart}>
     <div className="flex flex-col">
       <label htmlFor={inputTitle} className="block text-black-900 text-sm font-bold mb-2">
         {inputTitle}
