@@ -137,10 +137,6 @@ export interface DateInputProps {
   onFocus?: React.FocusEventHandler<HTMLInputElement>;
   text?: string;
   setDisplayAll?: (value: boolean) => void;
-  // endDateLTE?:string;
-  // relateDateStart?: string;
-  // relateDateEnd?: string;
-  // id: string;
 };
 
 export interface OnBlurDate {

@@ -6,11 +6,6 @@ const includeLastDay = 1;
 const dateRegex = /^(0[1-9]|[12][0-9]|3[01])\/(0[1-9]|1[0-2])\/(?:[0-9]{2})?[0-9]{2}$/;
 const earningsRegex = /^(\d{1,3}(,\d{3})*(\.\d{1,2})?|\d+(\.\d{1,2})?|\.\d{1,2})$/ ;
 
-// const differenceInDays = (date1: Date, date2: Date): number => {
-//   const diffTime = Math.abs(date2.getTime() - date1.getTime());
-//   return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-// };
-
 const formatDate = (input: string, setError: Function) => {
     const numericInput = input.replace(/\D/g, '');
     const ddmmyyRegex = /^(\d{2})(\d{2})(\d{2})$/;
