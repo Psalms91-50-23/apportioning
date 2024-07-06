@@ -1,9 +1,9 @@
 import React from 'react';
-import { result } from '@/types';
+import { Result } from '@/types';
 import functions from '@/functions';
 const { formatStringNumberWithCommas } = functions;
 
-const Output = ({ grossEarnings, grossEarningsStartDate, grossEarningsEndDate, daysCounted,workPatternDaysCounted, pwcStartDate, pwcEndDate, start, end, countDaysOverlapWithPWC, totalGrossForPeriodReduction, singleDayGrossWP }: result ) => {
+const Output = ({ grossEarnings, grossEarningsStartDate, grossEarningsEndDate, daysCounted,workPatternDaysCounted, pwcStartDate, pwcEndDate, start, end, countDaysOverlapWithPWC, totalGrossForPeriodReduction, singleDayGrossWP }: Result ) => {
   return (
     <div className="">
         <div className="">

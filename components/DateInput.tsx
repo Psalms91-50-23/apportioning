@@ -1,8 +1,7 @@
 import React from 'react';
 import { DateInputProps } from '@/types';
 
-const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef, onFocus }:DateInputProps) => {
-
+const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef, onFocus }: DateInputProps) => {
     const handleDragStart = (event: React.DragEvent<HTMLInputElement>) => {
     event.preventDefault();
   };
