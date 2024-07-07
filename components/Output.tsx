@@ -49,7 +49,7 @@ const Output = ({ grossEarnings, grossEarningsStartDate, grossEarningsEndDate, d
             Normal wage and previous weekly compensation date overlap
             </p>
             <p>{start} — {end}  {formatStringNumberWithCommas(countDaysOverlapWithPWC)} {Number(countDaysOverlapWithPWC) > 1 ? "days" : "day"} overlap based on work pattern</p> 
-            <p>{countDaysOverlapWithPWC} * ${formatStringNumberWithCommas(singleDayGrossWP)} = ${formatStringNumberWithCommas(totalGrossForPeriodReduction)}</p>
+            <p className="font-bold">{countDaysOverlapWithPWC} * ${formatStringNumberWithCommas(singleDayGrossWP)} = ${formatStringNumberWithCommas(totalGrossForPeriodReduction)}</p>
         </div>
     </div>
   )

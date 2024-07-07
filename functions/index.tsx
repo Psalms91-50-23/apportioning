@@ -669,22 +669,15 @@ const countDays = (startDateString: string, endDateString: string): number => {
   return 0;
 };
 
-const dayMap: { [key: number]: keyof PatternOfWorkInput } = {
-  0: 'sunday',
-  1: 'monday',
-  2: 'tuesday',
-  3: 'wednesday',
-  4: 'thursday',
-  5: 'friday',
-  6: 'saturday',
-};
-
-
 const countWorkDays = (
   startDate: Date | string,
   endDate: Date | string,
-  workPattern: PatternOfWorkInput
+  workPattern: PatternOfWorkInput,
+  grossStartDate?: Date | string,
+  grossEndDate?: Date | string
 ): number => {
+  const dayMap: (keyof PatternOfWorkInput)[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+
   let count = 0;
   let currentDate = createDateFormat(startDate);
   let currentDateEnd = createDateFormat(endDate);
@@ -696,52 +689,65 @@ const countWorkDays = (
 
     // First loop to determine the type of days (allFull, allHalf, or mixtureDays)
     while (currentDate <= currentDateEnd) {
-      if (currentDate instanceof Date) {
-        const dayOfWeek = currentDate.getDay();
-        const dayKey = dayMap[dayOfWeek];
+      const dayOfWeek = currentDate.getDay();
+      const dayKey = dayMap[dayOfWeek];
 
-        if (workPattern[dayKey] === 'full') {
-          allHalf = false;
-        } else if (workPattern[dayKey] === 'half') {
-          allFull = false;
-        }
+      if (workPattern[dayKey] === 'full') {
+        allHalf = false;
+      } else if (workPattern[dayKey] === 'half') {
+        allFull = false;
       }
 
-      // Increment the date by one day
-      if (currentDate instanceof Date) {
-        currentDate.setDate(currentDate.getDate() + 1);
-      } else {
-        break; // Exit loop if currentDate is not a Date instance
-      }
+      currentDate.setDate(currentDate.getDate() + 1);
     }
+
+    mixtureDays = !allFull && !allHalf;
     // Reset currentDate for counting days
     currentDate = createDateFormat(startDate);
-    // Second loop to count days based on the determined type
-    while (currentDate <= currentDateEnd) {
-      if (currentDate instanceof Date) {
-        const dayOfWeek = currentDate.getDay();
-        const dayKey = dayMap[dayOfWeek];
 
-        if (workPattern[dayKey] === 'full') {
-          count++;
-        } else if (workPattern[dayKey] === 'half') {
-          count += allHalf ? 1 : 0.5;
-        } else if (workPattern[dayKey] === '') {
-          // Ignore empty days
-        }
+    // Second loop to count days based on the determined type
+    while (currentDate <= currentDateEnd && currentDate instanceof Date) {
+      const dayOfWeek = currentDate.getDay();
+      const dayKey = dayMap[dayOfWeek];
+
+      if (workPattern[dayKey] === 'full') {
+        count++;
+      } else if (workPattern[dayKey] === 'half') {
+        count += allHalf ? 1 : 0.5;
       }
-      // Increment the date by one day
-      if (currentDate instanceof Date) {
-        currentDate.setDate(currentDate.getDate() + 1);
-      } else {
-        break; // Exit loop if currentDate is not a Date instance
-      }
+
+      currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    return count;
+    if (grossStartDate && grossEndDate) {
+      let grossCurrentDate = createDateFormat(grossStartDate);
+      let grossCurrentDateEnd = createDateFormat(grossEndDate);
+
+      if (grossCurrentDate instanceof Date && grossCurrentDateEnd instanceof Date) {
+        const overlapStartDate = grossCurrentDate > createDateFormat(startDate) ? grossCurrentDate : createDateFormat(startDate);
+        const overlapEndDate = grossCurrentDateEnd < createDateFormat(endDate) ? grossCurrentDateEnd : createDateFormat(endDate);
+
+        if (overlapStartDate <= overlapEndDate && overlapStartDate instanceof Date) {
+          let overlapCount = 0;
+          while (overlapStartDate <= overlapEndDate) {
+            const dayOfWeek = overlapStartDate.getDay();
+            const dayKey = dayMap[dayOfWeek];
+
+            if (workPattern[dayKey] === 'full') {
+              overlapCount++;
+            } else if (workPattern[dayKey] === 'half') {
+              overlapCount += allHalf ? 1 : 0.5;
+            }
+
+            overlapStartDate.setDate(overlapStartDate.getDate() + 1);
+          }
+          count = overlapCount;
+        }
+      }
+    }
   }
 
-  return 0; // Invalid date inputs
+  return count;
 };
 
 //tested all conditions is fine

@@ -17,6 +17,8 @@
 }
 
 body {
+  font-family: 'Roboto', Arial, sans-serif;
+  
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -26,20 +28,43 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+html {
+  line-height: 1.5; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+  -moz-tab-size: 4; /* 3 */
+  -o-tab-size: 4;
+     tab-size: 4; /* 3 */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
+  font-feature-settings: normal; /* 5 */
+  font-variation-settings: normal; /* 6 */
+}
+
+
+.big-size:hover {
+  transform: scale(1.25);
+  /* border: 1px solid  red; */
+  cursor:pointer;
+  transition-property: transform; /* Apply transition to the transform property */
+  transition-duration: 0.1s;
+}
 /* Style for input field text color in dark mode */
+/* Set the text color of the input field in dark mode */
+/* Set the text color of labels in dark mode */
+/* Set the text color of labels in dark mode */
+/* Button styles on hover */
+/* Set the border color on hover */
 @media (prefers-color-scheme: dark) {
   input {
-    color: #000000; /* Set the text color of the input field in dark mode */
+    color: #000000;
   }
   label {
-    color: #ffffff !important; /* Set the text color of labels in dark mode */
+    color: #ffffff !important;
   }
   p {
-    color: #ffffff; /* Set the text color of labels in dark mode */
+    color: #ffffff; 
   }
-  /* Button styles on hover */
   button:hover {
-    border: 2px solid #ffffff; /* Set the border color on hover */
+    border: 2px solid #ffffff; 
   }
 
 }

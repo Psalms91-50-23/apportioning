@@ -2,7 +2,8 @@
 import React, { useState,useEffect, ChangeEvent, useRef, RefObject } from 'react';
 
 import functions from "../functions";
-const { createDateFormat, replaceCommas, overlapDateRangeString,  convertToInitialDateFormat, dateOnBlur, handleEarningsOnBlur, earningsRegex, countDays, countWorkDays } = functions;
+const { createDateFormat, replaceCommas, overlapDateRangeString,  convertToInitialDateFormat, 
+  dateOnBlur, handleEarningsOnBlur, earningsRegex, countDays, countWorkDays, isFirefox } = functions;
 import {  PatternOfWorkInput } from "../types";
 import { DateInput, Output, DayToggle } from '.';
 
@@ -39,6 +40,8 @@ const EzyApportioning = () => {
   const [daysCounted, setDaysCounted] = useState<string>("0");
   const [workPatternDaysCounted, setWorkPatternDaysCounted] = useState<string>("0");
   const [countDaysOverlapWithPWC, setCountDaysOverlapWithPWC] = useState<string>("0");
+  const [fireFox, setFireFox] = useState<boolean>(false);
+
   const [dateRangeWithPWC, setDateRangeWithPWC] = useState({
     start: "",
     end: ""
@@ -69,7 +72,7 @@ const EzyApportioning = () => {
   };
 
   const isAllFieldCompleted = ():boolean => {
-    if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected && grossEarnings !== "0.00"){
+    if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected && grossEarnings !== ""){
       setDisplayAll(true);
       return true;
     }else{
@@ -102,7 +105,7 @@ const EzyApportioning = () => {
     let inputValue = e.target.value;
     if(inputRef.current === earningsRef.current){
       if(inputValue === ""){
-        inputValue = "0.00";
+        inputValue = "";
       }
       setError(false);
       setValue(inputValue);
@@ -142,7 +145,7 @@ const EzyApportioning = () => {
           //convert date format from dd/mm/yyy to yyyy/mm/dd as it is more accurate for counting days, eg april was 1 day off using original format
           const grossDateStart =  createDateFormat(grossEarningsStartDate) ?? new Date(grossEarningsStartDate);
           const grossDateEnd =  createDateFormat(grossEarningsEndDate) ?? new Date(grossEarningsEndDate);
-          const daysCountWp =  countWorkDays(new Date(grossDateStart), new Date(grossDateEnd), workPattern);
+          const daysCountWp =  countWorkDays(new Date(grossDateStart), new Date(grossDateEnd), workPattern, grossDateStart, grossDateEnd);
           //converting string to number and replacing commas with empty string for the purpose of calculating
           const grossEarningsNum = Number(replaceCommas(grossEarnings));
           const singleDayGrossWP = Number(grossEarningsNum/daysCountWp);
@@ -153,7 +156,7 @@ const EzyApportioning = () => {
           //finding start and end date for overlap
           const tempObject =  overlapDateRangeString(grossEarningsStartDate,grossEarningsEndDate, pwcStartDate, pwcEndDate);
           const { start, end } = tempObject;
-          const wage_pwc_overlap_days =  countWorkDays(new Date(start), new Date(end), workPattern);
+          const wage_pwc_overlap_days =  countWorkDays(new Date(start), new Date(end), workPattern,grossEarningsStartDate, grossDateEnd);
           const totalOverlapReduction = singleDayGrossWP * wage_pwc_overlap_days;
           setCountDaysOverlapWithPWC(wage_pwc_overlap_days.toString());
           setTotalGrossForPeriodReduction(totalOverlapReduction.toString());
@@ -170,6 +173,18 @@ const EzyApportioning = () => {
     }
 
   }
+
+  useEffect(() => {
+    const isFirefox = (): boolean => {
+      return typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
+    };
+
+    if(isFirefox()){
+      setFireFox(true);
+    }
+
+  }, [setFireFox])
+  
 
   useEffect(() => {
     const isAtLeastOneDaySelected = (pattern: PatternOfWorkInput): boolean => {
@@ -258,7 +273,7 @@ const EzyApportioning = () => {
       </div>
       <div className="flex flex-col w-full mb-4 space-x-4" style={{ maxWidth: "300px" }}>
         <div className="">
-          <label htmlFor="grossEarnings" className="block text-black-900 text-sm font-bold mb-2">
+          <label htmlFor="grossEarnings" className="block text-black-900 text-md font-bold mb-2">
             Gross Earnings
           </label>
           <input
@@ -269,7 +284,7 @@ const EzyApportioning = () => {
             onChange={(e) => onChange(e, setGrossEarnings, earningsRef, setGrossEarningsInputError)}
             onBlur={() => handleEarningsOnBlur(grossEarnings,setGrossEarnings,setGrossEarningsInputError, setIsGrossEarningCompleted)}
             onFocus={handleGrossEarningsFocus}
-            className={`w-full border rounded py-2 px-3 text-black-900$ {grossEarningsInputError ? 'border-red-500' : ''}`}
+            className={`w-full border rounded py-2 px-3 font-bold text-black-900$ {grossEarningsInputError ? 'border-red-500' : ''}`}
             style={{ maxWidth: "300px" }}
           />
         </div>
@@ -286,39 +301,51 @@ const EzyApportioning = () => {
         </div>
         <div className="flex flex-row w-full mb-4 space-x-5">
           <DateInput 
-            inputTitle="Gross Earnings Start Date" inputValue={grossEarningsStartDate} 
+            inputTitle="Gross Earnings Start Date" 
+            inputValue={grossEarningsStartDate} 
             onChange={(e) => onChange( e, setGrossEarningsStartDate,  grossStartDateRef, setGrossStartDateError, setIsGrossStartDateCompleted )} 
             onBlur={() => dateOnBlur({ dateValue: grossEarningsStartDate, setDateValue: setGrossEarningsStartDate, setDateError: setGrossStartDateError, setDateCompleted: setIsGrossStartDateCompleted, setDisplayAll })} 
-            error={grossStartDateError} inputRef={grossStartDateRef} 
+            error={grossStartDateError} 
+            inputRef={grossStartDateRef} 
             onFocus={handleFocus}
+            setValue={setGrossEarningsStartDate}
           />
           <DateInput 
-            inputTitle="Gross Earnings End Date" inputValue={grossEarningsEndDate} 
+            inputTitle="Gross Earnings End Date" 
+            inputValue={grossEarningsEndDate} 
             onChange={(e) => onChange( e, setGrossEarningsEndDate,  grossEndDateRef, setGrossEndDateError, setIsGrossEndDateCompleted )} 
             onBlur={() => dateOnBlur({ dateValue: grossEarningsEndDate, setDateValue: setGrossEarningsEndDate, setDateError: setGrossEndDateError, setDateCompleted: setIsGrossEndDateCompleted, setDisplayAll })} 
-            error={grossEndDateError} inputRef={grossEndDateRef} 
+            error={grossEndDateError} 
+            inputRef={grossEndDateRef} 
             onFocus={handleFocus}
+            setValue={setGrossEarningsEndDate}
           />
         </div>
         <div className="flex flex-row w-full mb-4 space-x-5">
           <DateInput 
-            inputTitle="PWC Start Date" inputValue={pwcStartDate} 
+            inputTitle="PWC Start Date" 
+            inputValue={pwcStartDate} 
             onChange={(e) => onChange( e, setPwcStartDate,  pwcStartDateRef, setPwcStartError, setPwcStartCompleted )} 
             onBlur={() => dateOnBlur({ dateValue: pwcStartDate, setDateValue: setPwcStartDate, setDateError: setPwcStartError, setDateCompleted: setPwcStartCompleted , setDisplayAll })} 
-            error={pwcStartError} inputRef={pwcStartDateRef} 
+            error={pwcStartError} 
+            inputRef={pwcStartDateRef} 
             onFocus={handleFocus}
+            setValue={setPwcStartDate}
           />
           <DateInput 
-            inputTitle="PWC  End Date" inputValue={pwcEndDate} 
+            inputTitle="PWC  End Date" 
+            inputValue={pwcEndDate} 
             onChange={(e) => onChange( e, setPwcEndDate,  pwcEndDateRef, setPwcEndError, setPwcEndCompleted )} 
             onBlur={() => dateOnBlur({ dateValue: pwcEndDate, setDateValue: setPwcEndDate, setDateError: setPwcEndError, setDateCompleted: setPwcEndCompleted, setDisplayAll })} 
-            error={pwcEndError} inputRef={pwcEndDateRef} 
+            error={pwcEndError} 
+            inputRef={pwcEndDateRef} 
             onFocus={handleFocus}
+            setValue={setPwcEndDate}
           />
         </div>
         <div className='mb-5'>
           <button 
-            className="font-bold italic text-lg p-3 rounded-md bg-green-300 hover:bg-green-700 hover:text-white"
+            className={`font-bold italic text-lg p-3 rounded-md ${fireFox ? 'bg-green-500' : 'bg-green-300'} bg-green-300 hover:bg-green-700 hover:text-white`}
             onClick={onSubmit}> Calculate 
           </button>
         </div>
