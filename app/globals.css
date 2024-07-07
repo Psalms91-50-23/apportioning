@@ -41,10 +41,9 @@ html {
 
 
 .big-size:hover {
-  transform: scale(1.25);
-  /* border: 1px solid  red; */
+  transform: scale(1.20);
   cursor:pointer;
-  transition-property: transform; /* Apply transition to the transform property */
+  transition-property: transform;  
   transition-duration: 0.1s;
 }
 /* Style for input field text color in dark mode */
