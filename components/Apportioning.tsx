@@ -156,9 +156,6 @@ const EzyApportioning = () => {
           //finding start and end date for overlap
           const tempObject =  overlapDateRangeString(grossEarningsStartDate,grossEarningsEndDate, pwcStartDate, pwcEndDate);
           const { start, end } = tempObject;
-          console.log({tempObject});
-          let tempStartDate = new Date(start);
-          let tempEndDate = new Date(end);
           const wage_pwc_overlap_days =  countWorkDays(new Date(start), new Date(end), workPattern,grossEarningsStartDate, grossDateEnd);
           const totalOverlapReduction = singleDayGrossWP * wage_pwc_overlap_days;
           setCountDaysOverlapWithPWC(wage_pwc_overlap_days.toString());

@@ -711,7 +711,6 @@ const countWorkDays = (
           if (allFull || allHalf) {
             count++;
           } else if (mixtureDays) {
-            console.log("mixture of day");
             if (workPattern[dayKey] === 'full') {
               count++;
             } else if (workPattern[dayKey] === 'half') {
