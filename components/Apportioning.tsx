@@ -16,8 +16,8 @@ const EzyApportioning = () => {
   const pwcEndDateRef = useRef<HTMLInputElement>(null);
   const [incapacity, setIncapacity] = useState<object>({ dofi: true, dosi: false} );
   //input dates gross earnings
-  const [grossEarningsStartDate, setGrossEarningsStartDate] = useState<string>('07/07/2024');
-  const [grossEarningsEndDate, setGrossEarningsEndDate] = useState<string>('20/07/2024');
+  const [grossEarningsStartDate, setGrossEarningsStartDate] = useState<string>('');
+  const [grossEarningsEndDate, setGrossEarningsEndDate] = useState<string>('');
   const [isGrossEarningCompleted, setIsGrossEarningCompleted] = useState<boolean>(false);
   //gross input date errors
   const [grossEarningsInputError, setGrossEarningsInputError] = useState<boolean>(false);
@@ -27,8 +27,8 @@ const EzyApportioning = () => {
   const [isGrossStartDateCompleted, setIsGrossStartDateCompleted] = useState<boolean>(false);
   const [isGrossEndDateCompleted, setIsGrossEndDateCompleted] = useState<boolean>(false);
   //pwc input dates
-  const [pwcStartDate, setPwcStartDate] = useState<string>('18/07/2024');
-  const [pwcEndDate, setPwcEndDate] = useState<string>('24/07/2024');
+  const [pwcStartDate, setPwcStartDate] = useState<string>('');
+  const [pwcEndDate, setPwcEndDate] = useState<string>('');
   //pwc error input dates
   const [pwcStartError, setPwcStartError] = useState<boolean>(false)
   const [pwcEndError, setPwcEndError] = useState<boolean>(false)
@@ -54,8 +54,8 @@ const EzyApportioning = () => {
       monday: 'full',
       tuesday: 'full',
       wednesday: 'full',
-      thursday: 'half',
-      friday: 'half',
+      thursday: 'full',
+      friday: 'full',
       saturday: '',
   };
 
