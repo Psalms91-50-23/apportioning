@@ -16,8 +16,8 @@ const EzyApportioning = () => {
   const pwcEndDateRef = useRef<HTMLInputElement>(null);
   const [incapacity, setIncapacity] = useState<object>({ dofi: true, dosi: false} );
   //input dates gross earnings
-  const [grossEarningsStartDate, setGrossEarningsStartDate] = useState<string>('');
-  const [grossEarningsEndDate, setGrossEarningsEndDate] = useState<string>('');
+  const [grossEarningsStartDate, setGrossEarningsStartDate] = useState<string>('07/07/2024');
+  const [grossEarningsEndDate, setGrossEarningsEndDate] = useState<string>('20/07/2024');
   const [isGrossEarningCompleted, setIsGrossEarningCompleted] = useState<boolean>(false);
   //gross input date errors
   const [grossEarningsInputError, setGrossEarningsInputError] = useState<boolean>(false);
@@ -27,8 +27,8 @@ const EzyApportioning = () => {
   const [isGrossStartDateCompleted, setIsGrossStartDateCompleted] = useState<boolean>(false);
   const [isGrossEndDateCompleted, setIsGrossEndDateCompleted] = useState<boolean>(false);
   //pwc input dates
-  const [pwcStartDate, setPwcStartDate] = useState<string>('');
-  const [pwcEndDate, setPwcEndDate] = useState<string>('');
+  const [pwcStartDate, setPwcStartDate] = useState<string>('18/07/2024');
+  const [pwcEndDate, setPwcEndDate] = useState<string>('24/07/2024');
   //pwc error input dates
   const [pwcStartError, setPwcStartError] = useState<boolean>(false)
   const [pwcEndError, setPwcEndError] = useState<boolean>(false)
@@ -54,8 +54,8 @@ const EzyApportioning = () => {
       monday: 'full',
       tuesday: 'full',
       wednesday: 'full',
-      thursday: 'full',
-      friday: 'full',
+      thursday: 'half',
+      friday: 'half',
       saturday: '',
   };
 
@@ -156,6 +156,9 @@ const EzyApportioning = () => {
           //finding start and end date for overlap
           const tempObject =  overlapDateRangeString(grossEarningsStartDate,grossEarningsEndDate, pwcStartDate, pwcEndDate);
           const { start, end } = tempObject;
+          console.log({tempObject});
+          let tempStartDate = new Date(start);
+          let tempEndDate = new Date(end);
           const wage_pwc_overlap_days =  countWorkDays(new Date(start), new Date(end), workPattern,grossEarningsStartDate, grossDateEnd);
           const totalOverlapReduction = singleDayGrossWP * wage_pwc_overlap_days;
           setCountDaysOverlapWithPWC(wage_pwc_overlap_days.toString());

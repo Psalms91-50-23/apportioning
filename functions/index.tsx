@@ -677,76 +677,92 @@ const countWorkDays = (
   grossEndDate?: Date | string
 ): number => {
   const dayMap: (keyof PatternOfWorkInput)[] = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-
   let count = 0;
-  let currentDate = createDateFormat(startDate);
-  let currentDateEnd = createDateFormat(endDate);
-
-  if (currentDate instanceof Date && currentDateEnd instanceof Date) {
-    let allFull = true;
-    let allHalf = true;
-    let mixtureDays = false;
-
-    // First loop to determine the type of days (allFull, allHalf, or mixtureDays)
-    while (currentDate <= currentDateEnd) {
-      const dayOfWeek = currentDate.getDay();
-      const dayKey = dayMap[dayOfWeek];
-
-      if (workPattern[dayKey] === 'full') {
-        allHalf = false;
-      } else if (workPattern[dayKey] === 'half') {
-        allFull = false;
-      }
-
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-
-    mixtureDays = !allFull && !allHalf;
-    // Reset currentDate for counting days
-    currentDate = createDateFormat(startDate);
-
-    // Second loop to count days based on the determined type
-    while (currentDate <= currentDateEnd && currentDate instanceof Date) {
-      const dayOfWeek = currentDate.getDay();
-      const dayKey = dayMap[dayOfWeek];
-
-      if (workPattern[dayKey] === 'full') {
-        count++;
-      } else if (workPattern[dayKey] === 'half') {
-        count += allHalf ? 1 : 0.5;
-      }
-
-      currentDate.setDate(currentDate.getDate() + 1);
-    }
-
-    if (grossStartDate && grossEndDate) {
-      let grossCurrentDate = createDateFormat(grossStartDate);
-      let grossCurrentDateEnd = createDateFormat(grossEndDate);
-
-      if (grossCurrentDate instanceof Date && grossCurrentDateEnd instanceof Date) {
-        const overlapStartDate = grossCurrentDate > createDateFormat(startDate) ? grossCurrentDate : createDateFormat(startDate);
-        const overlapEndDate = grossCurrentDateEnd < createDateFormat(endDate) ? grossCurrentDateEnd : createDateFormat(endDate);
-
-        if (overlapStartDate <= overlapEndDate && overlapStartDate instanceof Date) {
-          let overlapCount = 0;
-          while (overlapStartDate <= overlapEndDate) {
-            const dayOfWeek = overlapStartDate.getDay();
-            const dayKey = dayMap[dayOfWeek];
-
-            if (workPattern[dayKey] === 'full') {
-              overlapCount++;
-            } else if (workPattern[dayKey] === 'half') {
-              overlapCount += allHalf ? 1 : 0.5;
-            }
-
-            overlapStartDate.setDate(overlapStartDate.getDate() + 1);
-          }
-          count = overlapCount;
+  let currentStartDate;
+  let currentDateEnd;
+  let allFull = true;
+  let allHalf = true;
+  let mixtureDays = false;
+  // First path: when grossStartDate and grossEndDate exist
+  if (grossStartDate && grossEndDate) {
+    currentStartDate = createDateFormat(grossStartDate);
+    currentDateEnd = createDateFormat(grossEndDate);
+    if (currentStartDate instanceof Date && currentDateEnd instanceof Date) {
+      // First loop to determine the boolean flags
+      const tempStartDate = new Date(currentStartDate.getTime());
+      while (tempStartDate <= currentDateEnd) {
+        const dayOfWeek = tempStartDate.getDay();
+        const dayKey = dayMap[dayOfWeek];
+        if (workPattern[dayKey] === 'full') {
+          allHalf = false;
+        } else if (workPattern[dayKey] === 'half') {
+          allFull = false;
         }
+        tempStartDate.setDate(tempStartDate.getDate() + 1);
+      }
+      mixtureDays = !allFull && !allHalf;
+      currentStartDate = createDateFormat(startDate);
+      currentDateEnd = createDateFormat(endDate);
+      // Second loop to count days
+      while (currentStartDate <= currentDateEnd && currentStartDate instanceof Date) {
+        const dayOfWeek = currentStartDate.getDay();
+        const dayKey = dayMap[dayOfWeek];
+        if (workPattern[dayKey] !== '') {
+          if (allFull || allHalf) {
+            count++;
+          } else if (mixtureDays) {
+            console.log("mixture of day");
+            if (workPattern[dayKey] === 'full') {
+              count++;
+            } else if (workPattern[dayKey] === 'half') {
+              count += 0.5;
+            }
+          }
+        }
+        currentStartDate.setDate(currentStartDate.getDate() + 1);
+      }
+    }
+  } 
+  // Second path: when grossStartDate and grossEndDate do not exist
+  else {
+    currentStartDate = createDateFormat(startDate);
+    currentDateEnd = createDateFormat(endDate);
+
+    if (currentStartDate instanceof Date && currentDateEnd instanceof Date) {
+      // First loop to determine the boolean flags
+      const tempStartDate = new Date(currentStartDate.getTime());
+      while (tempStartDate <= currentDateEnd) {
+        const dayOfWeek = tempStartDate.getDay();
+        const dayKey = dayMap[dayOfWeek];
+        if (workPattern[dayKey] === 'full') {
+          allHalf = false;
+        } else if (workPattern[dayKey] === 'half') {
+          allFull = false;
+        }
+        tempStartDate.setDate(tempStartDate.getDate() + 1);
+      }
+      mixtureDays = !allFull && !allHalf;
+      // Reset currentStartDate for counting days
+      currentStartDate = createDateFormat(startDate);
+      // Second loop to count days
+      while (currentStartDate <= currentDateEnd && currentStartDate instanceof Date) {
+        const dayOfWeek = currentStartDate.getDay();
+        const dayKey = dayMap[dayOfWeek];
+        if (workPattern[dayKey] !== '') {
+          if (allFull || allHalf) {
+            count++;
+          } else if (mixtureDays) {
+            if (workPattern[dayKey] === 'full') {
+              count++;
+            } else if (workPattern[dayKey] === 'half') {
+              count += 0.5;
+            }
+          }
+        }
+        currentStartDate.setDate(currentStartDate.getDate() + 1);
       }
     }
   }
-
   return count;
 };
 
