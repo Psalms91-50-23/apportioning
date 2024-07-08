@@ -5,7 +5,7 @@ import functions from "../functions";
 const { isFirefox } = functions;
 import Image from 'next/image';
 
-const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef, onFocus, setValue }: DateInputProps) => {
+const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef, onFocus, setValue, setDisplayAll }: DateInputProps) => {
     const handleDragStart = (event: React.DragEvent<HTMLInputElement>) => {
     event.preventDefault();
   };
@@ -17,6 +17,14 @@ const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef,
     setIsFirefoxBrowser(isFirefox());
   }, []);
 
+  const onClick = () => {
+    if(setDisplayAll){
+      setDisplayAll(false);
+    }
+    if(setValue){
+      setValue("");
+    }
+  }
 
   return (
     <div className="flex flex-row mb-4 box-content" style={{ maxWidth: "300px" }} draggable onDragStart={handleDragStart}>
@@ -36,17 +44,20 @@ const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef,
           className={`w-full border rounded-lg py-2 px-3 pr-12 font-bold text-black-900${error && !isFirefoxBrowser ? ' border-red-500' : ''}`}
           onFocus={onFocus && onFocus}
         />
-       <img 
-        className={`absolute top-1 right-1 rounded-3xl ${onHover && "big-size"}`}
-        src="/cross.svg" 
-        alt="Cross Icon" 
-        width={35}
-        height={35}
-        onClick={() => setValue && setValue("")}
-        onMouseEnter={()=> setOnHover(true)}
-        onMouseLeave={()=> setOnHover(false)}
-        
-      />
+        { inputValue.length > 0 && (
+            <img 
+            className={`absolute top-1 right-1 rounded-3xl ${onHover && "big-size"}`}
+            src="/cross.svg" 
+            alt="Cross Icon" 
+            width={35}
+            height={35}
+            onClick={onClick}
+            onMouseEnter={()=> setOnHover(true)}
+            onMouseLeave={()=> setOnHover(false)}
+            
+          />
+        )
+        }
       </div>
       {error && (
         <div className="my-3">

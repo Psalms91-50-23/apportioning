@@ -309,6 +309,7 @@ const EzyApportioning = () => {
             inputRef={grossStartDateRef} 
             onFocus={handleFocus}
             setValue={setGrossEarningsStartDate}
+            setDisplayAll={setDisplayAll}
           />
           <DateInput 
             inputTitle="Gross Earnings End Date" 
@@ -319,6 +320,7 @@ const EzyApportioning = () => {
             inputRef={grossEndDateRef} 
             onFocus={handleFocus}
             setValue={setGrossEarningsEndDate}
+            setDisplayAll={setDisplayAll}
           />
         </div>
         <div className="flex flex-row w-full mb-4 space-x-5">
@@ -331,6 +333,7 @@ const EzyApportioning = () => {
             inputRef={pwcStartDateRef} 
             onFocus={handleFocus}
             setValue={setPwcStartDate}
+            setDisplayAll={setDisplayAll}
           />
           <DateInput 
             inputTitle="PWC  End Date" 
@@ -341,6 +344,7 @@ const EzyApportioning = () => {
             inputRef={pwcEndDateRef} 
             onFocus={handleFocus}
             setValue={setPwcEndDate}
+            setDisplayAll={setDisplayAll}
           />
         </div>
         <div className='mb-5'>
