@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { DateInputProps } from '@/types';
 import functions from "../functions";
 const { isFirefox } = functions;
-import Image from 'next/image';
 
 const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef, onFocus, setValue, setDisplayAll }: DateInputProps) => {
+
     const handleDragStart = (event: React.DragEvent<HTMLInputElement>) => {
-    event.preventDefault();
-  };
+      event.preventDefault();
+    };
 
   const [isFirefoxBrowser, setIsFirefoxBrowser] = useState(false);
   const [onHover, setOnHover] = useState<boolean>(false);
@@ -23,6 +23,9 @@ const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef,
     }
     if(setValue){
       setValue("");
+    }
+    if(inputRef?.current){
+      inputRef.current.focus();
     }
   }
 
@@ -46,22 +49,23 @@ const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef,
         />
         { inputValue.length > 0 && (
             <img 
-            className={`absolute top-1 right-1 rounded-3xl ${onHover && "big-size"}`}
-            src="/cross.svg" 
-            alt="Cross Icon" 
-            width={35}
-            height={35}
-            onClick={onClick}
-            onMouseEnter={()=> setOnHover(true)}
-            onMouseLeave={()=> setOnHover(false)}
-            
-          />
-        )
+              className={`absolute top-1 right-1 rounded-3xl ${onHover && "big-size"}`}
+              src="/cross.svg" 
+              alt="Cross Icon" 
+              width={35}
+              height={35}
+              onClick={onClick}
+              onMouseEnter={()=> setOnHover(true)}
+              onMouseLeave={()=> setOnHover(false)}  
+            />
+          )
         }
       </div>
       {error && (
         <div className="my-3">
-          <p className="text-red-700 font-bold text-xs italic">Invalid input format</p>
+          <p className="text-red-700 font-bold text-xs italic">
+            Invalid input format
+          </p>
         </div>
       )}
     </div>

@@ -76,6 +76,7 @@ export interface  DayToggleProps {
   handleWorkPatternChange: (day: keyof PatternOfWork, type: 'full' | 'half' | '') => void;
   index: number,
   dayType?: string,
+  length?: number,
 };
 
 export type PatternOfWorkInput = {
@@ -437,6 +438,4 @@ export interface FinancialDates {
   previousFinancialYearStart?: string,
   previousFinancialYearEnd?: string,
   nextFinancialYearStart?: string,
-
 }
-

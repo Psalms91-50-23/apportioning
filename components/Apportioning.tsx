@@ -7,6 +7,14 @@ const { createDateFormat, replaceCommas, overlapDateRangeString,  convertToIniti
 import {  PatternOfWorkInput } from "../types";
 import { DateInput, Output, DayToggle } from '.';
 
+const setAllValues = (value: "" | "half" | "full", workPattern: PatternOfWorkInput, setWorkPattern: React.Dispatch<React.SetStateAction<PatternOfWorkInput>>) => {
+  const updatedPattern: PatternOfWorkInput = { ...workPattern };
+  (Object.keys(updatedPattern) as Array<keyof PatternOfWorkInput>).forEach(day => {
+    updatedPattern[day] = value;
+  });
+  setWorkPattern(updatedPattern);
+};
+
 const EzyApportioning = () => {
   const [grossEarnings, setGrossEarnings] = useState<string>("0.00");
   const earningsRef = useRef<HTMLInputElement>(null);
@@ -41,7 +49,8 @@ const EzyApportioning = () => {
   const [workPatternDaysCounted, setWorkPatternDaysCounted] = useState<string>("0");
   const [countDaysOverlapWithPWC, setCountDaysOverlapWithPWC] = useState<string>("0");
   const [fireFox, setFireFox] = useState<boolean>(false);
-
+  const [allFull, setAllFull] = useState(false);
+  const [halfFull, setHalfFull] = useState(false);
   const [dateRangeWithPWC, setDateRangeWithPWC] = useState({
     start: "",
     end: ""
@@ -79,6 +88,14 @@ const EzyApportioning = () => {
       return false;
     }
   } 
+
+  const setFull = (value:string) => {
+    if(value === "full"){
+      setAllFull(true);
+    }else {
+      setHalfFull(true);
+    }
+  }
 
   const handleFocus: React.FocusEventHandler<HTMLInputElement> = () => {
     setDisplayAll(false);
@@ -174,17 +191,68 @@ const EzyApportioning = () => {
 
   }
 
+  // const setAllValues = (value: "" | "half" | "full", workPattern: PatternOfWorkInput, setWorkPattern: React.Dispatch<React.SetStateAction<PatternOfWorkInput>>) => {
+  //   const updatedPattern: PatternOfWorkInput = { ...workPattern };
+  //   (Object.keys(updatedPattern) as Array<keyof PatternOfWorkInput>).forEach(day => {
+  //     updatedPattern[day] = value;
+  //   });
+  //   setWorkPattern(updatedPattern);
+  // };
+
+  // const setAllValueFull = (value: string) => {
+  //   const updatedPattern: PatternOfWorkInput = { ...workPattern };
+  //   (Object.keys(updatedPattern) as Array<keyof PatternOfWorkInput>).forEach(day => {
+  //     if(value === "full"){
+  //       updatedPattern[day] = 'full';
+  //     }else {
+  //       updatedPattern[day] = 'half';
+  //     }
+  //   });
+  //   setWorkPattern(updatedPattern);
+  // };
+
+  const handleAllFullChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = event.target.checked;
+    setAllFull(event.target.checked);
+    if (checked) {
+      setHalfFull(false);
+    }
+    else {
+      setAllFull(false);
+    }
+  };
+
+  const handleAllHalfChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = event.target.checked;
+    if (checked) {
+      setAllFull(false);
+    }
+    else{
+      setHalfFull(false);
+    }
+  };
+
   useEffect(() => {
     const isFirefox = (): boolean => {
       return typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
     };
-
     if(isFirefox()){
       setFireFox(true);
     }
-
   }, [setFireFox])
   
+  useEffect(() => {
+    if (allFull) {
+      setAllValues('full', workPattern, setWorkPattern);
+    } else if (halfFull) {
+      setAllValues('half', workPattern, setWorkPattern);
+    }
+    // else if(!allFull){
+    //   setAllValues('', workPattern, setWorkPattern);
+    // }else if(!halfFull){
+    //   setAllValues('', workPattern, setWorkPattern);
+    // }
+  }, [allFull, halfFull]);
 
   useEffect(() => {
     const isAtLeastOneDaySelected = (pattern: PatternOfWorkInput): boolean => {
@@ -215,6 +283,8 @@ const EzyApportioning = () => {
     totalGrossForPeriodReduction,
     singleDayGrossWP
   }
+
+  const totalLength = Object.keys(initialPattern).length-1;
   return (
     <div className="flex flex-1 box-border min-h-screen flex-col">
       <p className='text-2xl font-bold italic mb-5'>PWC Apportioning</p>
@@ -235,9 +305,19 @@ const EzyApportioning = () => {
                       day={day as keyof PatternOfWorkInput}
                       type={workPattern[day as keyof PatternOfWorkInput]}
                       handleWorkPatternChange={handleWorkPatternChange}
+                      length={totalLength}
                     />
                   </div>
                 ))}
+                {/* <div className="flex justify-end items-end pb-1 ml-1">
+                  <input
+                    className='flex justify-center items-end'
+                    type="checkbox"
+                    checked={allFull}
+                    onChange={handleAllFullChange}
+                  /> 
+                </div>
+                <p className='flex items-end font-bold px-3 italic'>All Full</p> */}
               </div>
             </div>
             <div className='flex flex-row'>
@@ -257,9 +337,19 @@ const EzyApportioning = () => {
                       day={day as keyof PatternOfWorkInput}
                       type={workPattern[day as keyof PatternOfWorkInput]}
                       handleWorkPatternChange={handleWorkPatternChange}
+                      length={totalLength}
                     />
                   </div>
                 ))}
+                {/* <div className="flex items-end pb-1 mt-1">
+                  <input
+                    className='flex justify-center items-end mt-3'
+                    type="checkbox"
+                    checked={halfFull}
+                    onChange={handleAllHalfChange}
+                  /> 
+                </div>
+                <p className='flex justify-end items-end font-bold px-3 mt-3 italic'>All Half</p> */}
               </div>
             </div>
           </div>
@@ -290,7 +380,9 @@ const EzyApportioning = () => {
         </div>
         {grossEarningsInputError && (
           <div className="my-3">
-            <p className="text-red-700 font-bold text-xs italic">Please add a value</p>
+            <p className="text-red-700 font-bold text-xs italic">
+              Please add a value
+            </p>
           </div>
         )}
       </div>
