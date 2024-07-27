@@ -2,7 +2,7 @@
 import React, { useState,useEffect, ChangeEvent, useRef, RefObject } from 'react';
 import functions from "../../functions";
 const { createDateFormat, replaceCommas, overlapDateRangeString,  convertToInitialDateFormat, dateOnBlur, handleEarningsOnBlur, earningsRegex, countWorkDaysNew, countDaysNew, isFirefox } = functions;
-import { PatternOfWork, PatternOfWorkInput, DayToggleProps } from "../../types";
+import {  PatternOfWorkInput } from "../../types";
 import { DateInput, Output, DayToggle } from '../../components';
 
 const page = () => {
@@ -101,7 +101,7 @@ const page = () => {
         setGrossEarningsInputError(false);
         setDisplayAll(false);
         // Clear the input if the value 
-        if (grossEarnings === '0.00' ||  grossEarnings === "NaN" || grossEarnings === "NaN.00" || grossEarnings === ".00" ) {
+        if (grossEarnings === '0.00' ||  grossEarnings === "NaN" || grossEarnings === "NaN.00" || grossEarnings === ".00"  || grossEarnings.length === 0 ) {
             setGrossEarnings('');
         } else if (grossEarnings.includes('.') && grossEarnings.endsWith('.00')) {
             // Remove '.00' if the decimal part is '00'
@@ -221,7 +221,7 @@ const page = () => {
     singleDayGrossWP
   }
   return (
-    <div className="flex flex-1 flex-col max-width justify-center mb-12">
+    <div className="flex flex-1 flex-col justify-center mb-12">
       <p className='text-2xl font-bold italic mb-5'>PWC Apportioning</p>
       <div className="flex flex-col">
         <div className="flex flex-row ">
@@ -276,7 +276,7 @@ const page = () => {
         )
         }
       </div>
-      <div className="flex flex-col w-full mb-4 space-x-4" style={{ maxWidth: "300px" }}>
+      <div className="flex flex-col w-full mb-4" >
         <div className="">
           <label htmlFor="grossEarnings" className="block text-black-900 text-sm font-bold mb-2">
             Gross Earnings
@@ -289,7 +289,7 @@ const page = () => {
             onChange={(e) => onChange(e, setGrossEarnings, earningsRef, setGrossEarningsInputError)}
             onBlur={() => handleEarningsOnBlur(grossEarnings,setGrossEarnings,setGrossEarningsInputError, setIsGrossEarningCompleted)}
             onFocus={handleGrossEarningsFocus}
-            className={`w-full border rounded py-2 px-3 text-black-900$ {grossEarningsInputError ? 'border-red-500' : ''}`}
+            className={`w-full border rounded-lg py-2 px-3 text-black-900$ {grossEarningsInputError ? 'border-red-500' : ''}`}
             style={{ maxWidth: "300px" }}
           />
         </div>
@@ -304,7 +304,7 @@ const page = () => {
           <p className='font-bold mb-2'>Acceptable date formats for input field</p>
           <p className='text-sm italic'>011123 or 01112023 or 1/11/2023 or 1/11/23 or 01/11/23 or 01/11/2023</p>
         </div>
-        <div className="flex flex-row w-full mb-4 space-x-5">
+        <div className="flex flex-row w-full mb-4">
           <DateInput 
             inputTitle="Gross Earnings Start Date" inputValue={grossEarningsStartDate} 
             onChange={(e) => onChange( e, setGrossEarningsStartDate,  grossStartDateRef, setGrossStartDateError, setIsGrossStartDateCompleted )} 
@@ -322,7 +322,7 @@ const page = () => {
             customStyle={inputStyle}
           />
         </div>
-        <div className="flex flex-row w-full mb-4 space-x-5">
+        <div className="flex flex-1 flex-row w-full mb-4">
           <DateInput 
             inputTitle="PWC Start Date" inputValue={pwcStartDate} 
             onChange={(e) => onChange( e, setPwcStartDate,  pwcStartDateRef, setPwcStartError, setPwcStartCompleted )} 

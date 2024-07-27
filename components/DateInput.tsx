@@ -30,46 +30,48 @@ const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef,
   }
 
   return (
-    <div className="flex flex-row mb-4 box-content" style={{ maxWidth: "300px" }} draggable onDragStart={handleDragStart}>
-    <div className="flex flex-col">
-      <label htmlFor={inputTitle} className="block text-black-900 text-md font-bold mb-2">
-        {inputTitle}
-      </label>
-      <div className="flex flex-row relative">
-        <input
-          type="text"
-          id={inputTitle}
-          name={inputTitle}
-          value={inputValue}
-          onChange={onChange}
-          ref={inputRef}
-          onBlur={onBlur}
-          className={`w-full border rounded-lg py-2 px-3 pr-12 font-bold text-black-900${error && !isFirefoxBrowser ? ' border-red-500' : ''}`}
-          onFocus={onFocus && onFocus}
-        />
-        { inputValue.length > 0 && (
-            <img 
-              className={`absolute top-1 right-1 rounded-3xl ${onHover && "big-size"}`}
-              src="/cross.svg" 
-              alt="Cross Icon" 
-              width={35}
-              height={35}
-              onClick={onClick}
-              onMouseEnter={()=> setOnHover(true)}
-              onMouseLeave={()=> setOnHover(false)}  
-            />
-          )
-        }
-      </div>
-      {error && (
-        <div className="my-3">
-          <p className="text-red-700 font-bold text-xs italic">
-            Invalid input format
-          </p>
+    <div className="flex flex-row w-full mb-4 flex-1" 
+    style={{ maxWidth: "550px" }} 
+    draggable onDragStart={handleDragStart}>
+      <div className="flex flex-col relative">
+        <label htmlFor={inputTitle} className="block text-black-900 text-md font-bold mb-2">
+          {inputTitle}
+        </label>
+        <div className="flex flex-row w-full relative">
+          <input
+            type="text"
+            id={inputTitle}
+            name={inputTitle}
+            value={inputValue}
+            onChange={onChange}
+            ref={inputRef}
+            onBlur={onBlur}
+            className={`w-full border rounded-lg py-2 px-3 pr-12 font-bold text-black-900 ${error && !isFirefoxBrowser ? ' border-red-500' : ''}`}
+            onFocus={onFocus && onFocus}
+          />
+          { inputValue.length > 0 && (
+              <img 
+                className={`absolute top-1 right-1 rounded-3xl ${onHover && "big-size"}`}
+                src="/cross.svg" 
+                alt="Cross Icon" 
+                width={35}
+                height={35}
+                onClick={onClick}
+                onMouseEnter={()=> setOnHover(true)}
+                onMouseLeave={()=> setOnHover(false)}  
+              />
+            )
+          }
         </div>
-      )}
+        {error && (
+          <div className="my-3">
+            <p className="text-red-700 font-bold text-xs italic">
+              Invalid input format
+            </p>
+          </div>
+        )}
+      </div>
     </div>
-  </div>
   )
 }
 
