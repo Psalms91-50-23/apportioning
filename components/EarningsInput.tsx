@@ -54,7 +54,7 @@ const EarningsInput = ({
             onBlur={onBlur}
             onFocus={() => handleFocusChange()}
             // onFocus={onFocus}
-            className={`w-full border rounded py-2 px-3 ${isFirefoxBrowser ? `text-blue-900` : "text-black-900"} ${error ? ' border-red-500' : ''}`}
+            className={`w-full border rounded-lg py-2 px-3 ${isFirefoxBrowser ? `text-blue-900` : "text-black-900"} ${error ? ' border-red-500' : ''}`}
             style={inputStyle}
             // style={{ maxWidth: "300px" }}
           />
