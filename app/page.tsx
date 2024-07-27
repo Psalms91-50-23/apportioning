@@ -1,6 +1,7 @@
 'use client';
+import React from "react";
 
-export default function Home({ children, }: { children: React.ReactNode }) {
+const page =()  =>{
 
   return (
     <div className="flex flex-col justify-start items-start">
@@ -11,3 +12,4 @@ export default function Home({ children, }: { children: React.ReactNode }) {
   );
 }
 
+export default page
