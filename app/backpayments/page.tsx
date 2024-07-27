@@ -164,7 +164,7 @@ const handleGrossEarningsFocus = (): void => {
   setIsAllFieldEntered(false);
   setBackPaymentError(false);
   // Clear the input if the value is '0.00'
-  if (backPayment === '0.00' ||  backPayment === "NaN" || backPayment === "NaN.00" || backPayment === ".00" ) {
+  if (backPayment === '0.00' ||  backPayment === "NaN" || backPayment === "NaN.00" || backPayment === ".00" || backPayment.length === 0) {
     setBackPayment('');
   } else if (backPayment.includes('.') && backPayment.endsWith('.00')) {
       // Remove '.00' if the decimal part is '00'
@@ -479,7 +479,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
  const dates = { startDateSTE, endDateSTE, startDateLTE,endDateLTE };
   return (
     <div className='flex flex-col flex-1 min-h-screen max-width mb-10 relative'>
-      <p className='text-2xl font-bold italic mb-5'>Back Payment/Bonuses Apportioning</p>
+      <p className='text-2xl font-bold italic mb-5'>Back Payment Apportioning</p>
       <div className="flex flex-col">
         <div className="flex flex-col space-x-5">
         </div>

@@ -40,6 +40,7 @@ const DateInput = ({ inputTitle, inputValue, onChange, onBlur , error, inputRef,
         <div className="flex flex-row w-full relative">
           <input
             type="text"
+            placeholder='12/12/2023'
             id={inputTitle}
             name={inputTitle}
             value={inputValue}

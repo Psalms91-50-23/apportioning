@@ -45,6 +45,7 @@ const EarningsInput = ({
             {title}
           </label>
           <input
+            placeholder='300.54'
             type="text"
             id={id}
             ref={inputRef}

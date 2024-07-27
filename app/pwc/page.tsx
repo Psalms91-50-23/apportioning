@@ -285,6 +285,7 @@ const page = () => {
             type="text"
             id={`grossEarnings`}
             ref={earningsRef}
+            placeholder='300.54'
             value={grossEarnings}
             onChange={(e) => onChange(e, setGrossEarnings, earningsRef, setGrossEarningsInputError)}
             onBlur={() => handleEarningsOnBlur(grossEarnings,setGrossEarnings,setGrossEarningsInputError, setIsGrossEarningCompleted)}
