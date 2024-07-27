@@ -6,7 +6,7 @@ const {  formatDate, validateDate, sanitizeInput, grossEarningInputValueConverte
 import { DateInput, WorkPatternSelector, EarningsInput, DHBResult, NonDHBResult } from '../../components';
 
 
-const BackPayments = () => {
+const page = () => {
 
   const [displayAll, setDisplayAll] = useState<boolean>(false);
   const [isDHBError, setIsDHBError] = useState<boolean>(false);
@@ -947,4 +947,4 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
   )
 }
 
-export default BackPayments
+export default page

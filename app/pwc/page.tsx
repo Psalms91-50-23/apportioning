@@ -5,7 +5,7 @@ const { createDateFormat, replaceCommas, overlapDateRangeString,  convertToIniti
 import { PatternOfWork, PatternOfWorkInput, DayToggleProps } from "../../types";
 import { DateInput, Output, DayToggle } from '../../components';
 
-const EzyApportioning = () => {
+const page = () => {
     const [grossEarnings, setGrossEarnings] = useState<string>("");
     const earningsRef = useRef<HTMLInputElement>(null);
     const grossStartDateRef = useRef<HTMLInputElement>(null);
@@ -360,4 +360,4 @@ const EzyApportioning = () => {
   )
 }
 
-export default EzyApportioning
+export default page

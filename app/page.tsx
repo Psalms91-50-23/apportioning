@@ -1,6 +1,6 @@
 'use client';
 
-export default function Home({ children, }: { children: React.ReactNode }) {
+export default function page({ children, }: { children: React.ReactNode }) {
 
   return (
     <div className="flex flex-col justify-start items-start">
