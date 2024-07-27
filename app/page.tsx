@@ -1,9 +1,13 @@
-import { Apportioning } from '@/components'
+'use client';
 
-export default function Home() {
+export default function Home({ children, }: { children: React.ReactNode }) {
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Apportioning/>
-    </main>
-  )
+    <div className="flex flex-col justify-start items-start">
+      <img className="w-full h-auto" src={`/fireworksWelcome.svg`}/>
+      <img className="w-full h-auto" src={`/fireworksEzy.svg`}/>
+      <img className="w-full h-auto" src={`/fireworksApportioning.svg`}/>
+    </div>
+  );
 }
+

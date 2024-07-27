@@ -1,5 +1,5 @@
 
-import React, { MouseEventHandler, FocusEvent, ChangeEvent, RefObject, FocusEventHandler } from "react";
+import React, { MouseEventHandler, FocusEvent, ChangeEvent } from "react";
 
 export interface CustomButtonProps {
   title: String,
@@ -7,6 +7,11 @@ export interface CustomButtonProps {
   containerStyles?: string;
   handleClick?: MouseEventHandler <HTMLButtonElement>;
 };
+
+export interface IncapacityType {
+  dofi: boolean,
+  dosi: boolean,
+}
 
 export interface NavbarProps {
   isSelected: boolean, 
@@ -71,33 +76,21 @@ export type BackPayments = {
 
 export interface  DayToggleProps {
   day: keyof PatternOfWork;
-  // type: 'full' | 'half' | '';
   type: string,
   handleWorkPatternChange: (day: keyof PatternOfWork, type: 'full' | 'half' | '') => void;
   index: number,
   dayType?: string,
-  length?: number,
 };
 
 export type PatternOfWorkInput = {
-  sunday: 'full' | 'half' | '';
-  monday: 'full' | 'half' | '';
-  tuesday: 'full' | 'half' | '';
-  wednesday: 'full' | 'half' | '';
-  thursday: 'full' | 'half' | '';
-  friday: 'full' | 'half' | '';
-  saturday: 'full' | 'half' | '';
+  sunday: string;
+  monday: string;
+  tuesday: string;
+  wednesday: string;
+  thursday: string;
+  friday: string;
+  saturday: string;
 };
-
-// export type PatternOfWorkInput = {
-//   sunday: string;
-//   monday: string;
-//   tuesday: string;
-//   wednesday: string;
-//   thursday: string;
-//   friday: string;
-//   saturday: string;
-// };
 //original pattern of work
 export type PatternOfWork = {
   sunday: boolean;
@@ -109,15 +102,14 @@ export type PatternOfWork = {
   saturday: boolean;
 };
 
-
 export type DateRange = {
   start: Date;
   end: Date;
 };
 
 export type OverlapDates = {
-  start: string,
-  end: string
+  start: string;
+  end: string;
 };
 
 export type BlurHandlerProps = {
@@ -139,6 +131,7 @@ export interface DateInputProps {
   text?: string;
   setDisplayAll?: (value: boolean) => void;
   setValue?: (value: string) => void;
+  customStyle?: React.CSSProperties,
 };
 
 export interface OnBlurDate {
@@ -147,7 +140,6 @@ export interface OnBlurDate {
   setDateError: (error: boolean) => void;
   setDateCompleted: (completed: boolean) => void;
   setDisplayAll?: (value: boolean) => void;
-  // onFocus?: () => void;
 };
 
 export type Result = {
@@ -171,6 +163,7 @@ export interface WorkPatternSelectorProps {
   handleWorkPatternChange: (day: string) => void;
   isWPSelected: boolean;
   setDisplayAll: (value: boolean) => void;
+  setIsClicked: (value: boolean) => void;
 }
 
 export interface WorkPatternSelectorPropsInput {
@@ -187,7 +180,8 @@ export interface EarningsInputProp {
   onFocus?: () => void;
   error: boolean;
   inputRef?: React.RefObject<HTMLInputElement>;
-  setDisplayAll: (value: boolean) => void
+  setDisplayAll: (value: boolean) => void;
+  setIsClicked: (value: boolean) => void
 }
 
 export interface DhbBackPay {
@@ -224,7 +218,6 @@ export interface DateObject {
   financialEndDates: string;
 }
 
-
 export interface CalculateBackPay {
   isDHB: boolean;
   dateObjects: DateObject;
@@ -237,7 +230,7 @@ export interface CalculateBackPay {
   backPayEarnings: string;
   backPayPaidStartDate: string;
   backPayPaidEndDate: string;
-  incapacity: IncapacityType;
+  isDofi: boolean;
 }
 
 export interface CalculateBackPayNew {
@@ -252,7 +245,6 @@ export interface CalculateBackPayNew {
   backPayEarnings: string;
   backPayPaidStartDate: string;
   backPayPaidEndDate: string;
-  incapacity: IncapacityType;
 }
 
 //original bottom
@@ -304,7 +296,6 @@ export interface TotalDayCountsWP {
   totalDayCountWPForBackPay: number;
 }
 
-
 export interface InsideSTE {
   insideSTEDayCount: number | undefined;
   insideSTEDayCountsWP: number | undefined;
@@ -312,7 +303,8 @@ export interface InsideSTE {
   backPayEndDateRelateTo: string;
   finalInsideSTECalculations?: string;
   finalInsideSTECalculationsPartial?: string;
-  insideSTEAmount?: number | undefined;
+  insideSTEAmount?: number ;
+  greaterDateInsideSTE?: string;
 }
 
 export interface InsideLTE {
@@ -342,24 +334,50 @@ export interface OutsideLTE {
 }
 
 export interface DatesEarningsAndPeriodsRelatedTo {
-  insideSTE?: InsideSTE | string;
-  insideLTE?: InsideLTE | string;
-  outsideLTE?: OutsideLTE | string;
+  insideSTE: InsideSTE | undefined ;
+  insideLTE: InsideLTE | undefined  ;
+  outsideLTE: OutsideLTE | undefined ;
 }
 
-export interface IncapacityType {
-  dofi: boolean,
-  dosi: boolean,
+export interface FinancialDates {
+  currentFinancialYearStart?: string,
+  currentFinancialYearEnd?: string,
+  previousFinancialYearStart?: string,
+  previousFinancialYearEnd?: string,
+  nextFinancialYearStart?: string,
+
+}
+
+export interface ValueSTE_LTE_Boolean{
+  isInsideSTE: boolean,
+  isInsideLTE: boolean,
+  isOutsideLTE: boolean,
+}
+
+export interface FinancialDateTypes {
+  currentFinancialYearStart: string,
+  currentFinancialYearEnd: string,
+  currentFinancialPeriod: string,
+  previousFinancialYearStart: string,
+  previousFinancialYearEnd: string,
+  previousFinancialPeriod: string,
+}
+
+export interface booleanLTE_STE_Values {
+  isInsideSTE: boolean,
+  isInsideLTE: boolean,
+  isOutsideLTE: boolean,
 }
 
 export interface InsideSTENotDHB {
-  steAmountNotDHB?: number;
-  steAmountNotDHBCalculations?: string,
-  steAmountNotDHBCalculationsPartial?: string,
-  periodsInSTENotDHB?: string,
-  periodsInSTENotDHBStart?: string,
-  periodsInSTENotDHBEnd?: string,
-  
+  steAmountNotDHB: number;
+  steAmountNotDHBCalculations: string,
+  steAmountNotDHBCalculationsPartial: string,
+  periodsInSTENotDHB: string,
+  periodsInSTENotDHBStart: string,
+  periodsInSTENotDHBEnd: string,
+  steWorkPatternDayCounts: number,
+  steDayCounts: number,
 }
 
 export interface InsideLTECurrentFinancialYear {
@@ -370,47 +388,129 @@ export interface InsideLTECurrentFinancialYear {
 }
 
 export interface CurrentFinancialYearNotDHB {
-  insideSTECurrentFinancialYear?: InsideSTENotDHB;
-  insideLTECurrentFinancialYear?: InsideLTECurrentFinancialYear,
+  insideSTECurrentFinancialYear: InsideSTENotDHB ;
+  insideLTECurrentFinancialYear: InsideLTECurrentFinancialYear | string,
+  currentFinancialYear?: string,
+}
+
+export interface OutsideLTEDates  {
+  backPayStartDateRelateTo: string | "",
+  backPayEndDateRelateTo: string | "",
+}
+
+export interface OutsidePreviousLTEDates {
+  outsideLTEDates?: OutsideLTEDates,
+  outsideLTECalculations: string | "",
+  outsideLTECalculationsPartial?: string | "",
+  beforeStartDateLTE?: string,
+  outsideDayLTEDayCount: number,
+  outsideDayLTEWPDayCount: number,
 }
 
 export interface OutsideLTENotDHB {
-  outsideLTECalculations?: string,
-  outsideLTECalculationsPartial?: string,
-  
+  outsideLTECalculations: string | "",
+  outsideLTECalculationsPartial?: string | "",
+  outsidePeriodDates: OutsideLTEDates | "",
+  outsideLTEAmount: number,
+  outsideLTEDayCount: number,
+  outsideLTEWPDayCount: number,
+}
+
+export interface PrevDateYears {
+  startDateLTEOrRelateTo: string,
+  backpaymentRelateToEndDate: string,
 }
 
 export interface InsideLTENotDHB {
-  outsideLTENotDHB?: OutsideLTENotDHB,
-  insideLTENotDHB?: "",
+  insideLTEPrevFinYearCalculations: string,
+  insideLTEPrevFinYearCalculationsPartial: string,
+  insideLTEPrevFinYearDayCounts: number,
+  insideLTEPrevFinYearWPDayCounts: number,
+  insideLTEPrevFinYearAmount: number,
+  insideLTEPrevFinYearPeriods: PrevDateYears,
 }
 
 export interface PreviousFinancialYear {
-  insideLTE?: InsideLTENotDHB,
+  insideLTEPreviousFinancialYear?: InsideLTENotDHB | undefined,
+  outsideLTENotDHB: OutsideLTENotDHB | undefined,
+  previousFinancialYearOutsideLTE?: OutsidePreviousLTEDates | undefined,
 }
 
-export interface NotDHBResults {
-  currentFinancialYear?: CurrentFinancialYearNotDHB | string | undefined,
-  previousFinancialYear?: PreviousFinancialYear | string | undefined,
+export interface BackPaymentDates {
+  backPaymentStartDate?: string | "",
+  backPaymentEndDate?: string | "",
+  backPaymentStartDateRelateTo?: string | "",
+  backPaymentEndDateRelateTo?: string | "",
+  beforeLTEStartDate?: string | "",
+  beforeSTEStartDate?: string | "",
+}
+
+export interface FinancialDates {
+  currentFinancialYearDate: string,
+  currentFinancialPeriod: string,
+  previousFinancialYearDate: string,
+  previousFinancialPeriod: string,
+  
+}
+
+export interface isInWhichPeriod {
+  isInsideSTE: boolean,
+  isInsideLTE: boolean,
+  isOutsideLTE: boolean,
+}
+
+export interface NonDHBResults {
+  currentFinYear?: CurrentFinancialYearNotDHB | undefined,
+  previousFinYear?: PreviousFinancialYear | undefined,
+  backPaymentDates: BackPaymentDates,
+  financialYearDates: FinancialDateTypes,
+  booleanPeriods?: isInWhichPeriod,
+}
+
+export interface DayCounts {
+  totalDayCounts: number,
+  totalWPDayCounts: number,
+}
+
+export interface BackPayDates {
+  periodStartDate: string,
+  periodEndDate: string,
+  paidStartDate: string,
+  paidEndDate: string
+}
+
+export interface STE_LTE_Dates {
+  startDateSTE: string,
+  endDateSTE: string,
+  startDateLTE: string,
+  endDateLTE: string,
 }
 
 export interface ResultType {
-  totalBackPayPeriodOverlapDateSTE?: TotalBackPayPeriodOverlapDateSTE,
-  totalInsideLTE?: TotalInsideLTE | undefined,
-  totalOutSideLTE?: TotalOutSideLTE | undefined,
+  totalBackPayPeriodOverlapDateSTE?: TotalBackPayPeriodOverlapDateSTE ,
+  totalInsideLTE?: TotalInsideLTE,
+  totalOutSideLTE?: TotalOutSideLTE ,
   totalDayCountsPayRelateTo?: TotalDayCountsPayRelateTo,
   totalDayCountsWP?: TotalDayCountsWP,
   totalDayCounts?: object,
   workPattern?: PatternOfWork,
-  datesEarningsAndPeriodsRelatedTo?: DatesEarningsAndPeriodsRelatedTo,
+  datesEarningsAndPeriodsRelatedTo: DatesEarningsAndPeriodsRelatedTo ,
   singleDayBackPay?: number,
   singleDayCalculations?: string,
+  dayCounts: DayCounts,
   backPay?: number | undefined | null,
-  isDofi: boolean,
-  isDHB: boolean,
+  isDofi?: boolean,
+  isDHB?: boolean,
+  dates?: STE_LTE_Dates,
+  backPayDates?: BackPayDates,
   inputRef?: React.RefObject<HTMLDivElement>,
-  notDHBResults?: NotDHBResults | string | undefined,
-  // isCurrentFinancialYear: boolean,
+  nonDHBResults?: NonDHBResults,
+}
+
+export interface TotalDayCounts {
+  payPeriodStartDateRelateTo: string,
+  payPeriodEndDateRelateTo: string,
+  totalDayCountsNoWP: number,
 }
 
 export interface ResultTypeNew {
@@ -419,8 +519,9 @@ export interface ResultTypeNew {
   totalOutSideLTE?: TotalOutSideLTE | undefined,
   totalDayCountsPayRelateTo?: TotalDayCountsPayRelateTo,
   totalDayCountsWP?: TotalDayCountsWP,
-  totalDayCounts?: object,
-  workPattern?: PatternOfWorkInput,
+  totalDayCounts?: TotalDayCounts,
+  workPattern: PatternOfWork,
+  workPatternInput?: PatternOfWorkInput,
   datesEarningsAndPeriodsRelatedTo?: DatesEarningsAndPeriodsRelatedTo,
   singleDayBackPay?: number,
   singleDayCalculations?: string,
@@ -428,14 +529,7 @@ export interface ResultTypeNew {
   isDofi: boolean,
   isDHB: boolean,
   inputRef?: React.RefObject<HTMLDivElement>,
-  notDHBResults?: NotDHBResults | string | undefined,
-  // isCurrentFinancialYear: boolean,
+  nonDHBResults?: NonDHBResults,
 }
 
-export interface FinancialDates {
-  currentFinancialYearStart?: string,
-  currentFinancialYearEnd?: string,
-  previousFinancialYearStart?: string,
-  previousFinancialYearEnd?: string,
-  nextFinancialYearStart?: string,
-}
+

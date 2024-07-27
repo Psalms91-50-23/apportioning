@@ -1,9 +1,9 @@
 'use client';
 import React, { useState,useEffect, ChangeEvent, useRef, RefObject } from 'react';
-import functions from "../functions";
+import functions from "../../functions";
 const { createDateFormat, replaceCommas, overlapDateRangeString,  convertToInitialDateFormat, dateOnBlur, handleEarningsOnBlur, earningsRegex, countWorkDaysNew, countDaysNew, isFirefox } = functions;
-import { PatternOfWork, PatternOfWorkInput } from "../types";
-import { DateInput, Output, DayToggle } from '../components';
+import { PatternOfWork, PatternOfWorkInput, DayToggleProps } from "../../types";
+import { DateInput, Output, DayToggle } from '../../components';
 
 const EzyApportioning = () => {
     const [grossEarnings, setGrossEarnings] = useState<string>("");
@@ -47,11 +47,11 @@ const EzyApportioning = () => {
       
     const initialPattern: PatternOfWorkInput = {
         sunday: '',
-        monday: '',
-        tuesday: '',
-        wednesday: '',
-        thursday: '',
-        friday: '',
+        monday: 'full',
+        tuesday: 'full',
+        wednesday: 'full',
+        thursday: 'full',
+        friday: 'full',
         saturday: '',
     };
     const [isFirefoxBrowser, setIsFirefoxBrowser] = useState(false);
@@ -81,15 +81,6 @@ const EzyApportioning = () => {
       maxWidth: "500px", // Example maxWidth, adjust as needed
       fontWeight: "600"
     };
-    
-    //original
-    // const [workPattern, setWorkPattern] = useState<PatternOfWork>(initialWorkPattern);
-    // const handleWorkPatternChange = (day: keyof PatternOfWork): void => {
-    //   setWorkPattern((prevWorkPattern) => ({
-    //     ...prevWorkPattern,
-    //     [day]: !prevWorkPattern[day],
-    //   }));
-    // };
 
     const isAllFieldCompleted = ():boolean => {
       if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected && grossEarnings !== "0.00"){

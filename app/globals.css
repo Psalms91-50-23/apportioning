@@ -8,7 +8,7 @@
   --background-end-rgb: 255, 255, 255;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) { 
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
@@ -16,29 +16,47 @@
   }
 }
 
+/* html {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  justify-content: center;
+  max-width: 1000px;
+  height: auto;
+} */
+
 body {
-  font-family: 'Roboto', Arial, sans-serif;
-  
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
+      transparent,
       transparent,
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
 }
 
-html {
-  line-height: 1.5; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-  -moz-tab-size: 4; /* 3 */
-  -o-tab-size: 4;
-     tab-size: 4; /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 4 */
-  font-feature-settings: normal; /* 5 */
-  font-variation-settings: normal; /* 6 */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+
+.bg {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+    height: 100vh;
+    width: 100vw;
+}
 
 .big-size:hover {
   transform: scale(1.20);
@@ -46,24 +64,126 @@ html {
   transition-property: transform;  
   transition-duration: 0.1s;
 }
-/* Style for input field text color in dark mode */
-/* Set the text color of the input field in dark mode */
-/* Set the text color of labels in dark mode */
-/* Set the text color of labels in dark mode */
-/* Button styles on hover */
-/* Set the border color on hover */
-@media (prefers-color-scheme: dark) {
-  input {
-    color: #000000;
-  }
-  label {
-    color: #ffffff !important;
-  }
-  p {
-    color: #ffffff; 
-  }
-  button:hover {
-    border: 2px solid #ffffff; 
-  }
 
+.nav-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  transition: all 0.1s ease-in-out;
+  text-decoration: none;
+  font-size: 1.2rem;
+  font-weight:bolder;
+}
+
+.nav-button.active {
+  /* background-color: rgba(112, 205, 20,1); */
+  transform: scale(1.1);
+}
+
+.nav-button:hover .underline {
+  animation: squiggly 1s infinite;
+  animation-timing-function: linear;
+  color: white;
+}
+
+.underline {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+  transform: scaleX(0);
+  transition: all 0.20s ease-out;
+}
+
+.nav-button.selected .icon-container .svg-inline--fa {
+  color: white;
+}
+
+.nav-button:hover .underline,
+.nav-button.active .underline,
+.nav-button.selected .underline {
+  transform: scaleX(1);
+  transition: all 0.25s ease-out;
+  transform-origin: left;
+}
+
+.big-text {
+  transition: all 0.25s ease-out;
+  transform: scale(1.20);
+  color:white;
+  
+}
+
+.max-width {
+  max-width: 1300px;
+}
+
+.max-width-container {
+  max-width: 1135px;
+}
+
+.icon {
+  width: 4rem;
+  height: 4rem;
+}
+
+.up-arrow {
+  position: absolute;
+  width: 5rem;
+  height: 5rem;
+  right: -18px;
+  bottom: 0;
+}
+
+.up-arrow:hover {
+  cursor: pointer;
+  transition: all 0.25s ease-out;
+  transform-origin: left;
+}
+
+.underline_ {
+  text-decoration: underline;
+}
+
+/* Prevent text selection */
+.no-select {
+  user-select: none; /* For modern browsers */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
+  -ms-user-select: none; /* For Internet Explorer/Edge */
+}
+
+/* Prevent text dragging */
+.no-drag {
+  -webkit-user-drag: none; /* For Safari/Chrome */
+  -moz-user-drag: none; /* For Firefox */
+  -ms-user-drag: none; /* For Internet Explorer/Edge */
+  user-drag: none; /* For standard compatibility */
+}
+
+input {
+  color: black; /* Ensures the default text color is black */
+  background-color: white; /* Ensures the default background color is white */
+  -webkit-user-select: none; /* Prevents text selection in Webkit browsers */
+  -moz-user-select: none; /* Prevents text selection in Firefox */
+  -ms-user-select: none; /* Prevents text selection in Internet Explorer */
+  user-select: none; /* Prevents text selection in modern browsers */
+  box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+}
+
+@keyframes squiggly {
+  0% {
+    transform: translateX(-20%);
+  }
+  50% {
+    transform: translateX(35%);
+  }
+  100% {
+    transform: translateX(-20%);
+  }
 }

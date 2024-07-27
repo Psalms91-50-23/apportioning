@@ -1,0 +1,381 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 580 120" preserveAspectRatio="xMidYMid" style="display: block; shape-rendering: auto; background: transparent;" width="580" height="120"><style type="text/css">
+  .ld-text text {
+    text-anchor: middle;
+    dominant-baseline: middle;
+    font-size: 100px;
+    opacity: 0;
+    user-select: none;
+    pointer-events: none;
+  }
+</style>
+<g style="transform-origin:290px 60px;transform:scale(1)" class="ld-text">
+<style type="text/css">
+
+  @keyframes ld-explode {
+    0% { transform: scale(0) }
+    100% { transform: scale(1) }
+  }
+
+  .ld-explode {
+    animation: ld-explode 1s ease-out infinite;
+    transform-origin: 0px 0px;
+  }
+
+  @keyframes ld-pop {
+    0% { transform: scale(0) }
+    50% { transform: scale(1) }
+    100% { transform: scale(0) }
+  }
+
+  .ld-pop {
+    transform: scale(0);
+    transform-origin: 40px 0px;
+    animation: ld-pop 1s ease-out infinite;
+  }
+
+</style>
+<defs>
+<filter id="blur1">
+  <feGaussianBlur stdDeviation="2"></feGaussianBlur>
+</filter>
+<filter id="firework">
+  <feGaussianBlur result="blur" stdDeviation="2"></feGaussianBlur>
+  <feMerge>
+    <feMergeNode in="blur"></feMergeNode>
+    <feMergeNode in="SourceGraphic"></feMergeNode>
+  </feMerge>
+</filter>
+</defs>
+<g transform="translate(290,60)">
+  <g filter="url(#firework)">
+  <g transform="translate(44.280056601740554,24.12697527477033) scale(0.8390325123178457)"><g style="animation-delay:0s" class="ld-explode"><g style="transform:rotate(0deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(22.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(45deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(67.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(90deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(112.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(135deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(157.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(180deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(202.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(225deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(247.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(270deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(292.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(315deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(337.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:0s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g></g></g><g transform="translate(11.209939979759305,8.103985951224796) scale(0.5323887295708761)"><g style="animation-delay:-0.1s" class="ld-explode"><g style="transform:rotate(0deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(22.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(45deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(67.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(90deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(112.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(135deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(157.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(180deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(202.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(225deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(247.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(270deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(292.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(315deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(337.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.1s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g></g></g><g transform="translate(131.3140062425001,15.767875796502706) scale(0.7189104101139497)"><g style="animation-delay:-0.2s" class="ld-explode"><g style="transform:rotate(0deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(22.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(45deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(67.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(90deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(112.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(135deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(157.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(180deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(202.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(225deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(247.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(270deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(292.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(315deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(337.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.2s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g></g></g><g transform="translate(-118.40622092268592,4.279866627348918) scale(0.8133651529238638)"><g style="animation-delay:-0.3s" class="ld-explode"><g style="transform:rotate(0deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(22.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(45deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(67.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(90deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(112.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(135deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(157.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(180deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(202.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(225deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(247.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(270deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(292.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(315deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(337.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.3s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g></g></g><g transform="translate(-95.97910260358357,17.104906286112712) scale(0.9224610578162951)"><g style="animation-delay:-0.4s" class="ld-explode"><g style="transform:rotate(0deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(22.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(45deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(67.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(90deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(112.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(135deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(157.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(180deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(202.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(225deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(247.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(270deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(292.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(315deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(337.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.4s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g></g></g><g transform="translate(-134.99106906142893,10.928879853194962) scale(0.8436143194041232)"><g style="animation-delay:-0.5s" class="ld-explode"><g style="transform:rotate(0deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(22.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(45deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(67.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(90deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(112.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(135deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(157.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(180deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(202.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(225deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(247.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(270deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(292.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(315deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(337.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.5s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g></g></g><g transform="translate(114.43694398838234,0.4055905712588363) scale(0.5756050720377796)"><g style="animation-delay:-0.6s" class="ld-explode"><g style="transform:rotate(0deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(22.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(45deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(67.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(90deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(112.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(135deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(157.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(180deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(202.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(225deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(247.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(270deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(292.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(315deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(337.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.6s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g></g></g>
+  </g>
+  <g>
+  <g transform="scale(1.2500) translate(0,0)"><g class="path" style="opacity: 1; transform-origin: -169.61px -11.33px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.306429s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M42.03 21.06L42.03 21.06Q41.84 21.80 41.62 22.76Q41.41 23.71 41.41 24.57L41.41 24.57Q41.41 25.35 41.64 25.90Q41.88 26.45 42.66 26.45L42.66 26.45Q43.71 26.45 45.18 25.69Q46.64 24.92 48.32 23.65Q50 22.39 51.80 20.73Q53.59 19.06 55.35 17.29Q57.11 15.51 58.71 13.71Q60.31 11.92 61.56 10.35L61.56 10.35L63.01 15.55Q60.43 18.99 57.70 22.15Q54.96 25.31 52.13 27.74Q49.30 30.16 46.45 31.60Q43.59 33.05 40.78 33.05L40.78 33.05Q39.14 33.05 37.99 32.52Q36.84 31.99 36.13 31.08Q35.43 30.16 35.10 28.97Q34.77 27.78 34.77 26.45L34.77 26.45Q34.77 25.94 34.80 25Q34.84 24.06 34.90 23.07Q34.96 22.07 35.02 21.25Q35.08 20.43 35.08 20.20L35.08 20.20L21.21 21.06L14.77 21.14Q13.13 24.69 11.52 27.42L11.52 27.42Q10.82 28.60 10.04 29.73Q9.26 30.86 8.48 31.74Q7.70 32.62 6.91 33.15Q6.13 33.67 5.39 33.67L5.39 33.67Q4.22 33.67 3.48 33.32Q2.73 32.97 2.30 32.44Q1.88 31.92 1.70 31.25Q1.52 30.59 1.52 30L1.52 30Q1.52 28.99 1.80 27.99Q2.07 26.99 2.58 26.10L2.58 26.10L7.73 17.42Q8.09 16.88 9.16 14.81Q10.23 12.74 11.93 9.71Q13.63 6.68 15.86 3.01Q18.09-0.66 20.68-4.43Q23.28-8.20 26.19-11.76Q29.10-15.31 32.17-18.06Q35.23-20.82 38.36-22.48Q41.48-24.14 44.57-24.14L44.57-24.14Q47.46-24.14 50.25-22.34Q53.05-20.54 55.59-16.44L55.59-16.44Q55.86-15.90 55.86-15.51L55.86-15.51Q55.86-15 55.59-14.49Q55.31-13.98 54.86-13.59Q54.41-13.20 53.87-12.97Q53.32-12.73 52.73-12.73L52.73-12.73Q52.03-12.73 51.11-13.04Q50.20-13.36 49.38-14.37L49.38-14.37Q48.16-15.78 46.86-16.42Q45.55-17.07 44.26-17.07L44.26-17.07Q42.42-17.07 40.51-16.03Q38.59-15 36.66-13.22Q34.73-11.44 32.81-9.12Q30.90-6.79 29.10-4.22Q27.30-1.64 25.63 1.06Q23.95 3.75 22.46 6.21Q20.98 8.67 19.75 10.74Q18.52 12.81 17.58 14.22L17.58 14.22L24.73 14.22L36.80 13.32Q37.15 12.54 37.73 11.19Q38.32 9.85 39.04 8.17Q39.77 6.49 40.63 4.53Q41.48 2.58 42.36 0.61Q43.24-1.36 44.10-3.30Q44.96-5.23 45.70-6.87L45.70-6.87Q46.21-8.36 47.21-8.98Q48.20-9.61 49.34-9.61L49.34-9.61Q49.92-9.61 50.51-9.43Q51.09-9.26 51.58-8.88Q52.07-8.51 52.38-7.95Q52.70-7.38 52.73-6.60L52.73-6.60Q52.73-5.86 52.09-4.06Q51.45-2.26 50.45 0.16Q49.45 2.58 48.22 5.41Q46.99 8.24 45.80 11.08Q44.61 13.91 43.59 16.51Q42.58 19.10 42.03 21.06" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: -130.41px 11.82px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.282857s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M97.07 13.83L97.07 13.83Q97.62 13.52 98.09 13.32Q98.55 13.13 98.98 13.13L98.98 13.13Q99.84 13.13 100.27 13.77Q100.70 14.42 100.70 15.35L100.70 15.35Q100.70 16.37 100.18 17.42Q99.65 18.48 98.59 19.18L98.59 19.18Q94.41 22.31 91.13 24.89Q87.85 27.46 84.94 29.32Q82.03 31.17 79.26 32.19Q76.48 33.21 73.32 33.21L73.32 33.21Q70.35 33.21 68.73 32.11Q67.11 31.02 67.11 29.10L67.11 29.10Q67.11 28.95 67.11 28.81Q67.11 28.67 67.15 28.48L67.15 28.48Q67.30 27.31 68.36 25.78Q69.41 24.26 70.90 22.62Q72.38 20.98 74.06 19.30Q75.74 17.62 77.17 16.12Q78.59 14.61 79.53 13.36Q80.47 12.11 80.47 11.33L80.47 11.33Q80.47 10.86 80.08 10.59Q79.69 10.31 78.79 10.31L78.79 10.31Q77.23 10.31 75.57 11Q73.91 11.68 72.29 12.83Q70.66 13.99 69.12 15.47Q67.58 16.96 66.23 18.56Q64.88 20.16 63.77 21.78Q62.66 23.40 61.88 24.77L61.88 24.77Q61.64 25.20 61.21 25.98Q60.78 26.76 60.27 27.74Q59.77 28.71 59.20 29.75Q58.63 30.78 58.16 31.70Q57.70 32.62 57.32 33.34Q56.95 34.07 56.80 34.34L56.80 34.34Q56.60 34.69 56.15 35.67Q55.70 36.64 55.12 37.95Q54.53 39.26 53.89 40.71Q53.24 42.15 52.68 43.44Q52.11 44.73 51.68 45.71Q51.25 46.68 51.13 47.03L51.13 47.03Q50.74 48.05 50.21 48.95Q49.69 49.85 49 50.53Q48.32 51.21 47.44 51.62Q46.56 52.03 45.47 52.03L45.47 52.03Q44.06 52.03 43.14 51.47Q42.23 50.90 42.23 49.30L42.23 49.30Q42.23 48.52 42.46 47.70Q42.70 46.88 43.05 46.08Q43.40 45.28 43.77 44.51Q44.14 43.75 44.45 43.05L44.45 43.05Q46.56 39.14 48.75 35.22Q50.94 31.29 52.95 27.44Q54.96 23.60 56.68 19.89Q58.40 16.17 59.53 12.78L59.53 12.78Q59.84 12.07 60.39 10.78Q60.94 9.49 61.64 8.24Q62.34 6.99 63.22 6.08Q64.10 5.16 65.12 5.16L65.12 5.16Q66.68 5.16 67.38 5.76Q68.09 6.37 68.09 7.54L68.09 7.54Q68.09 7.78 68.01 8.28Q67.93 8.79 67.81 9.36Q67.70 9.92 67.56 10.43Q67.42 10.94 67.30 11.17L67.30 11.17Q68.75 9.85 70.43 8.54Q72.11 7.23 73.91 6.17Q75.70 5.12 77.58 4.46Q79.45 3.79 81.33 3.79L81.33 3.79Q82.62 3.79 83.89 4.10Q85.16 4.42 86.15 5.02Q87.15 5.63 87.77 6.55Q88.40 7.46 88.40 8.67L88.40 8.67Q88.40 10.28 87.44 12.09Q86.48 13.91 85.04 15.74Q83.59 17.58 81.91 19.32Q80.23 21.06 78.77 22.48Q77.30 23.91 76.31 24.90Q75.31 25.90 75.27 26.25L75.27 26.25Q75.27 26.72 75.63 27.01Q75.98 27.31 76.80 27.31L76.80 27.31Q77.46 27.31 78.75 26.68Q80.04 26.06 82.36 24.51Q84.69 22.97 88.26 20.37Q91.84 17.78 97.07 13.83" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: -92.17px 11.82px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.259286s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M135.31 13.83L135.31 13.83Q135.86 13.52 136.33 13.32Q136.80 13.13 137.23 13.13L137.23 13.13Q138.09 13.13 138.52 13.77Q138.95 14.42 138.95 15.35L138.95 15.35Q138.95 16.37 138.42 17.42Q137.89 18.48 136.84 19.18L136.84 19.18Q132.66 22.31 129.38 24.89Q126.09 27.46 123.18 29.32Q120.27 31.17 117.50 32.19Q114.73 33.21 111.56 33.21L111.56 33.21Q108.59 33.21 106.97 32.11Q105.35 31.02 105.35 29.10L105.35 29.10Q105.35 28.95 105.35 28.81Q105.35 28.67 105.39 28.48L105.39 28.48Q105.55 27.31 106.60 25.78Q107.66 24.26 109.14 22.62Q110.63 20.98 112.30 19.30Q113.98 17.62 115.41 16.12Q116.84 14.61 117.77 13.36Q118.71 12.11 118.71 11.33L118.71 11.33Q118.71 10.86 118.32 10.59Q117.93 10.31 117.03 10.31L117.03 10.31Q115.47 10.31 113.81 11Q112.15 11.68 110.53 12.83Q108.91 13.99 107.36 15.47Q105.82 16.96 104.47 18.56Q103.13 20.16 102.01 21.78Q100.90 23.40 100.12 24.77L100.12 24.77Q99.88 25.20 99.45 25.98Q99.02 26.76 98.52 27.74Q98.01 28.71 97.44 29.75Q96.88 30.78 96.41 31.70Q95.94 32.62 95.57 33.34Q95.20 34.07 95.04 34.34L95.04 34.34Q94.84 34.69 94.39 35.67Q93.95 36.64 93.36 37.95Q92.77 39.26 92.13 40.71Q91.48 42.15 90.92 43.44Q90.35 44.73 89.92 45.71Q89.49 46.68 89.38 47.03L89.38 47.03Q88.98 48.05 88.46 48.95Q87.93 49.85 87.25 50.53Q86.56 51.21 85.68 51.62Q84.80 52.03 83.71 52.03L83.71 52.03Q82.30 52.03 81.39 51.47Q80.47 50.90 80.47 49.30L80.47 49.30Q80.47 48.52 80.70 47.70Q80.94 46.88 81.29 46.08Q81.64 45.28 82.01 44.51Q82.38 43.75 82.70 43.05L82.70 43.05Q84.80 39.14 86.99 35.22Q89.18 31.29 91.19 27.44Q93.20 23.60 94.92 19.89Q96.64 16.17 97.77 12.78L97.77 12.78Q98.09 12.07 98.63 10.78Q99.18 9.49 99.88 8.24Q100.59 6.99 101.46 6.08Q102.34 5.16 103.36 5.16L103.36 5.16Q104.92 5.16 105.63 5.76Q106.33 6.37 106.33 7.54L106.33 7.54Q106.33 7.78 106.25 8.28Q106.17 8.79 106.05 9.36Q105.94 9.92 105.80 10.43Q105.66 10.94 105.55 11.17L105.55 11.17Q106.99 9.85 108.67 8.54Q110.35 7.23 112.15 6.17Q113.95 5.12 115.82 4.46Q117.70 3.79 119.57 3.79L119.57 3.79Q120.86 3.79 122.13 4.10Q123.40 4.42 124.39 5.02Q125.39 5.63 126.02 6.55Q126.64 7.46 126.64 8.67L126.64 8.67Q126.64 10.28 125.68 12.09Q124.73 13.91 123.28 15.74Q121.84 17.58 120.16 19.32Q118.48 21.06 117.01 22.48Q115.55 23.91 114.55 24.90Q113.55 25.90 113.52 26.25L113.52 26.25Q113.52 26.72 113.87 27.01Q114.22 27.31 115.04 27.31L115.04 27.31Q115.70 27.31 116.99 26.68Q118.28 26.06 120.61 24.51Q122.93 22.97 126.50 20.37Q130.08 17.78 135.31 13.83" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: -50.74px 2.39px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.235714s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M147.23 10.67L147.23 10.67Q145.39 10.67 143.69 11.58Q141.99 12.50 140.68 14.01Q139.38 15.51 138.59 17.40Q137.81 19.30 137.81 21.29L137.81 21.29Q137.81 22.03 137.93 22.91Q138.05 23.79 138.42 24.55Q138.79 25.31 139.49 25.82Q140.20 26.33 141.37 26.33L141.37 26.33Q143.16 26.33 144.86 25.37Q146.56 24.42 147.89 22.87Q149.22 21.33 150 19.38Q150.78 17.42 150.78 15.43L150.78 15.43Q150.78 14.65 150.68 13.81Q150.59 12.97 150.21 12.27Q149.84 11.56 149.14 11.12Q148.44 10.67 147.23 10.67 zM149.26 3.79L149.26 3.79Q150.74 3.79 152.44 4.18Q154.14 4.57 155.59 5.51Q157.03 6.45 157.99 7.99Q158.95 9.53 158.95 11.80L158.95 11.80Q158.95 12.97 158.63 14.48Q158.32 15.98 157.70 17.62L157.70 17.62Q158.09 18.09 158.59 18.28Q159.10 18.48 159.69 18.48L159.69 18.48Q160.51 18.48 161.50 18.01Q162.50 17.54 163.55 16.80Q164.61 16.06 165.66 15.12Q166.72 14.18 167.66 13.24Q168.59 12.31 169.36 11.47Q170.12 10.63 170.63 10.04L170.63 10.04Q170.90 9.77 171.29 9.77L171.29 9.77Q171.84 9.77 172.27 10.33Q172.70 10.90 172.70 11.92Q172.70 12.93 172.09 14.26Q171.48 15.59 169.84 17.03L169.84 17.03Q168.91 18.05 167.70 19.38Q166.48 20.71 165.12 21.88Q163.75 23.05 162.27 23.87Q160.78 24.69 159.30 24.69L159.30 24.69Q158.28 24.69 157.32 24.38Q156.37 24.06 155.39 23.36L155.39 23.36Q153.98 25.55 152.19 27.35Q150.39 29.14 148.18 30.43Q145.98 31.72 143.42 32.44Q140.86 33.17 137.97 33.17L137.97 33.17Q136.88 33.17 135.43 32.74Q133.98 32.31 132.68 31.31Q131.37 30.31 130.47 28.71Q129.57 27.11 129.57 24.81L129.57 24.81Q129.57 23.24 130.08 21.06Q130.59 18.87 131.62 16.55Q132.66 14.22 134.24 11.94Q135.82 9.65 138.01 7.83Q140.20 6.02 143.01 4.90Q145.82 3.79 149.26 3.79" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: -19.08px 3.05px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.212143s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M178.95 9.46L179.02 9.42Q180.55 8.48 182.17 7.70Q183.79 6.92 185.31 6.35Q186.84 5.78 188.22 5.45Q189.61 5.12 190.70 5.12L190.70 5.12Q192.46 5.12 193.42 5.96Q194.38 6.80 194.38 8.79L194.38 8.79Q194.38 9.22 194.34 9.71Q194.30 10.20 194.18 10.74L194.18 10.74Q193.98 11.76 193.01 13.13Q192.03 14.49 190.72 15.98Q189.41 17.46 187.91 18.97Q186.41 20.47 185.14 21.74Q183.87 23.01 183.03 23.95Q182.19 24.89 182.19 25.24L182.19 25.24Q182.19 25.55 182.23 25.67Q182.27 25.78 182.58 25.78L182.58 25.78Q184.69 24.89 187.29 23.62Q189.88 22.35 192.46 21.02Q195.04 19.69 197.34 18.42Q199.65 17.15 201.25 16.21L201.25 16.21Q201.60 16.02 201.97 15.88Q202.34 15.74 202.66 15.74L202.66 15.74Q203.36 15.74 203.83 16.21Q204.30 16.68 204.30 17.46L204.30 17.46Q204.30 18.36 203.54 19.51Q202.77 20.67 200.98 21.92L200.98 21.92Q199.61 22.78 197.91 23.85Q196.21 24.92 194.36 26.08Q192.50 27.23 190.61 28.32Q188.71 29.42 186.95 30.28Q185.20 31.14 183.65 31.66Q182.11 32.19 180.98 32.19L180.98 32.19Q178.28 32.19 176.93 30.90Q175.59 29.61 175.59 27.58L175.59 27.58Q175.59 27.27 175.63 27.11L175.63 27.11Q175.90 25.39 176.64 23.79Q177.38 22.19 178.32 20.74Q179.26 19.30 180.27 17.99Q181.29 16.68 182.13 15.53Q182.97 14.38 183.52 13.40Q184.06 12.42 184.06 11.60L184.06 11.60Q184.06 11.41 183.98 11.21Q183.91 11.02 183.63 11.02L183.63 11.02Q183.16 11.02 182.09 11.37Q181.02 11.72 179.80 12.31Q178.59 12.89 177.50 13.65Q176.41 14.42 175.94 15.28L175.94 15.28Q175.31 16.37 174.49 18.05Q173.67 19.73 172.79 21.56Q171.91 23.40 171.09 25.20Q170.27 26.99 169.69 28.28L169.69 28.28Q169.22 29.42 168.46 30.31Q167.70 31.21 166.80 31.84Q165.90 32.46 164.96 32.82Q164.02 33.17 163.24 33.17L163.24 33.17Q162.34 33.17 161.82 32.70Q161.29 32.23 161.29 31.17L161.29 31.17Q161.29 30.74 161.43 30.10Q161.56 29.46 161.99 28.67L161.99 28.67Q162.70 27.35 163.42 25.78Q164.14 24.22 165.08 22.21Q166.02 20.20 167.25 17.60Q168.48 15 170.16 11.60L170.16 11.60Q169.61 11.14 169.24 10.45Q168.87 9.77 168.87 8.75L168.87 8.75Q168.87 7.81 169.26 7.13Q169.65 6.45 170.31 6.02Q170.98 5.59 171.86 5.37Q172.73 5.16 173.71 5.16L173.71 5.16Q174.73 5.16 175.74 5.33Q176.76 5.51 177.56 5.86Q178.36 6.21 178.87 6.72Q179.38 7.23 179.38 7.89L179.38 7.89Q179.38 8.01 179.30 8.21Q179.22 8.40 179.12 8.64Q179.02 8.87 178.95 9.06Q178.87 9.26 178.87 9.38L178.87 9.38Q178.87 9.46 178.91 9.46L178.91 9.46L178.95 9.46" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: 10.86px -6.5px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.188571s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M226.21 10.35L209.96 10.47Q208.52 13.28 207.23 15.96Q205.94 18.64 204.80 20.90L204.80 20.90Q204.34 21.84 203.89 23.07Q203.44 24.30 203.44 25.24L203.44 25.24Q203.44 25.78 203.69 26.10Q203.95 26.41 204.53 26.41L204.53 26.41Q205.35 26.41 206.60 25.92Q207.85 25.43 209.30 24.63Q210.74 23.83 212.34 22.80Q213.95 21.76 215.49 20.65Q217.03 19.53 218.44 18.42Q219.84 17.31 220.94 16.37L220.94 16.37Q221.56 15.94 222.11 15.94L222.11 15.94Q222.77 15.94 223.20 16.53Q223.63 17.11 223.63 18.01Q223.63 18.91 223.20 19.85Q222.77 20.78 221.64 21.68L221.64 21.68Q219.10 23.99 216.50 26.06Q213.91 28.13 211.35 29.71Q208.79 31.29 206.29 32.23Q203.79 33.17 201.45 33.17L201.45 33.17Q199.88 33.17 198.83 32.76Q197.77 32.35 197.13 31.62Q196.48 30.90 196.21 29.94Q195.94 28.99 195.94 27.89L195.94 27.89Q195.94 25.94 196.60 23.83Q197.27 21.72 198.09 20.04L198.09 20.04Q199.26 17.62 200.41 15.24Q201.56 12.85 202.66 10.67L202.66 10.67L200.98 10.67Q198.79 10.67 197.97 9.96Q197.15 9.26 197.15 8.36L197.15 8.36Q197.15 7.97 197.40 7.40Q197.66 6.84 198.14 6.35Q198.63 5.86 199.34 5.51Q200.04 5.16 200.94 5.16L200.94 5.16L205.16 5.16L213.40-11.21Q214.18-12.69 215.33-13.34Q216.48-13.98 217.73-13.98L217.73-13.98Q218.91-13.98 219.88-13.36Q220.86-12.73 220.86-11.29L220.86-11.29Q220.86-10.54 220.53-9.78Q220.20-9.02 219.65-8.01L219.65-8.01Q219.30-7.34 218.79-6.42Q218.28-5.51 217.71-4.47Q217.15-3.44 216.54-2.30Q215.94-1.17 215.35-0.11L215.35-0.11Q214.02 2.39 212.54 5.16L212.54 5.16L225.27 5.16Q226.21 5.16 226.99 5.26Q227.77 5.35 228.34 5.65Q228.91 5.94 229.22 6.45Q229.53 6.96 229.53 7.81L229.53 7.81Q229.53 8.24 229.39 8.67Q229.26 9.10 228.89 9.46Q228.52 9.81 227.87 10.04Q227.23 10.28 226.21 10.35L226.21 10.35" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: 31.19px -19px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.165s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M228.36-1.60L228.36-1.60Q228.36-2.50 228.69-3.45Q229.02-4.41 229.69-5.19Q230.35-5.97 231.35-6.48Q232.34-6.99 233.71-6.99L233.71-6.99Q235.98-6.99 236.88-6.11Q237.77-5.23 237.77-3.90L237.77-3.90Q237.77-3.16 237.48-2.26Q237.19-1.36 236.60-0.60Q236.02 0.16 235.08 0.67Q234.14 1.17 232.85 1.17L232.85 1.17Q230.43 1.17 229.45 0.41Q228.48-0.35 228.36-1.60" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: 27.5px 3.07px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.141429s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M224.06 7.19L224.06 7.19Q224.73 6.10 225.59 5.63Q226.45 5.16 227.34 5.16L227.34 5.16Q228.83 5.16 229.90 6.12Q230.98 7.07 230.98 8.56L230.98 8.56Q230.94 8.91 230.88 9.26Q230.82 9.61 230.63 9.96L230.63 9.96Q230.08 10.98 229.73 11.68Q229.38 12.39 229.08 12.99Q228.79 13.60 228.52 14.18Q228.24 14.77 227.85 15.59L227.85 15.59Q227.38 16.56 226.80 17.72Q226.21 18.87 225.68 20.08Q225.16 21.29 224.79 22.46Q224.41 23.64 224.41 24.61L224.41 24.61Q224.41 25.67 224.94 26Q225.47 26.33 226.45 26.33L226.45 26.33Q227.54 26.33 228.73 25.86Q229.92 25.39 231.13 24.65Q232.34 23.91 233.52 22.95Q234.69 21.99 235.72 21.02Q236.76 20.04 237.64 19.14Q238.52 18.24 239.10 17.54L239.10 17.54Q239.88 16.80 240.66 16.80L240.66 16.80Q241.37 16.80 241.82 17.42Q242.27 18.05 242.27 19.03L242.27 19.03Q242.27 19.92 241.82 20.94Q241.37 21.96 240.35 22.85L240.35 22.85Q238.36 24.89 236.29 26.74Q234.22 28.60 232.05 30.02Q229.88 31.45 227.70 32.31Q225.51 33.17 223.28 33.17L223.28 33.17Q220.12 33.17 218.30 31.55Q216.48 29.92 216.48 26.49L216.48 26.49Q216.48 24.69 216.99 22.97Q217.50 21.25 218.20 19.63Q218.91 18.01 219.69 16.51Q220.47 15 221.02 13.64L221.02 13.64Q221.21 13.13 221.70 12.07Q222.19 11.02 222.73 9.92L222.73 9.92Q223.36 8.64 224.06 7.19" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: 54.69px 2.39px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.117857s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M252.66 10.67L252.66 10.67Q250.82 10.67 249.12 11.58Q247.42 12.50 246.11 14.01Q244.80 15.51 244.02 17.40Q243.24 19.30 243.24 21.29L243.24 21.29Q243.24 22.03 243.36 22.91Q243.48 23.79 243.85 24.55Q244.22 25.31 244.92 25.82Q245.63 26.33 246.80 26.33L246.80 26.33Q248.59 26.33 250.29 25.37Q251.99 24.42 253.32 22.87Q254.65 21.33 255.43 19.38Q256.21 17.42 256.21 15.43L256.21 15.43Q256.21 14.65 256.11 13.81Q256.02 12.97 255.64 12.27Q255.27 11.56 254.57 11.12Q253.87 10.67 252.66 10.67 zM254.69 3.79L254.69 3.79Q256.17 3.79 257.87 4.18Q259.57 4.57 261.02 5.51Q262.46 6.45 263.42 7.99Q264.38 9.53 264.38 11.80L264.38 11.80Q264.38 12.97 264.06 14.48Q263.75 15.98 263.13 17.62L263.13 17.62Q263.52 18.09 264.02 18.28Q264.53 18.48 265.12 18.48L265.12 18.48Q265.94 18.48 266.93 18.01Q267.93 17.54 268.98 16.80Q270.04 16.06 271.09 15.12Q272.15 14.18 273.09 13.24Q274.02 12.31 274.79 11.47Q275.55 10.63 276.05 10.04L276.05 10.04Q276.33 9.77 276.72 9.77L276.72 9.77Q277.27 9.77 277.70 10.33Q278.13 10.90 278.13 11.92Q278.13 12.93 277.52 14.26Q276.91 15.59 275.27 17.03L275.27 17.03Q274.34 18.05 273.13 19.38Q271.91 20.71 270.55 21.88Q269.18 23.05 267.70 23.87Q266.21 24.69 264.73 24.69L264.73 24.69Q263.71 24.69 262.75 24.38Q261.80 24.06 260.82 23.36L260.82 23.36Q259.41 25.55 257.62 27.35Q255.82 29.14 253.61 30.43Q251.41 31.72 248.85 32.44Q246.29 33.17 243.40 33.17L243.40 33.17Q242.30 33.17 240.86 32.74Q239.41 32.31 238.11 31.31Q236.80 30.31 235.90 28.71Q235 27.11 235 24.81L235 24.81Q235 23.24 235.51 21.06Q236.02 18.87 237.05 16.55Q238.09 14.22 239.67 11.94Q241.25 9.65 243.44 7.83Q245.63 6.02 248.44 4.90Q251.25 3.79 254.69 3.79" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: 88.89px 2.39px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.0942857s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M277.07 8.48L277.07 8.48Q277.85 6.80 279.02 5.98Q280.20 5.16 281.33 5.16L281.33 5.16Q282.27 5.16 283.01 5.84Q283.75 6.53 283.75 7.85L283.75 7.85Q283.75 8.36 283.63 8.95Q283.52 9.53 283.20 10.20L283.20 10.20Q284.06 9.10 285.66 7.95Q287.27 6.80 289.20 5.88Q291.13 4.96 293.18 4.38Q295.23 3.79 297.07 3.79L297.07 3.79Q299.14 3.79 300.53 4.79Q301.91 5.78 301.91 8.17L301.91 8.17Q301.91 9.57 301.48 11.10Q301.05 12.62 300.37 14.14Q299.69 15.67 298.85 17.13Q298.01 18.60 297.19 19.89Q296.37 21.17 295.68 22.25Q295 23.32 294.61 24.03L294.61 24.03Q294.10 24.65 294.10 25.47L294.10 25.47Q294.10 25.78 294.30 26.02Q294.49 26.25 294.92 26.25L294.92 26.25Q295.20 26.25 295.55 26.19Q295.90 26.14 296.41 25.78L296.41 25.78Q298.52 25 300.72 23.83Q302.93 22.66 304.96 21.35Q306.99 20.04 308.69 18.73Q310.39 17.42 311.52 16.37L311.52 16.37Q311.84 16.10 312.15 15.98Q312.46 15.86 312.73 15.86L312.73 15.86Q313.40 15.86 313.77 16.37Q314.14 16.88 314.14 17.66L314.14 17.66Q314.14 18.87 313.38 20.35Q312.62 21.84 310.98 23.13L310.98 23.13Q308.75 24.73 306.89 26.06Q305.04 27.39 303.11 28.54Q301.17 29.69 298.96 30.69Q296.76 31.68 293.79 32.54L293.79 32.54Q292.77 32.85 291.93 33.01Q291.09 33.17 290.39 33.17L290.39 33.17Q288.32 33.17 287.36 32.01Q286.41 30.86 286.41 28.79L286.41 28.79Q286.41 28.52 286.43 28.26Q286.45 28.01 286.48 27.70L286.48 27.70Q286.56 26.49 287.13 25.04Q287.70 23.60 288.50 22.07Q289.30 20.55 290.20 19.05Q291.09 17.54 291.86 16.19Q292.62 14.85 293.13 13.79Q293.63 12.74 293.63 12.07L293.63 12.07Q293.63 11.49 293.30 11.08Q292.97 10.67 292.30 10.67L292.30 10.67Q289.80 10.67 287.56 12.15Q285.31 13.64 283.36 15.80Q281.41 17.97 279.77 20.39Q278.13 22.81 276.88 24.73L276.88 24.73Q276.09 26.02 275.45 27.48Q274.80 28.95 274.10 30.22Q273.40 31.49 272.52 32.33Q271.64 33.17 270.31 33.17L270.31 33.17Q268.95 33.17 268.16 32.31Q267.38 31.45 267.38 30.20L267.38 30.20Q267.38 29.53 267.93 28.05Q268.48 26.56 269.34 24.61Q270.20 22.66 271.27 20.41Q272.34 18.17 273.42 15.96Q274.49 13.75 275.47 11.80Q276.45 9.85 277.07 8.48" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: 120.21px -19px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.0707143s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M317.38-1.60L317.38-1.60Q317.38-2.50 317.71-3.45Q318.05-4.41 318.71-5.19Q319.38-5.97 320.37-6.48Q321.37-6.99 322.73-6.99L322.73-6.99Q325-6.99 325.90-6.11Q326.80-5.23 326.80-3.90L326.80-3.90Q326.80-3.16 326.50-2.26Q326.21-1.36 325.63-0.60Q325.04 0.16 324.10 0.67Q323.16 1.17 321.88 1.17L321.88 1.17Q319.45 1.17 318.48 0.41Q317.50-0.35 317.38-1.60" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: 116.53px 3.07px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.0471429s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M313.09 7.19L313.09 7.19Q313.75 6.10 314.61 5.63Q315.47 5.16 316.37 5.16L316.37 5.16Q317.85 5.16 318.93 6.12Q320 7.07 320 8.56L320 8.56Q319.96 8.91 319.90 9.26Q319.84 9.61 319.65 9.96L319.65 9.96Q319.10 10.98 318.75 11.68Q318.40 12.39 318.11 12.99Q317.81 13.60 317.54 14.18Q317.27 14.77 316.88 15.59L316.88 15.59Q316.41 16.56 315.82 17.72Q315.23 18.87 314.71 20.08Q314.18 21.29 313.81 22.46Q313.44 23.64 313.44 24.61L313.44 24.61Q313.44 25.67 313.96 26Q314.49 26.33 315.47 26.33L315.47 26.33Q316.56 26.33 317.75 25.86Q318.95 25.39 320.16 24.65Q321.37 23.91 322.54 22.95Q323.71 21.99 324.75 21.02Q325.78 20.04 326.66 19.14Q327.54 18.24 328.13 17.54L328.13 17.54Q328.91 16.80 329.69 16.80L329.69 16.80Q330.39 16.80 330.84 17.42Q331.29 18.05 331.29 19.03L331.29 19.03Q331.29 19.92 330.84 20.94Q330.39 21.96 329.38 22.85L329.38 22.85Q327.38 24.89 325.31 26.74Q323.24 28.60 321.07 30.02Q318.91 31.45 316.72 32.31Q314.53 33.17 312.30 33.17L312.30 33.17Q309.14 33.17 307.32 31.55Q305.51 29.92 305.51 26.49L305.51 26.49Q305.51 24.69 306.02 22.97Q306.52 21.25 307.23 19.63Q307.93 18.01 308.71 16.51Q309.49 15 310.04 13.64L310.04 13.64Q310.23 13.13 310.72 12.07Q311.21 11.02 311.76 9.92L311.76 9.92Q312.38 8.64 313.09 7.19" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: 144.79px 2.39px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear -0.0235714s infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M332.97 8.48L332.97 8.48Q333.75 6.80 334.92 5.98Q336.09 5.16 337.23 5.16L337.23 5.16Q338.16 5.16 338.91 5.84Q339.65 6.53 339.65 7.85L339.65 7.85Q339.65 8.36 339.53 8.95Q339.41 9.53 339.10 10.20L339.10 10.20Q339.96 9.10 341.56 7.95Q343.16 6.80 345.10 5.88Q347.03 4.96 349.08 4.38Q351.13 3.79 352.97 3.79L352.97 3.79Q355.04 3.79 356.43 4.79Q357.81 5.78 357.81 8.17L357.81 8.17Q357.81 9.57 357.38 11.10Q356.95 12.62 356.27 14.14Q355.59 15.67 354.75 17.13Q353.91 18.60 353.09 19.89Q352.27 21.17 351.58 22.25Q350.90 23.32 350.51 24.03L350.51 24.03Q350 24.65 350 25.47L350 25.47Q350 25.78 350.20 26.02Q350.39 26.25 350.82 26.25L350.82 26.25Q351.09 26.25 351.45 26.19Q351.80 26.14 352.30 25.78L352.30 25.78Q354.41 25 356.62 23.83Q358.83 22.66 360.86 21.35Q362.89 20.04 364.59 18.73Q366.29 17.42 367.42 16.37L367.42 16.37Q367.73 16.10 368.05 15.98Q368.36 15.86 368.63 15.86L368.63 15.86Q369.30 15.86 369.67 16.37Q370.04 16.88 370.04 17.66L370.04 17.66Q370.04 18.87 369.28 20.35Q368.52 21.84 366.88 23.13L366.88 23.13Q364.65 24.73 362.79 26.06Q360.94 27.39 359 28.54Q357.07 29.69 354.86 30.69Q352.66 31.68 349.69 32.54L349.69 32.54Q348.67 32.85 347.83 33.01Q346.99 33.17 346.29 33.17L346.29 33.17Q344.22 33.17 343.26 32.01Q342.30 30.86 342.30 28.79L342.30 28.79Q342.30 28.52 342.32 28.26Q342.34 28.01 342.38 27.70L342.38 27.70Q342.46 26.49 343.03 25.04Q343.59 23.60 344.39 22.07Q345.20 20.55 346.09 19.05Q346.99 17.54 347.75 16.19Q348.52 14.85 349.02 13.79Q349.53 12.74 349.53 12.07L349.53 12.07Q349.53 11.49 349.20 11.08Q348.87 10.67 348.20 10.67L348.20 10.67Q345.70 10.67 343.46 12.15Q341.21 13.64 339.26 15.80Q337.30 17.97 335.66 20.39Q334.02 22.81 332.77 24.73L332.77 24.73Q331.99 26.02 331.35 27.48Q330.70 28.95 330 30.22Q329.30 31.49 328.42 32.33Q327.54 33.17 326.21 33.17L326.21 33.17Q324.84 33.17 324.06 32.31Q323.28 31.45 323.28 30.20L323.28 30.20Q323.28 29.53 323.83 28.05Q324.38 26.56 325.23 24.61Q326.09 22.66 327.17 20.41Q328.24 18.17 329.32 15.96Q330.39 13.75 331.37 11.80Q332.34 9.85 332.97 8.48" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g><g class="path" style="opacity: 1; transform-origin: 182.85px 13.5px 0px; transform: matrix3d(0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 0.91, 0, 0, 0, 0, 1); animation: 1s linear infinite forwards animate-x2uulkbinc; transform-box: view-box;"><path d="M381.99 3.79L381.99 3.79Q383.71 3.79 385 4.22Q386.29 4.65 387.19 5.16L387.19 5.16Q388.20 5.78 388.98 6.53L388.98 6.53Q389.53 6.17 390.16 5.86L390.16 5.86Q390.70 5.59 391.37 5.37Q392.03 5.16 392.70 5.16L392.70 5.16Q394.41 5.16 395.35 5.86Q396.29 6.56 396.29 7.54L396.29 7.54Q396.29 8.05 396.02 8.56L396.02 8.56L386.88 25.86L387.62 25.20Q392.23 22.50 395.20 20.96Q398.16 19.42 399.92 18.67Q401.68 17.93 402.44 17.76Q403.20 17.58 403.40 17.58L403.40 17.58Q404.30 17.58 404.79 18.26Q405.27 18.95 405.27 19.96L405.27 19.96Q405.27 21.10 404.63 22.27Q403.98 23.44 402.66 23.95L402.66 23.95Q400.90 24.85 398.55 25.88Q396.21 26.92 393.67 28.17Q391.13 29.42 388.57 30.96Q386.02 32.50 383.79 34.38L383.79 34.38L376.21 48.09Q375.27 50.32 374.51 51.72Q373.75 53.13 373.01 53.95Q372.27 54.77 371.48 55.08Q370.70 55.39 369.69 55.39L369.69 55.39Q368.16 55.39 367.29 54.34Q366.41 53.28 366.41 51.80L366.41 51.80Q366.41 50.24 367.15 48.17Q367.89 46.10 369.24 43.69Q370.59 41.29 372.50 38.65Q374.41 36.02 376.76 33.28L376.76 33.28L381.60 27.11Q380.12 28.48 378.67 29.46Q377.23 30.43 375.90 31.04Q374.57 31.64 373.42 31.92Q372.27 32.19 371.41 32.19L371.41 32.19Q369.84 32.19 368.52 31.47Q367.19 30.74 366.23 29.46Q365.27 28.17 364.73 26.41Q364.18 24.65 364.18 22.58L364.18 22.58Q364.18 18.28 365.84 14.81Q367.50 11.33 370.10 8.89Q372.70 6.45 375.84 5.12Q378.98 3.79 381.99 3.79 zM380.51 10.67L380.51 10.67Q378.67 10.67 376.95 11.58Q375.23 12.50 373.91 14.01Q372.58 15.51 371.80 17.46Q371.02 19.42 371.02 21.49L371.02 21.49Q371.02 22.11 371.11 22.83Q371.21 23.56 371.54 24.18Q371.88 24.81 372.52 25.22Q373.16 25.63 374.30 25.63L374.30 25.63Q375.12 25.63 376.23 24.90Q377.34 24.18 378.54 23.07Q379.73 21.96 380.86 20.61Q381.99 19.26 382.91 17.97Q383.83 16.68 384.38 15.65Q384.92 14.61 384.92 14.10L384.92 14.10Q384.92 13.24 384.45 12.60Q383.98 11.96 383.30 11.53Q382.62 11.10 381.86 10.88Q381.09 10.67 380.51 10.67" style="fill: rgb(255, 190, 74);" transform="translate(-201.875,-16.094)"></path></g></g><text dy="0.35em" fill="#ffbe4a" font-family="Damion" font-size="100">Apportioning</text>
+  </g>
+  <g filter="url(#firework)">
+  <g transform="translate(78.67867107929663,-25.13246925854845) scale(0.5946982478802991)"><g style="animation-delay:-0.7s" class="ld-explode"><g style="transform:rotate(0deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(22.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(45deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(67.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(90deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(112.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(135deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(157.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(180deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(202.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(225deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(247.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(270deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(292.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(315deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(337.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.7s" stroke="#00ddff" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g></g></g><g transform="translate(17.088086551302997,3.706672064029091) scale(0.7549949803545699)"><g style="animation-delay:-0.8s" class="ld-explode"><g style="transform:rotate(0deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(22.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(45deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(67.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(90deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(112.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(135deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(157.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(180deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(202.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(225deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(247.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(270deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(292.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(315deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(337.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.8s" stroke="#fe0000" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g></g></g><g transform="translate(-69.05330848315896,-17.962861488888727) scale(0.9850004775291695)"><g style="animation-delay:-0.9s" class="ld-explode"><g style="transform:rotate(0deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(22.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(45deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(67.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(90deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(112.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(135deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(157.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(180deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(202.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(225deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(247.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(270deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(292.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g><g style="transform:rotate(315deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l7 0" class="ld-pop"></path>
+</g><g style="transform:rotate(337.5deg);transform-origin:0px 0px">
+  <path style="animation-delay:-0.9s" stroke="#e8ff00" stroke-linecap="round" stroke-width="3" d="M30 0l3 0" class="ld-pop"></path>
+</g></g></g>
+  </g>
+</g>
+
+</g><style type="text/css">@keyframes animate-x2uulkbinc { 0.00% {transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.91, 0.91) skew(0deg, 0.00deg) ;opacity: 1.00;}4.00% {transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.91, 0.91) ;}8.00% {animation-timing-function: cubic-bezier(0.69,0.60,0.35,0.27);transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.91, 0.91) ;}14.00% {transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.93, 0.93) ;}18.00% {transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.94, 0.94) ;}22.00% {animation-timing-function: cubic-bezier(0.67,0.66,0.34,0.33);transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.96, 0.96) ;}26.00% {transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.97, 0.97) ;}30.00% {transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.99, 0.99) ;}34.00% {animation-timing-function: cubic-bezier(0.65,0.71,0.32,0.38);transform: translate(0.00px,0.00px) rotate(0.00deg) scale(1.01, 1.01) ;}40.00% {animation-timing-function: cubic-bezier(0.64,0.74,0.31,0.41);transform: translate(0.00px,0.00px) rotate(0.00deg) scale(1.02, 1.02) ;}46.00% {animation-timing-function: cubic-bezier(0.60,0.91,0.23,0.63);transform: translate(0.00px,0.00px) rotate(0.00deg) scale(1.03, 1.03) ;}50.00% {transform: translate(0.00px,0.00px) rotate(0.00deg) scale(1.03, 1.03) ;}54.00% {transform: translate(0.00px,0.00px) rotate(0.00deg) scale(1.03, 1.03) ;}58.00% {animation-timing-function: cubic-bezier(0.69,0.60,0.35,0.27);transform: translate(0.00px,0.00px) rotate(0.00deg) scale(1.03, 1.03) ;}64.00% {transform: translate(0.00px,0.00px) rotate(0.00deg) scale(1.01, 1.01) ;}68.00% {transform: translate(0.00px,0.00px) rotate(0.00deg) scale(1.00, 1.00) ;}72.00% {animation-timing-function: cubic-bezier(0.67,0.66,0.34,0.33);transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.98, 0.98) ;}76.00% {animation-timing-function: cubic-bezier(0.66,0.68,0.33,0.35);transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.97, 0.97) ;}82.00% {animation-timing-function: cubic-bezier(0.65,0.71,0.32,0.38);transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.94, 0.94) ;}88.00% {animation-timing-function: cubic-bezier(0.65,0.73,0.31,0.40);transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.92, 0.92) ;}94.00% {animation-timing-function: cubic-bezier(0.63,0.80,0.28,0.48);transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.91, 0.91) ;}100.00% {animation-timing-function: cubic-bezier(0.63,0.80,0.28,0.48);transform: translate(0.00px,0.00px) rotate(0.00deg) scale(0.91, 0.91) ;} }</style><!-- [ldio] generated by https://loading.io --></svg>
