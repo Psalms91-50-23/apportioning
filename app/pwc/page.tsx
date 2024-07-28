@@ -70,12 +70,12 @@ const page = () => {
           top: document.documentElement.scrollHeight,
           behavior: 'smooth'
         });
-      }, 50); // 200 milliseconds delay
+      }, 50); 
     };
 
     const inputStyle: React.CSSProperties = {
-      color: isFirefoxBrowser ? 'black' : '', // Set text color to black if isFirefoxBrowser is true
-      maxWidth: "500px", // Example maxWidth, adjust as needed
+      color: isFirefoxBrowser ? 'black' : '', 
+      maxWidth: "500px", 
       fontWeight: "600"
     };
     
@@ -275,7 +275,6 @@ const page = () => {
         }
       </div>
       <div className="flex flex-col w-full mb-4 space-x-4" 
-      // style={{ maxWidth: "300px" }}
       >
         <form className="">
           <label htmlFor="grossEarnings" className="block text-black-900 text-sm font-bold mb-2">

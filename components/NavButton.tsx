@@ -13,7 +13,7 @@ interface NavButtonProps {
     imageLocation?: string;
     customStyle?: boolean;
     customStylez?: React.CSSProperties;
-    isActive?: boolean; // New prop for active state
+    isActive?: boolean; 
   }
   
 const NavButton = ({page, label, icon, iconStatic, imageLocation, staticLocation, customStyle, customStylez, isActive }: NavButtonProps) => {
@@ -71,7 +71,7 @@ const NavButton = ({page, label, icon, iconStatic, imageLocation, staticLocation
             />
         )
         }
-        <p className={`${onHover && isActive && `big-text`}`}>
+        <p className={`${onHover && `big-text`}`}>
             {label}
         </p>
         <span className='underline-rainbow'></span>

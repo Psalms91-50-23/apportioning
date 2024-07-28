@@ -5,8 +5,7 @@ import functions from "../../functions";
 const {  formatDate, validateDate, sanitizeInput, grossEarningInputValueConverted, handleEarningsOnBlur, getAllDates, earningsRegex, dateRegex, dateOnBlur, countDays, countWorkDays, convertToDateFormat, isInsideSTEBool, isOutsideLTEBool, caculateBackpay, isInsideLTEBool, isAtLeastOneDaySelected, isCurrentFinancialYear, getFinancialYears } = functions;
 import { DateInput, WorkPatternSelector, EarningsInput, DHBResult, NonDHBResult } from '../../components';
 
-
-const page = () => {
+const BackPayments = () => {
 
   const [displayAll, setDisplayAll] = useState<boolean>(false);
   const [isDHBError, setIsDHBError] = useState<boolean>(false);
@@ -74,12 +73,12 @@ const page = () => {
 
   const initialWorkPattern: PatternOfWork = {
     sunday: false,
-    monday: true,
-    tuesday: true,
+    monday: false,
+    tuesday: false,
     wednesday: true,
     thursday: true,
     friday: true,
-    saturday: false,
+    saturday: true,
   };
 
 const [workPattern, setWorkPattern] = useState<PatternOfWork>(initialWorkPattern);
@@ -109,6 +108,7 @@ const scrollToTop= () => {
   }, 50); 
 };
 
+
 const backpayRef = useRef<HTMLInputElement>(null);
 const backpayStartDateRef = useRef<HTMLInputElement>(null);
 const backpayEndDateRef = useRef<HTMLInputElement>(null);
@@ -118,6 +118,7 @@ const steStartDateRef = useRef<HTMLInputElement>(null);
 const steEndDateRef = useRef<HTMLInputElement>(null);
 const lteStartDateRef = useRef<HTMLInputElement>(null);
 const lteEndDateRef = useRef<HTMLInputElement>(null);
+
 
 const handleCheckboxChange = (type: keyof IncapacityType) => {
   const newIncapacity = { ...incapacity, [type]: !incapacity[type] };
@@ -152,6 +153,7 @@ const validateAndSetGrossEarnings = (inputValue: string, setGrossEarnings: Funct
       setBackPayment('');
       setBackPaymentError(true);
       setBackPaymentStartDateError(false);
+      // setGrossEarningsFormat(false);
       return;
     }
   }      
@@ -164,7 +166,7 @@ const handleGrossEarningsFocus = (): void => {
   setIsAllFieldEntered(false);
   setBackPaymentError(false);
   // Clear the input if the value is '0.00'
-  if (backPayment === '0.00' ||  backPayment === "NaN" || backPayment === "NaN.00" || backPayment === ".00" || backPayment.length === 0) {
+  if (backPayment === '0.00' ||  backPayment === "NaN" || backPayment === "NaN.00" || backPayment === ".00" ) {
     setBackPayment('');
   } else if (backPayment.includes('.') && backPayment.endsWith('.00')) {
       // Remove '.00' if the decimal part is '00'
@@ -218,6 +220,7 @@ const handleBackpayOnBlur = (backPayment: string, setBackPayment: Function,   se
   // Update state
   setBackPaymentError(false);
   setBackPayment(formattedInput);
+
 };
 
 const onChange = (e: ChangeEvent<HTMLInputElement>, setValue: Function, inputRef: RefObject<HTMLInputElement>, setError: Function, setCompleted?: Function) => {
@@ -479,7 +482,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
  const dates = { startDateSTE, endDateSTE, startDateLTE,endDateLTE };
   return (
     <div className='flex flex-col flex-1 min-h-screen max-width mb-10 relative'>
-      <p className='text-2xl font-bold italic mb-5'>Back Payment Apportioning</p>
+      <p className='text-2xl font-bold italic mb-5'>Back Payment/Bonuses Apportioning</p>
       <div className="flex flex-col">
         <div className="flex flex-col space-x-5">
         </div>
@@ -498,32 +501,32 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
       </div>
       <div className='flex flex-col pt-3'>
         <div className="flex ">
-          <form className="flex items-center">
+          <div className="flex items-center">
             <input
               type="checkbox"
               className='w-4 h-4 hover:cursor-pointer'
               checked={incapacity.dofi}
               onChange={() => handleCheckboxChange('dofi')}
-              name={`dofi`}
               id={`dofi`}
+              name={`dofi`}
             />
-            <label className='px-4 font-bold' htmlFor="dofi">
+            <label className='px-4 font-bold' htmlFor='dofi'>
               DOFI
             </label>
-          </form>
-          <form className="flex items-center">
+          </div>
+          <div className="flex items-center">
             <input
               type="checkbox"
               className='w-4 h-4 hover:cursor-pointer '
               checked={incapacity.dosi}
               onChange={() => handleCheckboxChange('dosi')}
-              name={`dosi`}
               id={`dosi`}
+              name={`dosi`}
             />
             <label className='px-4 font-bold' htmlFor="dosi">
               DOSI
             </label>
-          </form>
+          </div>
         </div>
         { incapacityError && (
           <p className="font-bold text-red-900 py-2">
@@ -543,8 +546,8 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
               setDisplayAll(false);
               setIsClicked(false);
             }}
-            name={"DHB"}
             id={`DHB`}
+            name={`DHB`}
           />
           <label className='font-bold' htmlFor="DHB">DHB</label>
         </div>
@@ -598,8 +601,6 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                   setDisplayAll={setDisplayAll}
                   setValue={setBackPaymentStartDate}
                   onFocus={handleFocus}
-                  id={`Paid Start Date dofi`}
-                  // id={`backPaymentStartDate`}
                 />
                 <DateInput 
                   inputTitle="Paid End Date" 
@@ -618,8 +619,6 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                   setDisplayAll={setDisplayAll}
                   setValue={setBackPaymentEndDate}
                   onFocus={handleFocus}
-                  id={`Paid End Date dofi`}
-                  // id={`${backPaymentEndDate}`}
                 />
               </div>
             </div>
@@ -643,10 +642,10 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                 setDisplayAll={setDisplayAll}
                 setValue={setBackPaymentPeriodStartDate}
                 onFocus={handleFocus}
-                id={`Relate to Start Date dofi`}
               />
+
               <DateInput 
-                inputTitle="Relate to End Date" 
+                inputTitle="Relate to  End Date" 
                 inputValue={backPaymentPeriodEndDate} 
                 onChange={(e) => setBackPaymentPeriodEndDate(e.target.value)}
                 onBlur={() => dateOnBlur({ 
@@ -662,7 +661,6 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                 setDisplayAll={setDisplayAll}
                 setValue={setBackPaymentPeriodEndDate}
                 onFocus={handleFocus}
-                id={`Relate to End Date dofi`}
               />
             </div>
         </div>
@@ -680,7 +678,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                 <div className="flex flex-col flex-1">
                   <div className="flex flex-row flex-1 space-x-3">
                     <DateInput 
-                      inputTitle="STE Start Date" 
+                      inputTitle="STE start date" 
                       inputValue={startDateSTE} 
                       onChange={(e) => setStartDateSTE(e.target.value)}
                       onBlur={() => dateOnBlur({ 
@@ -696,10 +694,9 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                       setDisplayAll={setDisplayAll}
                       setValue={setStartDateSTE}
                       onFocus={handleFocus}
-                      id={`STE Start Date dofi`}
                     />
                     <DateInput 
-                      inputTitle="STE End Date" 
+                      inputTitle="STE end date" 
                       inputValue={endDateSTE} 
                       onChange={(e) => setEndDateSTE(e.target.value)}
                       onBlur={() => dateOnBlur({ 
@@ -714,7 +711,6 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                       setDisplayAll={setDisplayAll}
                       setValue={setEndDateSTE}
                       onFocus={handleFocus}
-                      id={`STE End Date dofi`}
                     />
                   </div>
                 </div>
@@ -722,7 +718,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                   <div className="flex flex-col">
                     <div className="flex flex-row space-x-3 pl-3">
                       <DateInput 
-                        inputTitle="LTE Start Date" 
+                        inputTitle="LTE start date" 
                         inputValue={startDateLTE} 
                         onChange={(e)=>setStartDateLTE(e.target.value)} 
                         onBlur={() => dateOnBlur({ 
@@ -736,10 +732,9 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                         setValue={setStartDateLTE}
                         onFocus={handleFocus}
                         inputRef={lteStartDateRef}
-                        id={`LTE Start Date dofi`}
                       />
                       <DateInput 
-                        inputTitle="LTE End Date" 
+                        inputTitle="LTE end date" 
                         inputValue={endDateLTE} 
                         onChange={(e)=>setEndDateLTE(e.target.value)} 
                         onBlur={() => dateOnBlur({ 
@@ -754,7 +749,6 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                         setValue={setEndDateLTE}
                         onFocus={handleFocus}
                         inputRef={lteEndDateRef}
-                        id={`LTE End Date dofi`}
                       />
                     </div>
                   </div>
@@ -773,7 +767,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
               <div className="flex flex-col">
                 <div className="flex flex-row space-x-3 w-full">
                   <DateInput 
-                    inputTitle="LTE Start Date" 
+                    inputTitle="LTE start date" 
                     inputValue={startDateLTE} 
                     onChange={(e)=>setStartDateLTE(e.target.value)} 
                     onBlur={() => dateOnBlur({ 
@@ -785,10 +779,9 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                     setDisplayAll={setDisplayAll}
                     setValue={setStartDateLTE}
                     onFocus={handleFocus}
-                    id={`LTE Start Date dosi`}
                   />
                   <DateInput 
-                    inputTitle="LTE End Date" 
+                    inputTitle="LTE end date" 
                     inputValue={endDateLTE} 
                     onChange={(e)=>setEndDateLTE(e.target.value)} 
                     onBlur={() => dateOnBlur({ 
@@ -801,7 +794,6 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                     setDisplayAll={setDisplayAll}
                     setValue={setEndDateLTE}
                     onFocus={handleFocus}
-                    id={`LTE End Date dosi`}
                   />
                 </div>
                 { (validateDate(startDateLTE) && validateDate(endDateLTE)) && (
@@ -959,4 +951,4 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
   )
 }
 
-export default page
+export default BackPayments
