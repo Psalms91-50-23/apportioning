@@ -20,16 +20,17 @@ const WorkPatternSelector = ({
     <div className="flex flex-col flex-wrap">
       <div className="flex flex-row flex-wrap items-center">
         {Object.keys(workPattern).map((day,num) => (
-        <div key={day} className={`flex items-center ${num === 0 ?`py-3 pr-3` : `p3 pr-3`}`}>
+        <form key={day} className={`flex items-center ${num === 0 ?`py-3 pr-3` : `p3 pr-3`}`}>
             <input
               type="checkbox"
-              id={`workPatternDay${day}`}
+              id={`workPatternDay${day}${num}`}
               checked={workPattern[day]}
               onChange={() => handleChange(day)}
               className="mr-2 text-black-900 w-4 h-4 hover:cursor-pointer"
+              name={`workPatternDay${day}${num}`}
             />
-            <label className="font-bold" htmlFor={`workPatternDay${day}`}>{day.charAt(0).toUpperCase() + day.slice(1)}</label>
-        </div>
+            <label className="font-bold" htmlFor={`workPatternDay${day}${num}`}>{day.charAt(0).toUpperCase() + day.slice(1)}</label>
+        </form>
         ))}
       </div>
       <div className="text-center">

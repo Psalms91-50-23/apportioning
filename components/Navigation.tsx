@@ -1,10 +1,12 @@
 'use client';
+import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { NavButton } from './';
 
 const Navigation = () => {
     const pathname = usePathname();
     const currentPath = pathname !== "/"; 
+    const [isActive, setIsActive] = useState(false);
 
     const customStyles = {
         width: "2.8rem",
@@ -13,9 +15,9 @@ const Navigation = () => {
 
   return (
     <nav className='flex flex-row justify-start p-10 space-x-4 max-width w-full'>
-       <NavButton page={""} label={"Home"} imageLocation={"/home.svg"} staticLocation={"/homeStatic.svg"}/>
-       <NavButton page={"backpayments"} label={"BackPayments"} imageLocation={"/pay.svg"} customStyle={true} staticLocation={"/payStatic.svg"}/>
-       <NavButton page={"pwc"} label={"PWC"} imageLocation={"/calculator.svg"} customStylez={customStyles} staticLocation={"/calculatorStatic.svg"}/>
+       <NavButton page={""} label={"Home"} imageLocation={"/home.svg"} staticLocation={"/homeStatic.svg"}  isActive={pathname === "/"}/>
+       <NavButton page={"backpayments"} label={"BackPayments"} imageLocation={"/pay.svg"} customStyle={true} staticLocation={"/payStatic.svg"}  isActive={pathname === "/backpayments"}/>
+       <NavButton page={"pwc"} label={"PWC"} imageLocation={"/calculator.svg"} customStylez={customStyles} staticLocation={"/calculatorStatic.svg"}  isActive={pathname === "/pwc"}/>
        {currentPath  && (
         <NavButton page={""} label={"Back"} imageLocation={"/leftArrow.svg"} staticLocation={"/leftArrowStatic.svg"} customStylez={customStyles}/>
        )

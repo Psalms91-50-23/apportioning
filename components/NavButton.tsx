@@ -13,9 +13,10 @@ interface NavButtonProps {
     imageLocation?: string;
     customStyle?: boolean;
     customStylez?: React.CSSProperties;
+    isActive?: boolean; // New prop for active state
   }
   
-const NavButton = ({page, label, icon, iconStatic, imageLocation, staticLocation, customStyle, customStylez }: NavButtonProps) => {
+const NavButton = ({page, label, icon, iconStatic, imageLocation, staticLocation, customStyle, customStylez, isActive }: NavButtonProps) => {
     const router = useRouter();
     const [onHover, setOnHover] = useState(false);
     const navigateToPage = (page: string) => {
@@ -44,7 +45,7 @@ const NavButton = ({page, label, icon, iconStatic, imageLocation, staticLocation
 
   return (
     <div 
-        className={`nav-button space-x-2`}
+        className={`nav-button space-x-2 ${isActive && !onHover &&`active-underline`}`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={() => navigateToPage(page)} >
@@ -70,10 +71,11 @@ const NavButton = ({page, label, icon, iconStatic, imageLocation, staticLocation
             />
         )
         }
-        <p className={`${onHover && `big-text`}`}>
+        <p className={`${onHover && isActive && `big-text`}`}>
             {label}
         </p>
-        <span className='underline'></span>
+        <span className='underline-rainbow'></span>
+        <span className={`${isActive && !onHover &&`active-underline`}`}></span>
     </div>
   )
 }

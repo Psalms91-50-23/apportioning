@@ -78,8 +78,9 @@ export interface  DayToggleProps {
   day: keyof PatternOfWork;
   type: string,
   handleWorkPatternChange: (day: keyof PatternOfWork, type: 'full' | 'half' | '') => void;
-  index: number,
+  index: number | string,
   dayType?: string,
+
 };
 
 export type PatternOfWorkInput = {
@@ -132,6 +133,7 @@ export interface DateInputProps {
   setDisplayAll?: (value: boolean) => void;
   setValue?: (value: string) => void;
   customStyle?: React.CSSProperties,
+  id?: string,
 };
 
 export interface OnBlurDate {

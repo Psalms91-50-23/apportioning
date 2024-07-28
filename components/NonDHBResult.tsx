@@ -83,7 +83,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                               <span className='font-bold '>
                                 Day counts for payment date it relates to above: 
                               </span>
-                              <span className='italic underline_ '>
+                              <span className='italic underline '>
                                 {totalDayCounts}
                               </span>
                             </div>
@@ -91,7 +91,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                               <span className='font-bold '>
                                 Day counts for payment date it relates to based on work pattern above: 
                               </span>
-                              <span className='italic underline_ '>
+                              <span className='italic underline '>
                                 {totalWPDayCounts}
                               </span>
                             </div>
@@ -99,7 +99,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                               <span className='font-bold '>Single Day calculations: </span>
                               <div className="flex flex-row space-x-2">
                                 <span className=''>{singleDayCalculations}</span>
-                                <span className='underline_ italic '>${singleDayBackPay}</span>
+                                <span className='underline italic '>${singleDayBackPay}</span>
                               </div>
                             </div>
                           </div>
@@ -128,7 +128,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                         <div className='bg-green-500 rounded-md p-3 text-inherit text-white hover:bg-green-700 mt-3'>
                           <div className="flex justify-center pb-3">
                             { isPaidInCurrentFinancialYear && (
-                              <p className='text-xl font-bold underline_'>
+                              <p className='text-xl font-bold underline'>
                                 Results for DOFI Non-DHB in current Financial Year
                               </p>
                             ) 
@@ -138,7 +138,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                             <div className="">
                               <div>
                                 <div className="flex justify-center py-2">
-                                  <p className='font-bold text-2xl underline_'>Results for DOFI Non-DHB in previous financial year</p>
+                                  <p className='font-bold text-2xl underline'>Results for DOFI Non-DHB in previous financial year</p>
                                 </div>
                                 <div className='flex flex-row space-x-2'>
                                   <p className='font-bold'>LTE periods:</p>
@@ -146,7 +146,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                                 </div>
                                 <div className="">
                                   <div className="flex justify-center py-2">
-                                    <p className="underline_ font-bold text-xl">Back Pay Dates information</p>
+                                    <p className="underline font-bold text-xl">Back Pay Dates information</p>
                                   </div>
                                   <div className="flex flex-row space-x-2">
                                     <p className='font-bold'>Back pay paid dates:</p>
@@ -159,16 +159,16 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                                 </div>
                                 <div className="">
                                   <div className="">
-                                    <p>Back payment is <span className='font-bold underline_'>received</span> in the <span className='italic underline_ font-bold'>{financialYearDates?.previousFinancialPeriod}</span> financial year period, which is in the previous financial year. Please refer to information above for more details.</p>
+                                    <p>Back payment is <span className='font-bold underline'>received</span> in the <span className='italic underline font-bold'>{financialYearDates?.previousFinancialPeriod}</span> financial year period, which is in the previous financial year. Please refer to information above for more details.</p>
                                     <p></p>
                                   </div>
                                   <div className="">
-                                    <p>Back payment <span className='underline_ font-bold'>relates to</span> the <span className='italic underline_ font-bold' >{financialYearDates?.previousFinancialPeriod}</span> financial year, which is the previous financial year period. Please refer to information above for more details.</p>
+                                    <p>Back payment <span className='underline font-bold'>relates to</span> the <span className='italic underline font-bold' >{financialYearDates?.previousFinancialPeriod}</span> financial year, which is the previous financial year period. Please refer to information above for more details.</p>
                                   </div>
                                   <div className="flex flex-col">
                                     <div className="">
                                       <div className="flex justify-center text-inherit font-bold text-xl">
-                                        <p className='underline_'>Keep inside LTE</p>
+                                        <p className='underline'>Keep inside LTE</p>
                                       </div>
                                       <div className="">
                                         <p className='font-bold'>Periods inside LTE calculations</p>
@@ -178,12 +178,12 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                                         </div>
                                       </div>
                                       <div className="flex flex-row space-x-2 font-bold text-inherit items-end ">
-                                        <p><span className='underline_'>Keep</span> inside LTE <span className='underline_'>${formatResult(Number(insideLTEPreviousFinancialYear?.insideLTEPrevFinYearAmount.toFixed(2)))}</span></p>
+                                        <p><span className='underline'>Keep</span> inside LTE <span className='underline'>${formatResult(Number(insideLTEPreviousFinancialYear?.insideLTEPrevFinYearAmount.toFixed(2)))}</span></p>
                                       </div>
                                     </div>
                                     <div className="">
                                       <div className="flex justify-center text-inherit font-bold text-xl">
-                                        <p className='underline_'>
+                                        <p className='underline'>
                                           Remove periods outside LTE
                                         </p>
                                       </div>
@@ -195,7 +195,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                                         <p className='font-bold'>${formatResult(Number(outsideLTENotDHB?.outsideLTEAmount.toFixed(2)))}</p>
                                       </div>
                                       <div className="flex flex-row text-inherit font-bold space-x-2">
-                                        <p className='underline_'>Remove</p>
+                                        <p className='underline'>Remove</p>
                                         <p>${formatResult(Number(outsideLTENotDHB?.outsideLTEAmount.toFixed(2)))}</p>
                                         <p>from LTE</p>
                                       </div>
@@ -208,7 +208,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                           }
                           { isInsideSTE && isPaidInCurrentFinancialYear  && insideSTECurrentFinancialYear && (
                             <div>
-                              <p className='flex justify-center font-bold text-xl underline_ py-3'>Back pay in STE information</p>
+                              <p className='flex justify-center font-bold text-xl underline py-3'>Back pay in STE information</p>
                               <div className='flex flex-row space-x-2'>
                                 <span className='font-bold '>
                                   Periods inside STE:
@@ -222,7 +222,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                                   <span className='font-bold '>
                                     Day counts inside STE:
                                   </span>
-                                  <span className='underline_ italic  font-bold'>
+                                  <span className='underline italic  font-bold'>
                                     {insideSTECurrentFinancialYear?.steDayCounts}
                                   </span>
                                 </div>
@@ -230,7 +230,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                                   <span className='font-bold '>
                                     Day counts based on work pattern inside STE:
                                   </span>
-                                  <span className='underline_ italic '>
+                                  <span className='underline italic '>
                                     {insideSTECurrentFinancialYear?.steWorkPatternDayCounts}
                                   </span>
                                 </div>
@@ -245,18 +245,18 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                                   <span className="font-bold">
                                     {insideSTECurrentFinancialYear?.steAmountNotDHBCalculationsPartial}
                                   </span>
-                                  <span className="font-bold underline_">
+                                  <span className="font-bold underline">
                                     ${formatResult(Number((insideSTECurrentFinancialYear?.steAmountNotDHB).toFixed(2)))}
                                   </span>
                                 </div>
                               </div>
                               <div className="">
                                 <div className="flex flex-col">
-                                  <span className='flex justify-center font-bold text-xl underline_ py-3'>
+                                  <span className='flex justify-center font-bold text-xl underline py-3'>
                                     LTE Current Financial Period Information
                                   </span>
                                   <span className='font-bold'>
-                                      Keep all in LTE as Non-DHB back payment is received in the financial period it is paid. This back pay is paid {backPaymentDates?.backPaymentStartDate} — {backPaymentDates?.backPaymentEndDate}, which is in the <span className="underline_">current</span> financial period {financialYearDates?.currentFinancialPeriod}.
+                                      Keep all in LTE as Non-DHB back payment is received in the financial period it is paid. This back pay is paid {backPaymentDates?.backPaymentStartDate} — {backPaymentDates?.backPaymentEndDate}, which is in the <span className="underline">current</span> financial period {financialYearDates?.currentFinancialPeriod}.
                                   </span>
                                 </div>
                               </div>
@@ -265,7 +265,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                           { isOutsideLTE && !isPaidInCurrentFinancialYear && (
                           <div> 
                             <div className="">
-                              <p className='flex justify-center font-bold text-xl underline_ pb-3'>
+                              <p className='flex justify-center font-bold text-xl underline pb-3'>
                                 Result for previous financial period outside LTE
                               </p>
                             </div>
@@ -285,13 +285,13 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                                 </div>
                               </div>
                             <div className="flex justify-center font-bold text-lg text-inherit py-2">
-                              <p><span className='underline_'>Remove</span> all back pay amount <span className='underline_'>${formatResult(Number(outsideLTENotDHB?.outsideLTEAmount.toFixed(2)))}</span> as it is all outside LTE.</p>
+                              <p><span className='underline'>Remove</span> all back pay amount <span className='underline'>${formatResult(Number(outsideLTENotDHB?.outsideLTEAmount.toFixed(2)))}</span> as it is all outside LTE.</p>
                             </div>
                           </div>
                           )}
                           { !isInsideSTE && isPaidInCurrentFinancialYear  && insideSTECurrentFinancialYear && (
                           <div> 
-                            <span className='flex justify-center font-bold text-xl underline_ pb-3'>
+                            <span className='flex justify-center font-bold text-xl underline pb-3'>
                               LTE Current Financial Period
                             </span>
                             {insideLTECurrentFinancialYear && typeof insideLTECurrentFinancialYear === "string" && (
@@ -305,7 +305,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                           { !isInsideSTE && !isOutsideLTE && isInsideLTE && !isPaidInCurrentFinancialYear && (
                             <div>
                               <div className="flex justify-center py-2">
-                                <p className='underline_ font-bold text-xl'>Results for DOFI in previous financial year</p>
+                                <p className='underline font-bold text-xl'>Results for DOFI in previous financial year</p>
                               </div>
                               <div className='flex flex-row space-x-2'>
                                 <p className='font-bold'>LTE periods:</p>
@@ -313,33 +313,33 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                               </div>
                               <div className="">
                                 <div className="flex justify-center py-2">
-                                  <p className="underline_ font-bold text-xl">Back Pay Dates information</p>
+                                  <p className="underline font-bold text-xl">Back Pay Dates information</p>
                                 </div>
                                 <div className="flex flex-row space-x-2 ">
                                   <p className='font-bold'>Back pay paid dates:</p>
                                   <div className="flex flex-row space-x-2">
                                     <p>{backPayDates?.paidStartDate} — {backPayDates?.paidEndDate}</p>
-                                    <p className='font-bold italic underline_'>${formatResult(Number(insideLTEPreviousFinancialYear?.insideLTEPrevFinYearAmount.toFixed(2)))}</p>
+                                    <p className='font-bold italic underline'>${formatResult(Number(insideLTEPreviousFinancialYear?.insideLTEPrevFinYearAmount.toFixed(2)))}</p>
                                   </div>
                                 </div>
                                 <div className="flex flex-row space-x-2">
                                   <p className='font-bold'>Back pay relate to dates:</p>
                                   <div className="flex flex-row space-x-2">
                                     <p>{backPayDates?.periodStartDate} — {backPayDates?.periodEndDate}</p>
-                                    <p className='font-bold italic underline_'>${formatResult(Number(insideLTEPreviousFinancialYear?.insideLTEPrevFinYearAmount.toFixed(2)))}</p>
+                                    <p className='font-bold italic underline'>${formatResult(Number(insideLTEPreviousFinancialYear?.insideLTEPrevFinYearAmount.toFixed(2)))}</p>
                                   </div>
                                 </div>
                               </div>
                               <div className="">
                                 <div className="font-bold text-inherit ">
-                                  <p>Back payment is <span className="font-bold italic underline_">received</span> in the <span className='italic underline_'>{financialYearDates?.previousFinancialPeriod}</span> financial year period, which is in the previous financial year. Please refer to information above for more details.</p>
+                                  <p>Back payment is <span className="font-bold italic underline">received</span> in the <span className='italic underline'>{financialYearDates?.previousFinancialPeriod}</span> financial year period, which is in the previous financial year. Please refer to information above for more details.</p>
                                   <p></p>
                                 </div>
                                 <div className="font-bold text-inherit ">
-                                  <p>Back payment <span className='underline_'>relates to</span> the <span className='italic underline_'>{financialYearDates?.previousFinancialPeriod}</span> financial year, which is the previous financial year period. Please refer to information above for more details.</p>
+                                  <p>Back payment <span className='underline'>relates to</span> the <span className='italic underline'>{financialYearDates?.previousFinancialPeriod}</span> financial year, which is the previous financial year period. Please refer to information above for more details.</p>
                                 </div>
                                 <div className="flex justify-center py-3">
-                                  <p className='font-bold text-xl underline_'>No apportioning needed for back pay as payments are within LTE periods.</p>
+                                  <p className='font-bold text-xl underline'>No apportioning needed for back pay as payments are within LTE periods.</p>
                                 </div>
                               </div>
                             </div>
@@ -353,7 +353,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                           { !isInsideSTE && !isOutsideLTE && isInsideLTE && !isPaidInCurrentFinancialYear && (
                             <div>
                                 <div className="flex justify-center py-3">
-                                  <p className='text-xl font-bold underline_'>
+                                  <p className='text-xl font-bold underline'>
                                     Results for DOSI Non-DHB in previous financial year
                                   </p>
                                 </div>
@@ -363,7 +363,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                               </div>
                               <div className="">
                                 <div className="flex justify-center py-2">
-                                  <p className="underline_ font-bold text-xl">Back Pay Dates information</p>
+                                  <p className="underline font-bold text-xl">Back Pay Dates information</p>
                                 </div>
                                 <div className="flex flex-row space-x-2">
                                   <p className="font-bold">Back pay paid dates:</p>
@@ -376,14 +376,14 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                               </div>
                               <div className="">
                                 <div className="font-bold text-inherit ">
-                                  <p>Back payment is received in the <span className='italic underline_'>{financialYearDates?.previousFinancialPeriod}</span> financial year period, which is in the previous financial year. Please refer to information above for more details.</p>
+                                  <p>Back payment is received in the <span className='italic underline'>{financialYearDates?.previousFinancialPeriod}</span> financial year period, which is in the previous financial year. Please refer to information above for more details.</p>
                                   <p></p>
                                 </div>
                                 <div className="font-bold text-inherit ">
-                                  <p>Back payment <span className='underline_'>relates to</span> the <span className='italic underline_'>{financialYearDates?.previousFinancialPeriod}</span> financial year, which is the previous financial year period. Please refer to information above for more details.</p>
+                                  <p>Back payment <span className='underline'>relates to</span> the <span className='italic underline'>{financialYearDates?.previousFinancialPeriod}</span> financial year, which is the previous financial year period. Please refer to information above for more details.</p>
                                 </div>
                                 <div className="flex justify-center py-3">
-                                  <p className='font-bold underline_'>No apportioning needed for back pay as payments are within LTE dates</p>
+                                  <p className='font-bold underline'>No apportioning needed for back pay as payments are within LTE dates</p>
                                 </div>
                               </div>
                             </div>
@@ -393,14 +393,14 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                             <div>
                               <div className="">
                                 <div className="flex justify-center">
-                                  <p className='font-bold text-xl underline_'>Result for DOSI Non-DHB current financial year</p>
+                                  <p className='font-bold text-xl underline'>Result for DOSI Non-DHB current financial year</p>
                                 </div>
                                 <div className="flex flex-col">
-                                  <span className='flex justify-center font-bold text-xl underline_ py-3'>
+                                  <span className='flex justify-center font-bold text-xl underline py-3'>
                                     LTE Current Financial Period Information
                                   </span>
                                   <span className='font-bold'>
-                                      Keep all in LTE as Non-DHB back payment is received in the financial period it is paid. This back pay is paid {backPaymentDates?.backPaymentStartDate} — {backPaymentDates?.backPaymentEndDate}, which is in the <span className="underline_">current</span> financial period {financialYearDates?.currentFinancialPeriod}.
+                                      Keep all in LTE as Non-DHB back payment is received in the financial period it is paid. This back pay is paid {backPaymentDates?.backPaymentStartDate} — {backPaymentDates?.backPaymentEndDate}, which is in the <span className="underline">current</span> financial period {financialYearDates?.currentFinancialPeriod}.
                                   </span>
                                 </div>
                               </div>
@@ -409,10 +409,10 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                           { !isInsideSTE && isPaidInCurrentFinancialYear  && insideSTECurrentFinancialYear && (
                           <div> 
                             <div className="flex justify-center font-bold text-xl py-2">
-                              <p className='underline_'>Result for DOSI Non-DHB in current financial year</p>
+                              <p className='underline'>Result for DOSI Non-DHB in current financial year</p>
                             </div>
                             <div className="flex justify-center">
-                              <span className='font-bold text-xl underline_ pb-3'>
+                              <span className='font-bold text-xl underline pb-3'>
                                 LTE Current Financial Period Information
                               </span>
                             </div>
@@ -427,7 +427,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                           {!isInsideSTE && isOutsideLTE && !isInsideLTE && !isPaidInCurrentFinancialYear && (
                             <div>
                               <div className="flex justify-center py-2">
-                                <p className='font-bold text-xl underline_'>Results for previous financial period DOSI</p>
+                                <p className='font-bold text-xl underline'>Results for previous financial period DOSI</p>
                               </div>
                               <div className="flex flex-row space-x-2">
                                 <p className='font-bold'>LTE periods:</p>
@@ -441,11 +441,11 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                                 <p className='font-bold'>Back pay relate to dates:</p>
                                 <div className="flex flex-row space-x-2">
                                   <p>{backPayDates?.periodStartDate} — {backPayDates?.periodEndDate}</p>
-                                  <p className="font-bold underline_">{formatResult(Number(outsideLTENotDHB?.outsideLTEAmount.toFixed(2)))}</p>
+                                  <p className="font-bold underline">{formatResult(Number(outsideLTENotDHB?.outsideLTEAmount.toFixed(2)))}</p>
                                 </div>
                               </div>
                               <div className="flex justify-center py-3 text-inherit font-bold text-lg">
-                                <p>Remove all <span className='underline_'>${formatResult(Number(outsideLTENotDHB?.outsideLTEAmount.toFixed(2)))}</span> from LTE as it is outside the LTE period.</p>
+                                <p>Remove all <span className='underline'>${formatResult(Number(outsideLTENotDHB?.outsideLTEAmount.toFixed(2)))}</span> from LTE as it is outside the LTE period.</p>
                               </div>
                             </div>
                           )
@@ -455,7 +455,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                             <div className="">
                               <div>
                                 <div className='flex justify-center py-3'>
-                                  <p className='font-bold text-xl underline_'>Results for DOSI Non-DHB in previous financial year</p>
+                                  <p className='font-bold text-xl underline'>Results for DOSI Non-DHB in previous financial year</p>
                                 </div>
                                 <div className='flex flex-row space-x-2'>
                                   <p className='font-bold'>LTE periods:</p>
@@ -463,7 +463,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                                 </div>
                                 <div className="">
                                   <div className="flex justify-center py-2">
-                                    <p className="underline_ font-bold text-xl">Back Pay Dates information</p>
+                                    <p className="underline font-bold text-xl">Back Pay Dates information</p>
                                   </div>
                                   <div className="flex flex-row space-x-2">
                                     <p className='font-bold'>Back pay paid dates:</p>
@@ -476,31 +476,31 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                                 </div>
                                 <div className="">
                                   <div className="">
-                                    <p>Back payment is <span className="font-bold italic underline_">received</span> in the <span className='italic underline_ font-bold'>{financialYearDates?.previousFinancialPeriod}</span> financial year period, which is in the previous financial year. Please refer to information above for more details.</p>
+                                    <p>Back payment is <span className="font-bold italic underline">received</span> in the <span className='italic underline font-bold'>{financialYearDates?.previousFinancialPeriod}</span> financial year period, which is in the previous financial year. Please refer to information above for more details.</p>
                                     <p></p>
                                   </div>
                                   <div className="">
-                                    <p>Back payment <span className='underline_ font-bold italic'>relates to</span> the <span className='italic underline_ font-bold'>{financialYearDates?.previousFinancialPeriod}</span> financial year, which is the previous financial year period. Please refer to information above for more details.</p>
+                                    <p>Back payment <span className='underline font-bold italic'>relates to</span> the <span className='italic underline font-bold'>{financialYearDates?.previousFinancialPeriod}</span> financial year, which is the previous financial year period. Please refer to information above for more details.</p>
                                   </div>
                                   <div className="flex flex-col">
                                     <div className="">
                                       <div className="flex justify-center text-inherit font-bold text-xl">
-                                        <p className='underline_'>Keep inside LTE</p>
+                                        <p className='underline'>Keep inside LTE</p>
                                       </div>
                                       <div className="">
                                         <p className='font-bold'>Periods inside LTE calculations</p>
                                         <div className="flex flex-row space-x-2">
                                           <p>{insideLTEPreviousFinancialYear?.insideLTEPrevFinYearCalculationsPartial}</p>
-                                          <p className='font-bold underline_'>${formatResult(Number(insideLTEPreviousFinancialYear?.insideLTEPrevFinYearAmount.toFixed(2)))}</p>
+                                          <p className='font-bold underline'>${formatResult(Number(insideLTEPreviousFinancialYear?.insideLTEPrevFinYearAmount.toFixed(2)))}</p>
                                         </div>
                                       </div>
                                       <div className="flex flex-row space-x-2 font-bold">
-                                        <p><span className='underline_'>Keep</span> inside LTE <span className='underline_'>${formatResult(Number(insideLTEPreviousFinancialYear?.insideLTEPrevFinYearAmount.toFixed(2)))}</span></p>
+                                        <p><span className='underline'>Keep</span> inside LTE <span className='underline'>${formatResult(Number(insideLTEPreviousFinancialYear?.insideLTEPrevFinYearAmount.toFixed(2)))}</span></p>
                                       </div>
                                     </div>
                                     <div className="">
                                       <div className="flex justify-center text-inherit font-bold text-xl">
-                                        <p className='underline_'>
+                                        <p className='underline'>
                                           Remove periods outside LTE
                                         </p>
                                       </div>
@@ -512,7 +512,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                                         <p className='font-bold'>${formatResult(Number(outsideLTENotDHB?.outsideLTEAmount.toFixed(2)))}</p>
                                       </div>
                                       <div className="flex flex-row text-inherit font-bold space-x-2">
-                                        <p className='underline_'>Remove</p>
+                                        <p className='underline'>Remove</p>
                                         <p>${formatResult(Number(outsideLTENotDHB?.outsideLTEAmount.toFixed(2)))}</p>
                                         <p>from LTE</p>
                                       </div>

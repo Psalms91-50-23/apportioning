@@ -6,13 +6,19 @@ import { DayToggleProps } from "../types";
 const DayToggle = ({ day, type, handleWorkPatternChange, index, dayType }: DayToggleProps) => {
 
   return (
-    <div className="flex flex-col items-center justify-center" style={{ minWidth: "87px"}} draggable={false}>
+    <div className="flex flex-col items-center justify-center" style={{ minWidth: "87px"}} draggable={false} >
       <div className='flex flex-col '>
         <div className="justify-center items-center ">
           { dayType === "full" && (
-            <span className='font-bold text-md'>
+            <label className='font-bold text-md' htmlFor={`full ${day}`}>
               {day.charAt(0).toUpperCase() + day.slice(1)}
-            </span>
+            </label>
+          )
+          }
+          { dayType === "half" && (
+            <label className='font-bold text-md' htmlFor={`half ${day}`}>
+              {day.charAt(0).toUpperCase() + day.slice(1)}
+            </label>
           )
           }
         </div>
@@ -23,6 +29,8 @@ const DayToggle = ({ day, type, handleWorkPatternChange, index, dayType }: DayTo
               type="checkbox"
               checked={type === 'full'}
               onChange={() => handleWorkPatternChange(day, type === 'full' ? '' : 'full')}
+              id={`full ${day}`}
+              name={`full ${day}`}
             /> 
           )
           }
@@ -31,6 +39,8 @@ const DayToggle = ({ day, type, handleWorkPatternChange, index, dayType }: DayTo
                 <input
                   type="checkbox"
                   checked={type === 'half'}
+                  id={`half ${day}`}
+                  name={`half ${day}`}
                   onChange={() => handleWorkPatternChange(day, type === 'half' ? '' : 'half')}
                 /> 
               )
