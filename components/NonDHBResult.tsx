@@ -4,7 +4,6 @@ import functions from "../functions";
 const  { formatResult } =  functions;
 
 import { ResultType, ValueSTE_LTE_Boolean } from '../types';
-
 interface BackPayResultProps {
   resultType: ResultType,
   resultRef?: React.RefObject<HTMLDivElement>,
