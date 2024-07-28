@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, ChangeEvent, RefObject } from 'react';
 import { PatternOfWork, ResultType, IncapacityType, FinancialDateTypes, ValueSTE_LTE_Boolean } from "../../types";
 import functions from "../../functions";
-const {  formatDate, validateDate, sanitizeInput, grossEarningInputValueConverted, handleEarningsOnBlur, getAllDates, earningsRegex, dateRegex, dateOnBlur, countDays, countWorkDays, convertToDateFormat, isInsideSTEBool, isOutsideLTEBool, caculateBackpay, isInsideLTEBool, isAtLeastOneDaySelected, isCurrentFinancialYear, getFinancialYears } = functions;
+const { validateDate, handleEarningsOnBlur, getAllDates, earningsRegex, dateOnBlur, countDays, countWorkDays, convertToDateFormat, isInsideSTEBool, isOutsideLTEBool, caculateBackpay, isInsideLTEBool, isCurrentFinancialYear, getFinancialYears } = functions;
 import { DateInput, WorkPatternSelector, EarningsInput, DHBResult, NonDHBResult } from '../../components';
 
 const BackPayments = () => {
@@ -73,12 +73,12 @@ const BackPayments = () => {
 
   const initialWorkPattern: PatternOfWork = {
     sunday: false,
-    monday: false,
-    tuesday: false,
+    monday: true,
+    tuesday: true,
     wednesday: true,
     thursday: true,
     friday: true,
-    saturday: true,
+    saturday: false,
   };
 
 const [workPattern, setWorkPattern] = useState<PatternOfWork>(initialWorkPattern);
@@ -107,7 +107,6 @@ const scrollToTop= () => {
     });
   }, 50); 
 };
-
 
 const backpayRef = useRef<HTMLInputElement>(null);
 const backpayStartDateRef = useRef<HTMLInputElement>(null);
@@ -142,31 +141,11 @@ const handleCheckboxChange = (type: keyof IncapacityType) => {
   }
 };
 
-
-const validateAndSetGrossEarnings = (inputValue: string, setGrossEarnings: Function, setErrorGrossEarnings: Function): void => {
-  // Only show an error if there is an input
-  if (inputValue.trim().length > 0) {
-    // Assume you want to allow only numbers with a maximum of two decimal places
-    const regex = /^\d+(\.\d{1,})?$/;
-
-    if (!regex.test(inputValue)) {
-      setBackPayment('');
-      setBackPaymentError(true);
-      setBackPaymentStartDateError(false);
-      // setGrossEarningsFormat(false);
-      return;
-    }
-  }      
-  // Update state only if there is no error
-  setBackPayment(inputValue);
-  setBackPaymentError(false);
-};
-
 const handleGrossEarningsFocus = (): void => {
   setIsAllFieldEntered(false);
   setBackPaymentError(false);
   // Clear the input if the value is '0.00'
-  if (backPayment === '0.00' ||  backPayment === "NaN" || backPayment === "NaN.00" || backPayment === ".00" ) {
+  if (backPayment === '0.00' ||  backPayment === "NaN" || backPayment === "NaN.00" || backPayment === ".00" || backPayment.length === 0 ) {
     setBackPayment('');
   } else if (backPayment.includes('.') && backPayment.endsWith('.00')) {
       // Remove '.00' if the decimal part is '00'
@@ -175,52 +154,6 @@ const handleGrossEarningsFocus = (): void => {
       // Add '.00' if no dot and decimal places are present
       setBackPayment(`${backPayment}.00`);
   }
-};
-
-const handleBackpayOnBlur = (backPayment: string, setBackPayment: Function,   setBackPaymentError: Function): void => {
-  validateAndSetGrossEarnings(backPayment, setBackPayment, setBackPaymentError);
-  let formattedInput = backPayment.trim(); // Trim leading/trailing whitespaces
-  formattedInput = grossEarningInputValueConverted(formattedInput);
-  // let finalValue = formatNumber(formattedInput);
-  if (!formattedInput || !earningsRegex.test(formattedInput)){
-      // If input is empty, set default value
-      formattedInput = '0.00';
-      setBackPayment(formattedInput);
-      setBackPaymentStartDateError(true);
-      return;
-  }
-  else {
-      // Add a dot with two zeros if there is no dot in the input
-      if (!formattedInput.includes('.')) {
-          formattedInput += '.00';
-      }
-      // Handle decimal part
-      const decimalIndex = formattedInput.indexOf('.');
-      const digitsAfterDecimal = formattedInput.length - decimalIndex - 1;
-
-      if (digitsAfterDecimal === 0) {
-          // Add '00' if there are no digits after the decimal point
-          formattedInput += '00';
-      } else if (digitsAfterDecimal === 1) {
-          // Add '0' if there is only one digit after the decimal point
-          formattedInput += '0';
-      } else if (digitsAfterDecimal > 2) {
-          // Round the number to two decimal places if more than 2 digits after the decimal point
-          formattedInput = `${(+formattedInput).toFixed(2)}`;
-      }
-      // Add the new condition to remove leading zeros for specific cases
-      if (/^0+\d[1-9]\.\d$/.test(formattedInput)) {
-          formattedInput = formattedInput.replace(/^0+/, ''); // Remove leading zeros
-      }
-  }
-  //removing unwanted $ sign
-  let santizedGrossInputs = sanitizeInput(formattedInput);
-  //adding commas to make it separate for each 1,000
-  formattedInput = grossEarningInputValueConverted(santizedGrossInputs);
-  // Update state
-  setBackPaymentError(false);
-  setBackPayment(formattedInput);
-
 };
 
 const onChange = (e: ChangeEvent<HTMLInputElement>, setValue: Function, inputRef: RefObject<HTMLInputElement>, setError: Function, setCompleted?: Function) => {
@@ -340,14 +273,6 @@ const isAllFieldCompleted = (): boolean => {
 
 }
 
-const clickArrow = () => {
-  if(!isClicked){
-    setIsClicked(true);
-  }else {
-    setIsClicked(true);
-  }
-}
-
 const calculateApportionBackPay = () => {
   let allFilledOut = onSubmitErrorSet();
 
@@ -367,79 +292,76 @@ const calculateApportionBackPay = () => {
     setDisplayAll(true);
   }
 
-    let dateObjects = getAllDates(startDateLTE, endDateLTE, startDateSTE, endDateSTE);
-    let financialDateObjects = getFinancialYears(endDateLTE);
-    const {currentFinancialYearStart} = financialDateObjects;
-    let isInCurrentFinYear = isCurrentFinancialYear(new Date(convertToDateFormat(backPaymentPeriodEndDate)), new Date(convertToDateFormat(currentFinancialYearStart)), new Date(convertToDateFormat(backPaymentEndDate)));
-    setIsPaidInCurrentFinancialYear(isInCurrentFinYear);
-    let tempInsideSTE, tempOutSideLTE, tempInsideLTE;
-    if(dateObjects && backPaymentPeriodEndDate && startDateSTE && backPaymentPeriodStartDate && startDateLTE && startDateLTE){
+  let dateObjects = getAllDates(startDateLTE, endDateLTE, startDateSTE, endDateSTE);
+  let financialDateObjects = getFinancialYears(endDateLTE);
+  const {currentFinancialYearStart} = financialDateObjects;
+  let isInCurrentFinYear = isCurrentFinancialYear(new Date(convertToDateFormat(backPaymentPeriodEndDate)), new Date(convertToDateFormat(currentFinancialYearStart)), new Date(convertToDateFormat(backPaymentEndDate)));
+  setIsPaidInCurrentFinancialYear(isInCurrentFinYear);
+  let tempInsideSTE, tempOutSideLTE, tempInsideLTE;
+  if(dateObjects && backPaymentPeriodEndDate && startDateSTE && backPaymentPeriodStartDate && startDateLTE && startDateLTE){
 
+    tempInsideSTE = isInsideSTEBool(backPaymentPeriodEndDate, startDateSTE);
+    tempInsideLTE = isInsideLTEBool(backPaymentPeriodStartDate, backPaymentPeriodEndDate, startDateSTE, startDateLTE);
+    tempOutSideLTE = isOutsideLTEBool(backPaymentPeriodStartDate, startDateLTE);
+
+    let tempObject;
+    if(isDHB && isAllFilled && tempInsideLTE && tempOutSideLTE && tempInsideSTE ){ 
+      tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+      setAllNeededObjects(tempObject);
+      scrollToBottom();
+    }
+    else if(isDHB && isAllFilled && tempInsideSTE && !tempOutSideLTE && tempInsideLTE){
+      tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: false, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+      setAllNeededObjects(tempObject);
+      scrollToBottom(); 
+    }
+    else if(isDHB && isAllFilled && !tempInsideSTE && !tempOutSideLTE && tempInsideLTE ){ 
+
+      tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: false, isInsideSTE: false, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+      setAllNeededObjects(tempObject);
+      scrollToBottom();
+    }
+    else if(isDHB && isAllFilled && !tempInsideSTE && tempOutSideLTE && tempInsideLTE ){
+      tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+      setAllNeededObjects(tempObject);
+      scrollToBottom();
+      
+    } else if(isDHB && isAllFilled && tempInsideSTE && tempOutSideLTE && !tempInsideLTE ){
+      tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+      setAllNeededObjects(tempObject);
+      scrollToBottom();
+    } else if(isDHB && isAllFilled && !tempInsideSTE && tempOutSideLTE && !tempInsideLTE){
+      tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+      setAllNeededObjects(tempObject);
+      scrollToBottom();
+    }
+    else {
+  
       tempInsideSTE = isInsideSTEBool(backPaymentPeriodEndDate, startDateSTE);
       tempInsideLTE = isInsideLTEBool(backPaymentPeriodStartDate, backPaymentPeriodEndDate, startDateSTE, startDateLTE);
       tempOutSideLTE = isOutsideLTEBool(backPaymentPeriodStartDate, startDateLTE);
+      setValuesSTE_LTE({
+        isInsideSTE: tempInsideSTE,
+        isInsideLTE: tempInsideLTE,
+        isOutsideLTE: tempOutSideLTE });
 
-      let tempObject;
-      if(isDHB && isAllFilled && tempInsideLTE && tempOutSideLTE && tempInsideSTE ){ 
+      if(!isDHB && isAllFilled){
         tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
-        setAllNeededObjects(tempObject);
-        scrollToBottom();
-      }
-      else if(isDHB && isAllFilled && tempInsideSTE && !tempOutSideLTE && tempInsideLTE){
-        tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: false, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
-        setAllNeededObjects(tempObject);
-        scrollToBottom();
-          
-      }
-      else if(isDHB && isAllFilled && !tempInsideSTE && !tempOutSideLTE && tempInsideLTE ){ 
-        //checking if backpay/bonuses are in LTE only
-        //currently working on 3/7/2024
-        tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: false, isInsideSTE: false, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
-        setAllNeededObjects(tempObject);
-        scrollToBottom();
-      }
-      else if(isDHB && isAllFilled && !tempInsideSTE && tempOutSideLTE && tempInsideLTE ){
-        tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
-        setAllNeededObjects(tempObject);
-        scrollToBottom();
-        
-      } else if(isDHB && isAllFilled && tempInsideSTE && tempOutSideLTE && !tempInsideLTE ){
-        tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
-        setAllNeededObjects(tempObject);
-        scrollToBottom();
-      } else if(isDHB && isAllFilled && !tempInsideSTE && tempOutSideLTE && !tempInsideLTE){
-        tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
-        setAllNeededObjects(tempObject);
-        scrollToBottom();
-      }
-      else {
-   
-        tempInsideSTE = isInsideSTEBool(backPaymentPeriodEndDate, startDateSTE);
-        tempInsideLTE = isInsideLTEBool(backPaymentPeriodStartDate, backPaymentPeriodEndDate, startDateSTE, startDateLTE);
-        tempOutSideLTE = isOutsideLTEBool(backPaymentPeriodStartDate, startDateLTE);
-        setValuesSTE_LTE({
-          isInsideSTE: tempInsideSTE,
-          isInsideLTE: tempInsideLTE,
-          isOutsideLTE: tempOutSideLTE });
-
-        if(!isDHB && isAllFilled){
-
-          tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
-          if(tempObject?.nonDHBResults?.financialYearDates){
-            let tempObj = tempObject?.nonDHBResults?.financialYearDates;
-            setFinancialDates(tempObj)
-          }
-          setAllNeededObjects(tempObject);
-          scrollToBottom();
+        if(tempObject?.nonDHBResults?.financialYearDates){
+          let tempObj = tempObject?.nonDHBResults?.financialYearDates;
+          setFinancialDates(tempObj)
         }
+        setAllNeededObjects(tempObject);
+        scrollToBottom();
       }
-      setIsClicked(true);
     }
-    else {
-      if(!isAllFilled){
-        return;
-      } 
-    }
+    setIsClicked(true);
+  }
+  else {
+    if(!isAllFilled){
+      return;
+    } 
+  }
 }
 
 useEffect(() => {
@@ -448,11 +370,6 @@ useEffect(() => {
      setIncapacityError(false);
   }
 }, [incapacity,, setIncapacityError])
-
-
-useEffect(() => {
-  // isAtLeastOneDaySelected();
-}, [isAtLeastOneDaySelected])
 
 useEffect(() => {
   allValidFormats()
@@ -482,7 +399,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
  const dates = { startDateSTE, endDateSTE, startDateLTE,endDateLTE };
   return (
     <div className='flex flex-col flex-1 min-h-screen max-width mb-10 relative'>
-      <p className='text-2xl font-bold italic mb-5'>Back Payment/Bonuses Apportioning</p>
+      <p className='text-2xl font-bold italic mb-5'>Back Payment Apportioning</p>
       <div className="flex flex-col">
         <div className="flex flex-col space-x-5">
         </div>

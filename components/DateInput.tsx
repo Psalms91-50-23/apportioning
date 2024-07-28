@@ -24,32 +24,26 @@ const DateInput = ({
     }
   }
 
-  useEffect(() => {
-    const handleDragStart = (e: DragEvent) => {
-      e.preventDefault();
-    };
+useEffect(() => {
+  const handleDragStart = (e: DragEvent) => {
+  e.preventDefault();
+  };
 
-    const inputElement = inputRef?.current;
-    if (inputElement) {
-      inputElement.addEventListener('dragstart', handleDragStart);
-    }
-
-    return () => {
-      if (inputElement) {
-        inputElement.removeEventListener('dragstart', handleDragStart);
-      }
-    };
-  }, [inputRef]);
-
-  useEffect(() => {
-    setIsFirefoxBrowser(isFirefox());
-  }, []);
-
-  const handleFocus = () => {
-    if(setDisplayAll){
-      setDisplayAll(false);
-    }
+  const inputElement = inputRef?.current;
+  if (inputElement) {
+    inputElement.addEventListener('dragstart', handleDragStart);
   }
+
+  return () => {
+    if (inputElement) {
+      inputElement.removeEventListener('dragstart', handleDragStart);
+    }
+  };
+}, [inputRef]);
+
+useEffect(() => {
+  setIsFirefoxBrowser(isFirefox());
+}, []);
 
   return (
     <div className="flex flex-col mb-4 w-full" 

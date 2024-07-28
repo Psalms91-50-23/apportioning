@@ -1,12 +1,10 @@
 'use client';
-import { useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { NavButton } from './';
 
 const Navigation = () => {
     const pathname = usePathname();
     const currentPath = pathname !== "/"; 
-    const [isActive, setIsActive] = useState(false);
 
     const customStyles = {
         width: "2.8rem",

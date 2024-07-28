@@ -2,8 +2,7 @@
 import React from 'react';
 import { DayToggleProps } from "../types";
 
-
-const DayToggle = ({ day, type, handleWorkPatternChange, index, dayType }: DayToggleProps) => {
+const DayToggle = ({ day, type, handleWorkPatternChange, dayType }: DayToggleProps) => {
 
   return (
     <div className="flex flex-col items-center justify-center" style={{ minWidth: "87px"}} draggable={false} >

@@ -31,10 +31,10 @@ const EarningsInput = ({
       setIsClicked(false);
     }
 
-      // Conditionally define text color based on isFirefoxBrowser
+// Conditionally define text color based on isFirefoxBrowser
   const inputStyle: React.CSSProperties = {
-    color: isFirefoxBrowser ? 'black' : '', // Set text color to black if isFirefoxBrowser is true
-    maxWidth: "300px", // Example maxWidth, adjust as needed
+    color: isFirefoxBrowser ? 'black' : '', 
+    maxWidth: "300px", 
     fontWeight: "700"
   };
 
@@ -53,10 +53,8 @@ const EarningsInput = ({
             onChange={onChange}
             onBlur={onBlur}
             onFocus={() => handleFocusChange()}
-            // onFocus={onFocus}
             className={`w-full border rounded-lg py-2 px-3 ${isFirefoxBrowser ? `text-blue-900` : "text-black-900"} ${error ? ' border-red-500' : ''}`}
             style={inputStyle}
-            // style={{ maxWidth: "300px" }}
           />
         </div>
         {error && (

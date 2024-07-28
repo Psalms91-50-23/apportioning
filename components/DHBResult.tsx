@@ -118,16 +118,16 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                         { insideSTE?.greaterDateInsideSTE ? (
                           <div className='flex flex-col'>
                             <div className=''>
-                              <p>{insideSTE?.greaterDateInsideSTE} — {insideSTE?.backPayEndDateRelateTo}</p>      
+                              <p className="italic">{insideSTE?.greaterDateInsideSTE} — {insideSTE?.backPayEndDateRelateTo}</p>      
                             </div>
                             <div className="flex space-x-2">
                               <div className="flex flex-row space-x-2">
                                 <p className='font-bold'>Day counts:</p>
-                                <p>{insideSTE?.insideSTEDayCount}</p>
+                                <p className="italic">{insideSTE?.insideSTEDayCount}</p>
                               </div>
                               <div className="flex flex-row space-x-2">
                                 <p className='font-bold'>Day counts work pattern:</p>
-                                <p>{insideSTE?.insideSTEDayCountsWP}</p>
+                                <p className="italic">{insideSTE?.insideSTEDayCountsWP}</p>
                               </div>
                             </div>
                             <div className="">
@@ -163,17 +163,17 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                             <div className="flex space-x-2">
                               <div className="flex flex-row space-x-2">
                                 <p className='font-bold'>Day counts:</p>
-                                <p>{insideSTE?.insideSTEDayCount}</p>
+                                <p className="italic">{insideSTE?.insideSTEDayCount}</p>
                               </div>
                               <div className="flex flex-row space-x-2">
                                 <p className='font-bold'>Day counts work pattern:</p>
-                                <p>{insideSTE?.insideSTEDayCountsWP}</p>
+                                <p className="italic">{insideSTE?.insideSTEDayCountsWP}</p>
                               </div>
                             </div>
                             <div className="">
                               <div className="flex flex-row space-x-2">
                                 <p className='font-bold'>Keep inside STE:</p>
-                                <p>{insideSTE?.finalInsideSTECalculationsPartial}<span className='font-bold underline'>${formatResult(Number(insideSTE?.insideSTEAmount?.toFixed(2)))}</span></p>
+                                <p className="italic">{insideSTE?.finalInsideSTECalculationsPartial}<span className='font-bold underline'>${formatResult(Number(insideSTE?.insideSTEAmount?.toFixed(2)))}</span></p>
                               </div>
                             </div>   
                           </>
@@ -193,12 +193,12 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                         </div>
                         <div className="">
                           <div className="flex flex-row space-x-2">
-                            <p>LTE periods:</p>
-                            <p>{dates?.startDateLTE} — {dates?.endDateLTE}</p>
+                            <p className="font-bold">LTE periods:</p>
+                            <p className='italic'>{dates?.startDateLTE} — {dates?.endDateLTE}</p>
                           </div>
                           <div className="flex flex-row space-x-2">
-                            <p>Back pay relate to periods:</p>
-                            <p>{totalDayCountsPayRelateTo?.payPeriodStartDateRelateTo} — {totalDayCountsPayRelateTo?.payPeriodEndDateRelateTo}</p>
+                            <p className="font-bold">Back pay relate to periods:</p>
+                            <p className='italic'>{totalDayCountsPayRelateTo?.payPeriodStartDateRelateTo} — {totalDayCountsPayRelateTo?.payPeriodEndDateRelateTo}</p>
                           </div>
                         </div>
                         <div className="flex flex-row text-inherit font-bold space-x-1">
@@ -310,7 +310,7 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                     <div className="flex flex-row space-x-2">
                       <p className='font-bold'>Back Pay Periods outside LTE:</p>
                       <div className="flex flex-col">
-                        <p className=''>
+                        <p className='italic'>
                          {outsideLTE.backPayStartDateRelateTo} — {outsideLTE.beforeLTEStartDate}
                         </p>
                       </div>
@@ -318,11 +318,11 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                     <div className="flex flex-row space-x-2">
                       <div className="flex flex-row space-x-2">
                         <p className='font-bold'>Day counts dates above:</p>
-                        <p>{outsideLTE.outsideLTEDayCounts}</p>
+                        <p className='italic'>{outsideLTE.outsideLTEDayCounts}</p>
                       </div>
                       <div className="flex flex-row space-x-2">
                         <p className='font-bold'>Day counts work pattern above:</p>
-                        <p>{outsideLTE.outsideLTEDayCountsWP}</p>
+                        <p className='italic'>{outsideLTE.outsideLTEDayCountsWP}</p>
                       </div>
                     </div>
                     <div className="flex flex-row space-x-2">
@@ -342,7 +342,6 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
             }
             { insideSTE && !outsideLTE && insideLTE && (
               <>
-                {/* finish both dosi and dofi 30/6/2024 */}
                 <div className="bg-green-500 p-3 mt-3 rounded-xl text-inherit text-white hover:bg-green-700">
                     <div className="flex flex-wrap justify-center">
                       { isDofi ? (
@@ -368,7 +367,7 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                           <div className="">
                             <div className="flex flex-wrap space-x-2">
                               <span className='font-bold'>Back pay periods in STE:</span>
-                              <span className='flex flex-wrap'>
+                              <span className='flex flex-wrap italic'>
                                 {insideSTE?.startDateSTE} — {insideSTE?.backPayEndDateRelateTo} 
                               </span>
                             </div>
@@ -445,10 +444,10 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                                 <p className='flex-wrap font-bold underline'>
                                   Back pay inside LTE as the periods are within LTE:
                                 </p>
-                                <p className=''>{allDates?.startDateLTE} — {allDates?.endDateLTE}</p>
+                                <p className='italic'>{allDates?.startDateLTE} — {allDates?.endDateLTE}</p>
                               </div>
                               <div className="space-x-1">
-                                <span>
+                                <span className='italic'>
                                   {insideLTE?.finalInsideLTECalculationsPartial}
                                 </span>
                                 { insideLTE?.insideLTEAmount && (
@@ -491,10 +490,10 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                                 <p className='flex-wrap font-bold underline'>
                                   Keep inside LTE as the periods are within LTE:
                                 </p>
-                                <p className=''>{allDates?.startDateLTE} — {allDates?.endDateLTE}</p>
+                                <p className='italic'>{allDates?.startDateLTE} — {allDates?.endDateLTE}</p>
                               </div>
                               <div className="space-x-3">
-                                <span>
+                                <span className='italic'>
                                   {insideLTE?.finalInsideLTECalculationsPartial}
                                 </span>
                                 { insideLTE?.insideLTEAmount && (
@@ -515,7 +514,6 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
               )
               }
               { insideSTE && outsideLTE && !insideLTE && (
-              // currently working on 1/7/2024 KT
               <div className=''>
                 <div className='flex flex-col flex-wrap bg-green-500 py-3 px-3 rounded-lg text-inherit hover:bg-green-700 my-3 text-white'>
                   { isDofi ? (
@@ -529,7 +527,7 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                         <div className="flex flex-row flex-wrap ">
                           <div className="flex flex-row pr-4">
                             <span className="flex-wrap font-bold pr-3">Day counts inside STE: </span>
-                            <span className='flex-wrap items-center'>
+                            <span className='flex-wrap items-center italic'>
                               {insideSTE?.startDateSTE} — {insideSTE?.backPayEndDateRelateTo} {insideSTE?.insideSTEDayCount} days 
                             </span>
                           </div>
@@ -537,7 +535,7 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                             <span className="flex-wrap font-bold pr-3">
                               Day counts inside STE based on work pattern: 
                             </span>
-                            <span className=''>
+                            <span className='italic'>
                               {insideSTE?.startDateSTE} — {insideSTE?.backPayEndDateRelateTo} {insideSTE?.insideSTEDayCountsWP} days 
                             </span>
                           </div>
@@ -549,7 +547,7 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                         </span>
                         { insideSTE && typeof insideSTE !== "string" && (
                           <div className="flex flex-row flex-wrap items-center">
-                            <span className='flex items-center pr-2'>
+                            <span className='flex items-center pr-2 italic'>
                               {insideSTE?.startDateSTE} — {insideSTE?.backPayEndDateRelateTo} {insideSTE?.insideSTEDayCountsWP} days = {insideSTE?.insideSTEDayCountsWP} x {singleDayBackPay} = 
                             </span>
                             <span className='flex-wrap items-center font-bold italic underline'>
@@ -587,7 +585,7 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                         { outsideLTE && typeof outsideLTE !== "string" && (
                           <div>
                             <div className="">
-                              <span className='items-center'>
+                              <span className='items-center italic'>
                                 {outsideLTE?.backPayStartDateRelateTo} — {outsideLTE?.beforeLTEStartDate} {outsideLTE?.outsideLTEDayCountsWP} days work pattern = {outsideLTE?.outsideLTEDayCountsWP} x {singleDayBackPay} = {" "}
                                 <span className='items-center flex-wrap font-bold italic underline'>
                                   ${formatResult(Number(outsideLTE?.outsideLTEAmount?.toFixed(2)))}
@@ -597,7 +595,7 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                             <span className='flex-wrap font-bold text-l'>
                               Keep this amount in LTE:
                             </span>
-                            <span className='pl-2'>
+                            <span className='pl-2 italic'>
                               ${formatResult(Number(backPay))} — ${formatResult(Number(outsideLTE?.outsideLTEAmount))} = {` `}
                               <span className='flex-wrap items-center font-bold italic underline'>
                                 ${formatResult(Number(backPay) - Number(outsideLTE?.outsideLTEAmount))}
@@ -621,7 +619,7 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                         </span>
                         { outsideLTE && typeof outsideLTE !== "string" && (
                           <div className='flex flex-col'>
-                            <span>
+                            <span className='italic'>
                               {outsideLTE?.finalOutsideLTECalculationsPartial}
                               <span className='flex-wrap font-bold italic underline'>
                                 ${formatResult(Number(outsideLTE?.outsideLTEAmount?.toFixed(2)))}
@@ -630,7 +628,7 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                             <span className='flex-wrap font-bold text-l'>
                               Keep remaining amount in LTE:
                             </span>
-                            <span>
+                            <span className='italic'>
                               ${formatResult(Number(backPay))} — ${formatResult(Number(outsideLTE?.outsideLTEAmount))} = {` `}
                               <span className='flex-wrap font-bold italic underline'>
                                 ${formatResult(Number(backPay) - Number(outsideLTE?.outsideLTEAmount))}
@@ -647,7 +645,6 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
             )
             }
             <div className="rounded-md text-inherit bg-green-500">
-            {/* this will be inside LTE and outside LTE currently doing 2/7/2024 KT —— finished for this*/}
             { outsideLTE && insideLTE && !insideSTE && (
               <div className='flex flex-col flex-wrap 0 rounded-xl mt-3 p-5 text-inherit text-white testing' >
                 <div className="flex flex-row flex-wrap justify-center  pt-2 pb-4 space-x-3">
@@ -663,7 +660,6 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                 </div>
                 <div className="">
                   <div className="flex flex-col flex-wrap relative">
-                    
                     <div className="flex justify-center">
                       <p className='text-xl font-bold underline py-2'>Back pay outside LTE information</p>
                     </div>
@@ -673,7 +669,7 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                       </p>
                       {outsideLTE && typeof outsideLTE !== 'string' && 
                         (
-                          <p className='flex-wrap'>
+                          <p className='flex-wrap italic'>
                             {outsideLTE?.backPayStartDateRelateTo} — {outsideLTE?.beforeLTEStartDate}
                           </p>
                         )
@@ -761,7 +757,7 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                             <div className="flex flex-row flex-wrap">
                               { insideLTE && typeof insideLTE !== "string" && (
                                 <>
-                                  <p className='flex-wrap pr-2'>
+                                  <p className='flex-wrap pr-2 italic'>
                                     {insideLTE?.finalInsideLTECalculationsPartial}
                                   </p>
                                   <p className='flex-wrap font-bold underline'>
@@ -795,7 +791,6 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
               </div>
               { !outsideLTE && !insideSTE && insideLTE && (
                 <>
-                  {/* currently working on 3/7/2024 */}
                   <div className='flex-wrap rounded-lg bg-green-500 p-3 mt-4 text-inherit text-white hover:bg-green-700'>
                     <div className='flex flex-wrap justify-center py-3'>
                       { isDofi ? (
@@ -809,7 +804,6 @@ const DHBResult = ({ resultType, resultRef, allDates }: BackPayResultProps ) => 
                       }
                     </div>
                     <div>
-                      {/* currently at this part of dhb 21/7/2024 */}
                       <div className="flex flex-row justify-center py-2">
                         <p className='font-bold text-xl underline'>Back pay inside LTE information</p>
                       </div>
