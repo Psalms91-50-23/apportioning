@@ -15,12 +15,6 @@ const DayToggle = ({ day, type, handleWorkPatternChange, index, dayType }: DayTo
             </label>
           )
           }
-          { dayType === "half" && (
-            <label className='font-bold text-md' htmlFor={`half ${day}`}>
-              {day.charAt(0).toUpperCase() + day.slice(1)}
-            </label>
-          )
-          }
         </div>
         <div className="flex justify-center items-center py-1">
           { dayType === "full" && (

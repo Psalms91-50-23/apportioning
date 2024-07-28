@@ -153,7 +153,6 @@ const page = () => {
           
           const daysCountNoWp = countDaysNew(grossEarningsStartDate, grossEarningsEndDate);
           setDaysCounted(daysCountNoWp.toString());
-          console.log({daysCountNoWp});
           //convert date format from dd/mm/yyy to yyyy/mm/dd as it is more accurate for counting days, eg april was 1 day off using original format
           const grossDateStart =  createDateFormat(grossEarningsStartDate) ?? new Date(grossEarningsStartDate);
           const grossDateEnd =  createDateFormat(grossEarningsEndDate) ?? new Date(grossEarningsEndDate);
@@ -225,46 +224,48 @@ const page = () => {
       <p className='text-2xl font-bold italic mb-5'>PWC Apportioning</p>
       <div className="flex flex-col">
         <div className="flex flex-row ">
-          <div>
-            <div className="flex flex-row">
-              <div className="flex justify-end items-end">
-                <span className='font-bold'>Full</span>
-              </div>
+          <div className="">
+            <div>
               <div className="flex flex-row">
-                {Object.keys(initialPattern).map((day, index) => (
-                  <div key={`${index} ${workPattern[day as keyof PatternOfWorkInput]}`} > 
-                    <DayToggle
-                      dayType='full'
-                      index={`${index}-number`}
-                      // key={day}
-                      day={day as keyof PatternOfWorkInput}
-                      type={workPattern[day as keyof PatternOfWorkInput]}
-                      handleWorkPatternChange={handleWorkPatternChange}
-                    />
-                  </div>
-                ))}
+                <div className="flex justify-end items-end">
+                  <span className='font-bold'>Full</span>
+                </div>
+                <div className="flex flex-row">
+                  {Object.keys(initialPattern).map((day, index) => (
+                    <div key={`${index} ${workPattern[day as keyof PatternOfWorkInput]}`} > 
+                      <DayToggle
+                        dayType='full'
+                        index={`${index}-number`}
+                        key={day}
+                        day={day as keyof PatternOfWorkInput}
+                        type={workPattern[day as keyof PatternOfWorkInput]}
+                        handleWorkPatternChange={handleWorkPatternChange}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-            <div className='flex flex-row'>
-              <div className="flex items-end justify-end">
-                <span className='font-bold'>Half</span>
-              </div>
-              <div  className="flex flex-row justify-center items-center">
-                {Object.keys(initialPattern).map((day, index) => (
-                  <div 
-                    key={`${index} ${workPattern[day as keyof PatternOfWorkInput]}`} 
-                    className='flex items-center justify-center'
-                  > 
-                    <DayToggle
-                      dayType='half'
-                      index={index}
-                      key={day}
-                      day={day as keyof PatternOfWorkInput}
-                      type={workPattern[day as keyof PatternOfWorkInput]}
-                      handleWorkPatternChange={handleWorkPatternChange}
-                    />
-                  </div>
-                ))}
+              <div className='flex flex-row'>
+                <div className="flex items-end justify-end">
+                  <span className='font-bold'>Half</span>
+                </div>
+                <div  className="flex flex-row justify-center items-center">
+                  {Object.keys(initialPattern).map((day, index) => (
+                    <div 
+                      key={`${index} ${workPattern[day as keyof PatternOfWorkInput]}`} 
+                      className='flex items-center justify-center'
+                    > 
+                      <DayToggle
+                        dayType='half'
+                        index={index}
+                        key={day}
+                        day={day as keyof PatternOfWorkInput}
+                        type={workPattern[day as keyof PatternOfWorkInput]}
+                        handleWorkPatternChange={handleWorkPatternChange}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
