@@ -2,20 +2,19 @@
 import React, { useState,useEffect, ChangeEvent, useRef, RefObject } from 'react';
 import functions from "../../functions";
 const { createDateFormat, replaceCommas, overlapDateRangeString,  convertToInitialDateFormat, dateOnBlur, handleEarningsOnBlur, earningsRegex, includeLastDay, countDays, countWorkDaysNew, countDaysNew, isFirefox } = functions;
-import { PatternOfWork, PatternOfWorkInput, DayToggleProps } from "../../types";
+import { PatternOfWorkInput } from "../../types";
 import { DateInput, Output, DayToggle } from '../../components';
 
 const page = () => {
-    const [grossEarnings, setGrossEarnings] = useState<string>("300.00");
+    const [grossEarnings, setGrossEarnings] = useState<string>("");
     const earningsRef = useRef<HTMLInputElement>(null);
     const grossStartDateRef = useRef<HTMLInputElement>(null);
     const grossEndDateRef = useRef<HTMLInputElement>(null);
     const pwcStartDateRef = useRef<HTMLInputElement>(null);
     const pwcEndDateRef = useRef<HTMLInputElement>(null);
-    const [incapacity, setIncapacity] = useState<object>({ dofi: true, dosi: false} );
     //input dates gross earnings
-    const [grossEarningsStartDate, setGrossEarningsStartDate] = useState<string>('07/07/2023');
-    const [grossEarningsEndDate, setGrossEarningsEndDate] = useState<string>('13/07/2023');
+    const [grossEarningsStartDate, setGrossEarningsStartDate] = useState<string>('');
+    const [grossEarningsEndDate, setGrossEarningsEndDate] = useState<string>('');
     const [isGrossEarningCompleted, setIsGrossEarningCompleted] = useState<boolean>(false);
     //gross input date errors
     const [grossEarningsInputError, setGrossEarningsInputError] = useState<boolean>(false);
@@ -25,8 +24,8 @@ const page = () => {
     const [isGrossStartDateCompleted, setIsGrossStartDateCompleted] = useState<boolean>(false);
     const [isGrossEndDateCompleted, setIsGrossEndDateCompleted] = useState<boolean>(false);
     //pwc input dates
-    const [pwcStartDate, setPwcStartDate] = useState<string>('07/07/2023');
-    const [pwcEndDate, setPwcEndDate] = useState<string>('13/07/2023');
+    const [pwcStartDate, setPwcStartDate] = useState<string>('');
+    const [pwcEndDate, setPwcEndDate] = useState<string>('');
     //pwc error input dates
     const [pwcStartError, setPwcStartError] = useState<boolean>(false)
     const [pwcEndError, setPwcEndError] = useState<boolean>(false)
@@ -47,18 +46,16 @@ const page = () => {
       
     const initialPattern: PatternOfWorkInput = {
         sunday: '',
-        monday: '',
-        tuesday: '',
-        wednesday: '',
-        thursday: '',
-        friday: '',
+        monday: 'full',
+        tuesday: 'full',
+        wednesday: 'full',
+        thursday: 'full',
+        friday: 'full',
         saturday: '',
     };
     const [isFirefoxBrowser, setIsFirefoxBrowser] = useState(false);
     const [displayAll, setDisplayAll] = useState<boolean>(false);
     const [workPattern, setWorkPattern] = useState<PatternOfWorkInput>(initialPattern);
-
-    const [workDays, setWorkDays] = useState<number>(0);
 
     const handleWorkPatternChange = (day: keyof PatternOfWorkInput, type: string) => {
         setWorkPattern(prevPattern => ({
@@ -277,7 +274,9 @@ const page = () => {
         )
         }
       </div>
-      <div className="flex flex-col w-full mb-4 space-x-4" style={{ maxWidth: "300px" }}>
+      <div className="flex flex-col w-full mb-4 space-x-4" 
+      // style={{ maxWidth: "300px" }}
+      >
         <form className="">
           <label htmlFor="grossEarnings" className="block text-black-900 text-sm font-bold mb-2">
             Gross Earnings
@@ -293,6 +292,7 @@ const page = () => {
             className={`w-full border rounded py-2 px-3 text-black-900$ {grossEarningsInputError ? 'border-red-500' : ''}`}
             style={{ maxWidth: "300px" }}
             name={`grossEarnings`}
+            placeholder='400.98'
           />
         </form>
         {grossEarningsInputError && (
@@ -301,69 +301,69 @@ const page = () => {
           </div>
         )}
       </div>
-      <div className="flex flex-col">
-        <div className="mb-5">
-          <p className='font-bold mb-2'>Acceptable date formats for input field</p>
-          <p className='text-sm italic'>011123 or 01112023 or 1/11/2023 or 1/11/23 or 01/11/23 or 01/11/2023</p>
-        </div>
-        <div className="flex flex-row w-full mb-4 space-x-5">
-          <DateInput 
-            inputTitle="Gross Earnings Start Date" 
-            inputValue={grossEarningsStartDate} 
-            onChange={(e) => onChange( e, setGrossEarningsStartDate,  grossStartDateRef, setGrossStartDateError, setIsGrossStartDateCompleted )} 
-            onBlur={() => dateOnBlur({ dateValue: grossEarningsStartDate, setDateValue: setGrossEarningsStartDate, setDateError: setGrossStartDateError, setDateCompleted: setIsGrossStartDateCompleted, setDisplayAll })} 
-            error={grossStartDateError} inputRef={grossStartDateRef} 
-            onFocus={handleFocus}
-            customStyle={inputStyle}
-            id={`Gross Earnings Start Date`}
-          />
-          <DateInput 
-            inputTitle="Gross Earnings End Date" 
-            inputValue={grossEarningsEndDate} 
-            onChange={(e) => onChange( e, setGrossEarningsEndDate,  grossEndDateRef, setGrossEndDateError, setIsGrossEndDateCompleted )} 
-            onBlur={() => dateOnBlur({ dateValue: grossEarningsEndDate, setDateValue: setGrossEarningsEndDate, setDateError: setGrossEndDateError, setDateCompleted: setIsGrossEndDateCompleted, setDisplayAll })} 
-            error={grossEndDateError} inputRef={grossEndDateRef} 
-            onFocus={handleFocus}
-            customStyle={inputStyle}
-            id={`Gross Earnings End Date`}
-          />
-        </div>
-        <div className="flex flex-row w-full mb-4 space-x-5">
-          <DateInput 
-            inputTitle="PWC Start Date" inputValue={pwcStartDate} 
-            onChange={(e) => onChange( e, setPwcStartDate,  pwcStartDateRef, setPwcStartError, setPwcStartCompleted )} 
-            onBlur={() => dateOnBlur({ dateValue: pwcStartDate, setDateValue: setPwcStartDate, setDateError: setPwcStartError, setDateCompleted: setPwcStartCompleted , setDisplayAll })} 
-            error={pwcStartError} inputRef={pwcStartDateRef} 
-            onFocus={handleFocus}
-            customStyle={inputStyle}
-            id={`PWC Start Date`}
-          />
-          <DateInput 
-            inputTitle="PWC End Date" inputValue={pwcEndDate} 
-            onChange={(e) => onChange( e, setPwcEndDate,  pwcEndDateRef, setPwcEndError, setPwcEndCompleted )} 
-            onBlur={() => dateOnBlur({ dateValue: pwcEndDate, setDateValue: setPwcEndDate, setDateError: setPwcEndError, setDateCompleted: setPwcEndCompleted, setDisplayAll })} 
-            error={pwcEndError} inputRef={pwcEndDateRef} 
-            onFocus={handleFocus}
-            customStyle={inputStyle}
-            id={`PWC End Date`}
-          />
-        </div>
-        <div className='mb-5'>
-          <button 
-            className="font-bold italic text-lg p-3 rounded-md bg-green-600 hover:bg-green-800 hover:text-white w-full"
-            onClick={onSubmit}> Calculate 
-          </button>
-        </div>
-        { isAllFieldEntered && displayAll ? (
-          <Output {...tempObject}/>
-        ):
-        (
-          <div className="">
-            <p className={`font-bold ${!isAllFieldEntered? 'text-red-700' : 'text-black-900'}`}> Please fill out all input fields </p>
+        <div className="flex flex-col w-full">
+          <div className="mb-5">
+            <p className='font-bold mb-2'>Acceptable date formats for input field</p>
+            <p className='text-sm italic'>011123 or 01112023 or 1/11/2023 or 1/11/23 or 01/11/23 or 01/11/2023</p>
           </div>
-        )
-       }
-      </div>
+          <div className="flex flex-row w-full mb-4 space-x-5">
+            <DateInput 
+              inputTitle="Gross Earnings Start Date" 
+              inputValue={grossEarningsStartDate} 
+              onChange={(e) => onChange( e, setGrossEarningsStartDate,  grossStartDateRef, setGrossStartDateError, setIsGrossStartDateCompleted )} 
+              onBlur={() => dateOnBlur({ dateValue: grossEarningsStartDate, setDateValue: setGrossEarningsStartDate, setDateError: setGrossStartDateError, setDateCompleted: setIsGrossStartDateCompleted, setDisplayAll })} 
+              error={grossStartDateError} inputRef={grossStartDateRef} 
+              onFocus={handleFocus}
+              customStyle={inputStyle}
+              id={`Gross Earnings Start Date`}
+            />
+            <DateInput 
+              inputTitle="Gross Earnings End Date" 
+              inputValue={grossEarningsEndDate} 
+              onChange={(e) => onChange( e, setGrossEarningsEndDate,  grossEndDateRef, setGrossEndDateError, setIsGrossEndDateCompleted )} 
+              onBlur={() => dateOnBlur({ dateValue: grossEarningsEndDate, setDateValue: setGrossEarningsEndDate, setDateError: setGrossEndDateError, setDateCompleted: setIsGrossEndDateCompleted, setDisplayAll })} 
+              error={grossEndDateError} inputRef={grossEndDateRef} 
+              onFocus={handleFocus}
+              customStyle={inputStyle}
+              id={`Gross Earnings End Date`}
+            />
+          </div>
+          <div className="flex flex-row w-full mb-4 space-x-5">
+            <DateInput 
+              inputTitle="PWC Start Date" inputValue={pwcStartDate} 
+              onChange={(e) => onChange( e, setPwcStartDate,  pwcStartDateRef, setPwcStartError, setPwcStartCompleted )} 
+              onBlur={() => dateOnBlur({ dateValue: pwcStartDate, setDateValue: setPwcStartDate, setDateError: setPwcStartError, setDateCompleted: setPwcStartCompleted , setDisplayAll })} 
+              error={pwcStartError} inputRef={pwcStartDateRef} 
+              onFocus={handleFocus}
+              customStyle={inputStyle}
+              id={`PWC Start Date`}
+            />
+            <DateInput 
+              inputTitle="PWC End Date" inputValue={pwcEndDate} 
+              onChange={(e) => onChange( e, setPwcEndDate,  pwcEndDateRef, setPwcEndError, setPwcEndCompleted )} 
+              onBlur={() => dateOnBlur({ dateValue: pwcEndDate, setDateValue: setPwcEndDate, setDateError: setPwcEndError, setDateCompleted: setPwcEndCompleted, setDisplayAll })} 
+              error={pwcEndError} inputRef={pwcEndDateRef} 
+              onFocus={handleFocus}
+              customStyle={inputStyle}
+              id={`PWC End Date`}
+            />
+          </div>
+          <div className='mb-5'>
+            <button 
+              className="font-bold italic text-lg p-3 rounded-md bg-green-600 hover:bg-green-800 hover:text-white w-full"
+              onClick={onSubmit}> Calculate 
+            </button>
+          </div>
+          { isAllFieldEntered && displayAll ? (
+            <Output {...tempObject}/>
+          ):
+          (
+            <div className="">
+              <p className={`font-bold ${!isAllFieldEntered? 'text-red-700' : 'text-black-900'}`}> Please fill out all input fields </p>
+            </div>
+          )
+        }
+        </div>
     </div>
   )
 }

@@ -41,8 +41,10 @@ const DateInput = ({
   };
 
   return (
-    <div className="flex flex-row w-full mb-4 flex-1" style={{ maxWidth: "550px" }} draggable={false}>
-      <form className="flex flex-col relative">
+    <div className="flex flex-row w-full mb-4 flex-1" 
+    // style={{ maxWidth: "550px" }}
+     draggable={false}>
+      <form className="flex flex-col relative w-full">
         <label htmlFor={id} className="block text-black-900 text-md font-bold mb-2">
           {inputTitle}
         </label>
