@@ -52,7 +52,7 @@ body {
   transform: scale(1.20);
   cursor:pointer;
   transition-property: transform;  
-  transition-duration: 0.1s;
+  transition-duration: 0.2s;
 }
 
 .nav-button {
@@ -82,12 +82,12 @@ body {
 .active-underline {
   position: relative;
   border-bottom: 5px solid white;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 .active-underline:hover {
   border-bottom: 0px solid white;
-  transition: all 0.1s ease-in-out;
+  transition: all 0.25s ease-in-out;
 }
 
 .underline-rainbow {
