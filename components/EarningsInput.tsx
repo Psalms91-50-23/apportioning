@@ -57,14 +57,9 @@ const EarningsInput = ({
             style={inputStyle}
           />
         </div>
-        {error && (
+        {error || !value || value == "0.00" && (
           <div className="my-3">
-            <p className="text-red-700 font-bold text-xs italic">Please add a value</p>
-          </div>
-        )}
-        {!value || value == "0.00" && (
-          <div className="my-3">
-            <p className="text-red-700 font-bold text-xs italic">Please add a value</p>
+            <p className="text-red-900 font-bold text-s italic">Please add a value</p>
           </div>
         )}
       </div>
