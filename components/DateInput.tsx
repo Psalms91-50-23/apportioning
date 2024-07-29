@@ -71,6 +71,7 @@ useEffect(() => {
             name={inputTitle}
             style={customStyle && customStyle}
             placeholder="12/12/2023"
+            autoComplete='off'
           />
           { inputValue.length > 0 && (
             <img 

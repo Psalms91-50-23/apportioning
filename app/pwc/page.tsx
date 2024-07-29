@@ -292,6 +292,7 @@ const page = () => {
             style={{ maxWidth: "300px" }}
             name={`grossEarnings`}
             placeholder='400.98'
+            autoComplete='off'
           />
         </form>
         {grossEarningsInputError && (

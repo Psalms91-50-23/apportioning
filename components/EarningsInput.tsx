@@ -55,6 +55,7 @@ const EarningsInput = ({
             onFocus={() => handleFocusChange()}
             className={`w-full border rounded-lg py-2 px-3 ${isFirefoxBrowser ? `text-blue-900` : "text-black-900"} ${error ? ' border-red-500' : ''}`}
             style={inputStyle}
+            autoComplete='off'
           />
         </div>
         {error || !value || value == "0.00" && (
