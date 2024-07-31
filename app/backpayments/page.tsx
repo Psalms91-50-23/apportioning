@@ -405,13 +405,13 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
         </div>
         {isDHB ? (
           <div className="flex flex-col space-y-2">
-            <p className='font-bold italic text-lg'>DHB Back Payment excludes the rules for back payments apportioning in financial years; therefore you would have to apportion it to the period it relates to. If in STE or in both STE and LTE, apportion it to that period and if outside of LTE, apportion it and remove from LTE what is outside and keep what is in LTE and STE</p>
+            <p className='font-bold text-lg'>DHB Back Payment excludes the rules for back payments apportioning in financial years; therefore you would have to apportion it to the period it relates to. If in STE or in both STE and LTE, apportion it to that period and if outside of LTE, apportion it and remove from LTE what is outside and keep what is in LTE and STE</p>
           </div>
         ):
           <div className="flex w-full flex-col space-y-2">
-            <p className='font-bold italic text-lg'>Non-DHB Back Payment stays in the financial period it is paid, it does not apportion pass financial periods
+            <p className='font-bold text-lg'>Non-DHB Back Payment stays in the financial period it is paid, it does not apportion pass financial periods
             </p>
-            <span className='font-bold underline'>BUT </span> 
+            <span className='font-bold underline italic'>BUT </span> 
             <p className='font-bold text-lg'>DHB ignores financial years and gets apportion to the financial period it relates to.</p>
           </div>
         }

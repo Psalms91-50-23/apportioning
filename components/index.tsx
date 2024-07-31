@@ -10,6 +10,7 @@ import DayToggle from "./DayToggle";
 import Header from "./Header";
 import Navigation from "./Navigation";
 import NavButton from "./NavButton";
+import ClientSideScript from "./ClientSideScript";
 
 export {
     DateInput,
@@ -22,5 +23,6 @@ export {
     DayToggle,
     Header,
     Navigation,
-    NavButton
+    NavButton,
+    ClientSideScript
 }

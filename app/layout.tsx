@@ -1,5 +1,5 @@
 
-import { Navigation } from '../components'; 
+import { Navigation, ClientSideScript } from '../components'; 
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
@@ -15,6 +15,7 @@ export const metadata: Metadata = {
 }
 
 export default function RootLayout({ children, }: { children: React.ReactNode }) {
+
   return (
     <html lang="en" className='flex justify-center' >
       <body 
@@ -22,6 +23,7 @@ export default function RootLayout({ children, }: { children: React.ReactNode })
       >
       <div className="min-h-screen max-width-container">
         <Navigation /> 
+        <ClientSideScript />
         <main className="flex flex-1 justify-start px-10 items-start">
           {children}
         </main>

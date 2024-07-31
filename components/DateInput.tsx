@@ -75,7 +75,6 @@ useEffect(() => {
           />
           { inputValue.length > 0 && (
             <img 
-              draggable="false"
               className={`absolute top-1 right-1 rounded-3xl ${hover && "big-size"}`}
               src={hover ? `/cross.svg`:`/crossStatic.svg`} 
               alt="Cross Icon" 
@@ -84,19 +83,18 @@ useEffect(() => {
               onClick={onClick}
               onMouseEnter={()=> setHover(true)}
               onMouseLeave={()=> setHover(false)}  
-              
             />
             )
           }
         </div>
         { text && (
-          <p className='pt-2' draggable={false}>{text}</p>
+          <p className='pt-2' >{text}</p>
         )
         }
       </div>
       {error && (
-        <div className="flex-1 my-3" draggable={false}>
-          <p  draggable={false} className="text-red-700 font-bold text-xs italic">
+        <div className="flex-1 my-3">
+          <p  draggable={false} className="text-red-900 font-bold text-s italic">
             Invalid input format
           </p>
         </div>

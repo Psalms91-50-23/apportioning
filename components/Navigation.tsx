@@ -14,10 +14,10 @@ const Navigation = () => {
   return (
     <nav className='flex flex-row justify-start p-10 space-x-4 max-width w-full'>
        <NavButton page={""} label={"Home"} imageLocation={"/home.svg"} staticLocation={"/homeStatic.svg"}  isActive={pathname === "/"}/>
-       <NavButton page={"backpayments"} label={"BackPayments"} imageLocation={"/pay.svg"} customStyle={true} staticLocation={"/payStatic.svg"}  isActive={pathname === "/backpayments"}/>
+       <NavButton page={"backpayments"} label={"Back Payments"} imageLocation={"/pay.svg"} customStyle={true} staticLocation={"/payStatic.svg"}  isActive={pathname === "/backpayments"}/>
        <NavButton page={"pwc"} label={"PWC"} imageLocation={"/calculator.svg"} customStylez={customStyles} staticLocation={"/calculatorStatic.svg"}  isActive={pathname === "/pwc"}/>
        {currentPath  && (
-        <NavButton page={""} label={"Back"} imageLocation={"/leftArrow.svg"} staticLocation={"/leftArrowStatic.svg"} customStylez={customStyles}/>
+        <NavButton page={""} label={"Previous"} imageLocation={"/leftArrow.svg"} staticLocation={"/leftArrowStatic.svg"} customStylez={customStyles}/>
        )
        }
     </nav>

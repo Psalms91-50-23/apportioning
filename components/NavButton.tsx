@@ -48,9 +48,10 @@ const NavButton = ({page, label, icon, iconStatic, imageLocation, staticLocation
         className={`nav-button space-x-2 ${isActive && !onHover &&`active-underline`}`}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
+        
         onClick={() => navigateToPage(page)} >
             {icon && !iconStatic && (
-            <p className={`px-6 ${onHover && `big-text`}`}>
+            <p className={`px-6 ${onHover && `big-text`}`} draggable='false'>
                 <FontAwesomeIcon icon={icon}/>
             </p>
             )
@@ -60,6 +61,7 @@ const NavButton = ({page, label, icon, iconStatic, imageLocation, staticLocation
                 src={imageLocation}
                 className={`icon`}
                 style={customStylez && !customStyle ? customStylez : !customStylez && customStyle ? style : undefined}
+                
             />
         )
         }
@@ -68,10 +70,11 @@ const NavButton = ({page, label, icon, iconStatic, imageLocation, staticLocation
                 src={staticLocation}
                 className={`icon`}
                 style={customStylez && !customStyle ? customStylez : !customStylez && customStyle ? style : undefined}
+                draggable='false'
             />
         )
         }
-        <p className={`${onHover && `big-text`}`}>
+        <p className={`${onHover && `big-text`}`} >
             {label}
         </p>
         <span className='underline-rainbow'></span>
