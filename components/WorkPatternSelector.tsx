@@ -20,7 +20,7 @@ const WorkPatternSelector = ({
     <div className="flex flex-col flex-wrap">
       <div className="flex flex-row flex-wrap items-center">
         {Object.keys(workPattern).map((day,num) => (
-        <form key={day} className={`flex items-center ${num === 0 ?`py-3 pr-3` : `p3 pr-3`}`}>
+        <div key={day} className={`flex items-center ${num === 0 ?`py-3 pr-3` : `p3 pr-3`}`}>
             <input
               type="checkbox"
               id={`workPatternDay${day}${num}`}
@@ -30,14 +30,15 @@ const WorkPatternSelector = ({
               name={`workPatternDay${day}${num}`}
             />
             <label className="font-bold" htmlFor={`workPatternDay${day}${num}`}>{day.charAt(0).toUpperCase() + day.slice(1)}</label>
-        </form>
+        </div>
         ))}
-      </div>
-      <div className="text-center">
+        <div className="flex flex-col text-center">
         {!isWPSelected && (
-          <p className="font-bold italic">Please choose a work pattern</p>
+          <p className="font-bold italic text-red-900">Please choose a work pattern</p>
         )}
       </div>
+      </div>
+    
     </div>
   );
 };

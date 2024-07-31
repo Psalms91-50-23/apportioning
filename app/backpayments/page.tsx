@@ -409,10 +409,9 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
           </div>
         ):
           <div className="flex w-full flex-col space-y-2">
-            <p className='font-bold text-lg'>Non-DHB Back Payment stays in the financial period it is paid, it does not apportion pass financial periods
+            <p className='font-bold text-lg'>Non-DHB Back Payment stays in the financial period it is paid, it does not apportion pass financial periods.
             </p>
-            <span className='font-bold underline italic'>BUT </span> 
-            <p className='font-bold text-lg'>DHB ignores financial years and gets apportion to the financial period it relates to.</p>
+            <p className='font-bold text-lg'>DHB disregards financial years and gets apportioned to the financial period it relates to.</p>
           </div>
         }
       </div>
@@ -447,7 +446,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
         </div>
         { incapacityError && (
           <p className="font-bold text-red-900 py-2">
-            Please select if incapacity is dofi or dosi
+            Please select if incapacity is DOFI or DOSI
           </p>
         )
         }
@@ -468,7 +467,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
           />
           <label className='font-bold' htmlFor="DHB">DHB</label>
         </div>
-        <p className='font-bold italic'>Tick if DHB or default is non-DHB</p>
+        <p className='font-bold italic'>Tick if DHB or default is Non-DHB</p>
       </div>
       <WorkPatternSelector 
         workPattern={workPattern}
