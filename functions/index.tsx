@@ -1720,5 +1720,4 @@ const isFirefox = (): boolean => {
     // caculateBackpayNew,
     getCountedWorkDays,
     isCurrentFinancialYear
-    
   }
