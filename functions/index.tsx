@@ -1,5 +1,4 @@
 'use client';
-// import {  differenceInDays } from "date-fns";
 import { OnBlurDate, DhbBackPay, PatternOfWork, DateFormats, BeforeDate, CalculateBackPay, DateObject, WorkPattern, PatternOfWorkInput, InsideLTE, InsideSTE, OutsideLTE, IncapacityType, ResultType, ResultTypeNew, NonDHBResults, CalculateBackPayNew, FinancialDateTypes, InsideLTENotDHB, PrevDateYears, OutsidePreviousLTEDates, OutsideLTENotDHB,  } from "@/types";
 
 const includeLastDay = 1;
