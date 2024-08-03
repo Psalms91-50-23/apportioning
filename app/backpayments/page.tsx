@@ -582,7 +582,6 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
         </div>
       </div>
         <div className="flex flex-row flex-1 space-x-3">     
-        {dofi && !dosi ? (
           <div className='flex flex-col flex-1 max-width'>
             <div className="flex flex-1 mx-auto py-2 max-width">
               <p className='flex justify-center text-xl font-bold'>
@@ -672,65 +671,6 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
               </div> 
             </div>
           </div>
-        )
-        : !dofi && dosi ? 
-        (
-          <div className=''>
-            <div className="flex flex-1 mx-auto py-4">
-              <p className='flex flex-1 w-full justify-center text-xl font-bold'>Long Term Dates</p>
-            </div>
-            <div className="flex flex-row flex-1 w-full">
-              <div className="flex flex-col">
-                <div className="flex flex-row space-x-3 w-full">
-                  <DateInput 
-                    inputTitle="LTE start date" 
-                    inputValue={startDateLTE} 
-                    onChange={(e)=>setStartDateLTE(e.target.value)} 
-                    onBlur={() => dateOnBlur({ 
-                      dateValue: startDateLTE, 
-                      setDateValue: setStartDateLTE, 
-                      setDateError: setStartDateLTE_Error, 
-                      setDateCompleted: setStartDateLTECompleted, setDisplayAll })} 
-                    error={startDateLTE_Error}
-                    setDisplayAll={setDisplayAll}
-                    setValue={setStartDateLTE}
-                    onFocus={handleFocus}
-                  />
-                  <DateInput 
-                    inputTitle="LTE end date" 
-                    inputValue={endDateLTE} 
-                    onChange={(e)=>setEndDateLTE(e.target.value)} 
-                    onBlur={() => dateOnBlur({ 
-                      dateValue: endDateLTE, 
-                      setDateValue: setEndDateLTE, 
-                      setDateError: setEndDateLTE_Error, 
-                      setDateCompleted: setEndDateLTECompleted, 
-                      setDisplayAll })} 
-                    error={endDateLTE_Error}
-                    setDisplayAll={setDisplayAll}
-                    setValue={setEndDateLTE}
-                    onFocus={handleFocus}
-                  />
-                </div>
-                { (validateDate(startDateLTE) && validateDate(endDateLTE)) && (
-                  <div className="flex flex-1 flex-row space-x-3 justify-between py-3">
-                    <p>
-                      {countDays(startDateLTE, endDateLTE)}{" "}LTE days counted
-                    </p>
-                      { isWPSelected && (
-                        <p>{countWorkDays(startDateLTE, endDateLTE, workPattern)}{" "} WP days counted</p>
-                      )
-                      }
-                  </div>
-                )
-                }
-              </div>
-            </div>
-          </div>
-          )  
-        :
-          ""  
-        }
         </div>    
       </div>
       <div className='flex mb-5 py-2 max-width-container'>
@@ -779,12 +719,13 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                       Financial Period it belongs to: 
                     </p>
                     <p className='italic'>
-                      {currentFinancialYearStart} — {currentFinancialYearEnd} belongs to 
-                    </p>
-                    <p className='font-bold underline'>
+                      <span className="font-bold">
+                        {currentFinancialYearStart} — {currentFinancialYearEnd}
+                      </span> back payments <span className="italic font-bold underline">paid</span> within these periods, belongs to <span className='font-bold underline'>
                       {currentFinancialPeriod}
+                    </span>
+                    <span> Financial Period for Non-DHB</span>
                     </p>
-                    <p>Financial Period</p>
                   </div>
                   <div className="pt-2">
                     <p className='flex justify-center text-xl font-bold italic py-2'>Previous Financial Year Information</p>
@@ -805,12 +746,11 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                     <div className="flex flex-row space-x-2">
                       <p className='font-bold'>Financial Period it belongs to: </p>
                       <p className='italic'>
-                        {previousFinancialYearStart} — {previousFinancialYearEnd} belongs to 
+                        <span className="font-bold">{previousFinancialYearStart} — {previousFinancialYearEnd}</span> back payments <span className="italic font-bold underline">paid</span> within these periods, belongs to <span className='font-bold underline'>
+                          {previousFinancialPeriod}
+                        </span>
+                        <span> Financial Period for Non-DHB</span>
                       </p>
-                      <p className='font-bold underline'>
-                        {previousFinancialPeriod}
-                      </p>
-                      <p>Financial Period</p>
                     </div>
                     <div className="">
                     </div>
