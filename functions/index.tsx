@@ -812,11 +812,6 @@ const getDateFormats = ({ date, dateFormat,readableFormat, dateObjectFormat }:Da
 
 }
 
-// const calculateDHB = ({ dbhBackPayPeriodStartDate, dbhBackPayPeriodEndDate, startDateLTE, endDateLTE }:DhbBackPay): object => {
-
-// return {}
-// }
-
 const convertToDateFormat = (dateString: string): string => {
   const [day, month, year] = dateString.split('/');
   return `${year}/${month}/${day}`;
@@ -951,7 +946,6 @@ const getNeededObjects = (isDHB: boolean, workPattern: PatternOfWork, backPayEar
     insideLTEDayCounts: 0,
     backPayEndDateRelateTo,
     finalInsideLTECalculations: "",
-    // finalInsideLTECalculationsPartial: "",
     startDateLTE,
   };
 
@@ -959,7 +953,6 @@ const getNeededObjects = (isDHB: boolean, workPattern: PatternOfWork, backPayEar
     insideSTEDayCount: 0,
     insideSTEDayCountsWP: 0,
     finalInsideSTECalculations: "",
-    // finalInsideSTECalculationsPartial:"",
     startDateSTE,
     backPayEndDateRelateTo,
   };
@@ -970,7 +963,6 @@ const getNeededObjects = (isDHB: boolean, workPattern: PatternOfWork, backPayEar
     outsideLTEDayCountsWP: 0,
     outsideLTEDayCounts: 0,
     finalOutsideLTECalculations: "",
-    // finalOutsideLTECalculationsPartial: "",
   }
 
   let dates = {
@@ -1453,7 +1445,6 @@ const getNeededObjects = (isDHB: boolean, workPattern: PatternOfWork, backPayEar
                   countedDays = countDays(backPayStartDateRelateTo, backPayEndDateRelateTo);
                   countedWorkDays = countWorkDays(backPayStartDateRelateTo, backPayEndDateRelateTo, workPattern);
 
-                //here currently 22/7/2024 completed this part
                   tempInsideLTEPreviousFinancialYear = {...tempInsideLTEPreviousFinancialYear, insideLTEPrevFinYearCalculations: `${backPayStartDateRelateTo} — ${backPayEndDateRelateTo} ${countedWorkDays} work pattern days => $${singleDayBackPay} / ${countedWorkDays} = ${formatResult(Number(backPayNumber.toFixed(2)))}`,
                     insideLTEPrevFinYearCalculationsPartial: `${backPayStartDateRelateTo} — ${backPayEndDateRelateTo} ${countedWorkDays} work pattern days => $${singleDayBackPay} / ${countedWorkDays} = `,
                     insideLTEPrevFinYearDayCounts: countedDays,
