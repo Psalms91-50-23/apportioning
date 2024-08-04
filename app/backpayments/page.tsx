@@ -416,32 +416,37 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
         }
       </div>
       <div className='flex flex-col pt-3'>
-        <div className="flex ">
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              className='w-4 h-4 hover:cursor-pointer'
-              checked={incapacity.dofi}
-              onChange={() => handleCheckboxChange('dofi')}
-              id={`dofi`}
-              name={`dofi`}
-            />
-            <label className='px-4 font-bold' htmlFor='dofi'>
-              DOFI
-            </label>
+        <div className='flex flex-row'>
+          <div className="flex ">
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                className='w-4 h-4 hover:cursor-pointer'
+                checked={incapacity.dofi}
+                onChange={() => handleCheckboxChange('dofi')}
+                id={`dofi`}
+                name={`dofi`}
+              />
+              <label className='px-4 font-bold' htmlFor='dofi'>
+                DOFI
+              </label>
+            </div>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                className='w-4 h-4 hover:cursor-pointer '
+                checked={incapacity.dosi}
+                onChange={() => handleCheckboxChange('dosi')}
+                id={`dosi`}
+                name={`dosi`}
+              />
+              <label className='px-4 font-bold' htmlFor="dosi">
+                DOSI
+              </label>
+            </div>
           </div>
-          <div className="flex items-center">
-            <input
-              type="checkbox"
-              className='w-4 h-4 hover:cursor-pointer '
-              checked={incapacity.dosi}
-              onChange={() => handleCheckboxChange('dosi')}
-              id={`dosi`}
-              name={`dosi`}
-            />
-            <label className='px-4 font-bold' htmlFor="dosi">
-              DOSI
-            </label>
+          <div className="">
+            <p className='italic text-s font-bold'>If your DOSI requires you to put in STE values as it overlaps with DOFI STE periods, tick the DOFI checkbox</p>
           </div>
         </div>
         { incapacityError && (
