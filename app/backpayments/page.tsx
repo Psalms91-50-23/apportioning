@@ -559,14 +559,13 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                  })} 
                 error={backPaymentPeriodStartDateError} 
                 inputRef={backpayPaidStartDateRef}
-                text={(validateDate(backPaymentPeriodStartDate) && validateDate(backPaymentPeriodEndDate)) ? `${ countDays(backPaymentPeriodStartDate, backPaymentPeriodEndDate)} days counted` : ""}
+                text={(validateDate(backPaymentPeriodStartDate) && validateDate(backPaymentPeriodEndDate)) ? `${ countDays(backPaymentPeriodStartDate, backPaymentPeriodEndDate)} WP days counted` : ""}
                 setDisplayAll={setDisplayAll}
                 setValue={setBackPaymentPeriodStartDate}
                 onFocus={handleFocus}
               />
-
               <DateInput 
-                inputTitle="Relate to  End Date" 
+                inputTitle="Relate to End Date" 
                 inputValue={backPaymentPeriodEndDate} 
                 onChange={(e) => setBackPaymentPeriodEndDate(e.target.value)}
                 onBlur={() => dateOnBlur({ 
@@ -598,7 +597,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                 <div className="flex flex-col flex-1">
                   <div className="flex flex-row flex-1 space-x-3">
                     <DateInput 
-                      inputTitle="STE start date" 
+                      inputTitle="STE Start Date" 
                       inputValue={startDateSTE} 
                       onChange={(e) => setStartDateSTE(e.target.value)}
                       onBlur={() => dateOnBlur({ 
@@ -616,7 +615,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                       onFocus={handleFocus}
                     />
                     <DateInput 
-                      inputTitle="STE end date" 
+                      inputTitle="STE End Date" 
                       inputValue={endDateSTE} 
                       onChange={(e) => setEndDateSTE(e.target.value)}
                       onBlur={() => dateOnBlur({ 
@@ -638,7 +637,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                   <div className="flex flex-col">
                     <div className="flex flex-row space-x-3 pl-3">
                       <DateInput 
-                        inputTitle="LTE start date" 
+                        inputTitle="LTE Start Date" 
                         inputValue={startDateLTE} 
                         onChange={(e)=>setStartDateLTE(e.target.value)} 
                         onBlur={() => dateOnBlur({ 
@@ -654,7 +653,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                         inputRef={lteStartDateRef}
                       />
                       <DateInput 
-                        inputTitle="LTE end date" 
+                        inputTitle="LTE End Date" 
                         inputValue={endDateLTE} 
                         onChange={(e)=>setEndDateLTE(e.target.value)} 
                         onBlur={() => dateOnBlur({ 
