@@ -310,7 +310,6 @@ const page = () => {
             <DateInput 
               inputTitle="Gross Earnings Start Date" 
               inputValue={grossEarningsStartDate} 
-              // onChange={(e) => setGrossEarningsStartDate(e.target.value)} 
               setValue={setGrossEarningsStartDate}
               onChange={(e) => onChange( e, setGrossEarningsStartDate,  grossStartDateRef, setGrossStartDateError, setIsGrossStartDateCompleted )} 
               onBlur={() => dateOnBlur({ 
@@ -328,7 +327,6 @@ const page = () => {
             <DateInput 
               inputTitle="Gross Earnings End Date" 
               inputValue={grossEarningsEndDate} 
-              // onChange={(e) => setGrossEarningsEndDate(e.target.value)} 
               setValue={setGrossEarningsEndDate}
               onChange={(e) => onChange( e, setGrossEarningsEndDate,  grossEndDateRef, setGrossEndDateError, setIsGrossEndDateCompleted )} 
               onBlur={() => dateOnBlur({ 
@@ -348,7 +346,6 @@ const page = () => {
             <DateInput 
               inputTitle="PWC Start Date" 
               inputValue={pwcStartDate} 
-              // onChange={(e) => setPwcStartDate(e.target.value)} 
               setValue={setPwcStartDate}
               onChange={(e) => onChange( e, setPwcStartDate,  pwcStartDateRef, setPwcStartError, setPwcStartCompleted )} 
               onBlur={() => dateOnBlur({ dateValue: pwcStartDate, setDateValue: setPwcStartDate, setDateError: setPwcStartError, setDateCompleted: setPwcStartCompleted , setDisplayAll })} 
@@ -361,7 +358,6 @@ const page = () => {
             <DateInput 
               inputTitle="PWC End Date" 
               inputValue={pwcEndDate} 
-              // onChange={(e) => setPwcEndDate(e.target.value)} 
               setValue={setPwcEndDate}
               onChange={(e) => onChange( e, setPwcEndDate,  pwcEndDateRef, setPwcEndError, setPwcEndCompleted )} 
               onBlur={() => dateOnBlur({ dateValue: pwcEndDate, setDateValue: setPwcEndDate, setDateError: setPwcEndError, setDateCompleted: setPwcEndCompleted, setDisplayAll })} 
