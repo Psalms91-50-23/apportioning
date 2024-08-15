@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { DateInputProps } from '@/types';
 import functions from "../functions";
-const { isFirefox, beyondLTE_EndDate } = functions;
+const { isFirefox } = functions;
 
 const DateInput = ({ 
   inputTitle, inputValue, onChange, 
@@ -12,12 +12,13 @@ const DateInput = ({
   const [hover, setHover] = useState<boolean>(false);
   const [isFirefoxBrowser, setIsFirefoxBrowser] = useState(false);
 
-  const onClick = () => {
-    if(setDisplayAll){
-      setDisplayAll(false);
-    }
+  const onClick = (e: React.MouseEvent) => {
+    e.preventDefault();
     if(setValue){
       setValue("");
+    }
+    if(setDisplayAll){
+      setDisplayAll(false);
     }
     if(inputRef?.current){
       inputRef.current.focus();
@@ -51,7 +52,7 @@ useEffect(() => {
      >
       <div className="flex flex-col border-box" >
         <label htmlFor={inputTitle} 
-         draggable={false}
+          draggable={false}
           className="block text-black-900 text-md font-bold mb-2" >
           {inputTitle}
         </label>
@@ -76,7 +77,7 @@ useEffect(() => {
           { inputValue.length > 0 && (
             <img 
               className={`absolute top-1 right-1 rounded-3xl ${hover && "big-size"}`}
-              src={hover ? `/cross.svg`:`/crossStatic.svg`} 
+              src={hover ? `/crossTransparent.svg`:`/crossTransparentStatic.svg`} 
               alt="Cross Icon" 
               width={35}
               height={35}

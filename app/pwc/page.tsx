@@ -310,9 +310,17 @@ const page = () => {
             <DateInput 
               inputTitle="Gross Earnings Start Date" 
               inputValue={grossEarningsStartDate} 
+              // onChange={(e) => setGrossEarningsStartDate(e.target.value)} 
+              setValue={setGrossEarningsStartDate}
               onChange={(e) => onChange( e, setGrossEarningsStartDate,  grossStartDateRef, setGrossStartDateError, setIsGrossStartDateCompleted )} 
-              onBlur={() => dateOnBlur({ dateValue: grossEarningsStartDate, setDateValue: setGrossEarningsStartDate, setDateError: setGrossStartDateError, setDateCompleted: setIsGrossStartDateCompleted, setDisplayAll })} 
-              error={grossStartDateError} inputRef={grossStartDateRef} 
+              onBlur={() => dateOnBlur({ 
+                dateValue: grossEarningsStartDate, 
+                setDateValue: setGrossEarningsStartDate, 
+                setDateError: setGrossStartDateError, 
+                setDateCompleted: setIsGrossStartDateCompleted, 
+                setDisplayAll })} 
+              error={grossStartDateError} 
+              inputRef={grossStartDateRef} 
               onFocus={handleFocus}
               customStyle={inputStyle}
               id={`Gross Earnings Start Date`}
@@ -320,9 +328,17 @@ const page = () => {
             <DateInput 
               inputTitle="Gross Earnings End Date" 
               inputValue={grossEarningsEndDate} 
+              // onChange={(e) => setGrossEarningsEndDate(e.target.value)} 
+              setValue={setGrossEarningsEndDate}
               onChange={(e) => onChange( e, setGrossEarningsEndDate,  grossEndDateRef, setGrossEndDateError, setIsGrossEndDateCompleted )} 
-              onBlur={() => dateOnBlur({ dateValue: grossEarningsEndDate, setDateValue: setGrossEarningsEndDate, setDateError: setGrossEndDateError, setDateCompleted: setIsGrossEndDateCompleted, setDisplayAll })} 
-              error={grossEndDateError} inputRef={grossEndDateRef} 
+              onBlur={() => dateOnBlur({ 
+                dateValue: grossEarningsEndDate, 
+                setDateValue: setGrossEarningsEndDate, 
+                setDateError: setGrossEndDateError, 
+                setDateCompleted: setIsGrossEndDateCompleted, 
+                setDisplayAll })} 
+              error={grossEndDateError} 
+              inputRef={grossEndDateRef} 
               onFocus={handleFocus}
               customStyle={inputStyle}
               id={`Gross Earnings End Date`}
@@ -330,19 +346,27 @@ const page = () => {
           </div>
           <div className="flex flex-row w-full mb-4 space-x-5">
             <DateInput 
-              inputTitle="PWC Start Date" inputValue={pwcStartDate} 
+              inputTitle="PWC Start Date" 
+              inputValue={pwcStartDate} 
+              // onChange={(e) => setPwcStartDate(e.target.value)} 
+              setValue={setPwcStartDate}
               onChange={(e) => onChange( e, setPwcStartDate,  pwcStartDateRef, setPwcStartError, setPwcStartCompleted )} 
               onBlur={() => dateOnBlur({ dateValue: pwcStartDate, setDateValue: setPwcStartDate, setDateError: setPwcStartError, setDateCompleted: setPwcStartCompleted , setDisplayAll })} 
-              error={pwcStartError} inputRef={pwcStartDateRef} 
+              error={pwcStartError} 
+              inputRef={pwcStartDateRef} 
               onFocus={handleFocus}
               customStyle={inputStyle}
               id={`PWC Start Date`}
             />
             <DateInput 
-              inputTitle="PWC End Date" inputValue={pwcEndDate} 
+              inputTitle="PWC End Date" 
+              inputValue={pwcEndDate} 
+              // onChange={(e) => setPwcEndDate(e.target.value)} 
+              setValue={setPwcEndDate}
               onChange={(e) => onChange( e, setPwcEndDate,  pwcEndDateRef, setPwcEndError, setPwcEndCompleted )} 
               onBlur={() => dateOnBlur({ dateValue: pwcEndDate, setDateValue: setPwcEndDate, setDateError: setPwcEndError, setDateCompleted: setPwcEndCompleted, setDisplayAll })} 
-              error={pwcEndError} inputRef={pwcEndDateRef} 
+              error={pwcEndError} 
+              inputRef={pwcEndDateRef} 
               onFocus={handleFocus}
               customStyle={inputStyle}
               id={`PWC End Date`}
