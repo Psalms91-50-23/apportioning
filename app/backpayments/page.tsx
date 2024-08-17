@@ -703,7 +703,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                   </p>
               ): ""
               }
-              { displayAll && (
+              { displayAll && !isDHB && (
                 <>
                   <p className='flex justify-center text-xl font-bold italic py-2'>Current Financial Year Information</p>
                   <div className="flex flex-row space-x-2">
