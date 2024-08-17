@@ -14,7 +14,7 @@ interface BackPayResultProps {
 const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCurrentFinancialYear }: BackPayResultProps) => {
 
   if(!resultType){
-    return
+    return;
   }
   if(!valueSTE_LTE_Boolean.isInsideLTE && !valueSTE_LTE_Boolean.isInsideSTE && !valueSTE_LTE_Boolean.isOutsideLTE){
     return;
@@ -107,7 +107,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                       <div className="flex flex-row space-x-3">
                         <div className="space-x-2">
                           <span className=' font-bold'>
-                            Current Financial Year Start Date:
+                            Current Financial Year:
                           </span>
                           <span className='justify-center items-center '>
                             {financialYearDates?.currentFinancialPeriod}
@@ -115,7 +115,7 @@ const NonDHBResult = ({ resultType, resultRef, valueSTE_LTE_Boolean, isPaidInCur
                         </div>
                         <div className="space-x-2">
                           <span className=' font-bold'>
-                            Previous Financial Year End Date:
+                            Previous Financial Year:
                           </span>
                           <span className='justify-center items-center '>
                             {financialYearDates?.previousFinancialPeriod}
