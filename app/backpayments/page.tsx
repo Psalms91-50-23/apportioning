@@ -559,7 +559,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                  })} 
                 error={backPaymentPeriodStartDateError} 
                 inputRef={backpayPaidStartDateRef}
-                text={(validateDate(backPaymentPeriodStartDate) && validateDate(backPaymentPeriodEndDate)) ? `${ countDays(backPaymentPeriodStartDate, backPaymentPeriodEndDate)} WP days counted` : ""}
+                text={(validateDate(backPaymentPeriodStartDate) && validateDate(backPaymentPeriodEndDate)) ? `${ countDays(backPaymentPeriodStartDate, backPaymentPeriodEndDate)} days counted` : ""}
                 setDisplayAll={setDisplayAll}
                 setValue={setBackPaymentPeriodStartDate}
                 onFocus={handleFocus}
@@ -577,7 +577,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
                  })} 
                 error={backPaymentPeriodEndDateError} 
                 inputRef={backpayPaidEndDateRef}
-                text={(validateDate(backPaymentPeriodStartDate) && validateDate(backPaymentPeriodEndDate)) ? `${countWorkDays(backPaymentPeriodStartDate, backPaymentPeriodEndDate, workPattern)} days counted` : ""}
+                text={(validateDate(backPaymentPeriodStartDate) && validateDate(backPaymentPeriodEndDate)) ? `${countWorkDays(backPaymentPeriodStartDate, backPaymentPeriodEndDate, workPattern)} WP days counted` : ""}
                 setDisplayAll={setDisplayAll}
                 setValue={setBackPaymentPeriodEndDate}
                 onFocus={handleFocus}
