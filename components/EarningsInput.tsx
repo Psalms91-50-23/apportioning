@@ -45,7 +45,7 @@ const EarningsInput = ({
             {title}
           </label>
           <input
-            placeholder='300.54'
+            placeholder='3,055.54'
             type="text"
             id={id}
             ref={inputRef}
@@ -53,7 +53,7 @@ const EarningsInput = ({
             onChange={onChange}
             onBlur={onBlur}
             onFocus={() => handleFocusChange()}
-            className={`w-full border rounded-lg py-2 px-3 ${isFirefoxBrowser ? `text-blue-900` : "text-black-900"} ${error ? ' border-red-500' : ''}`}
+            className={`w-full font-bold  border rounded-lg py-2 px-3 ${isFirefoxBrowser ? `text-blue-900` : "text-black-900"} ${error ? ' border-red-500' : ''}`}
             style={inputStyle}
             autoComplete='off'
           />

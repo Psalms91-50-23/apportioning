@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, ChangeEvent, RefObject } from 'react';
 import { PatternOfWork, ResultType, IncapacityType, FinancialDateTypes, ValueSTE_LTE_Boolean } from "../../types";
 import functions from "../../functions";
-const { validateDate, handleEarningsOnBlur, getAllDates, earningsRegex, dateOnBlur, countDays, countWorkDays, convertToDateFormat, isInsideSTEBool, isOutsideLTEBool, caculateBackpay, isInsideLTEBool, isCurrentFinancialYear, getFinancialYears } = functions;
+const { validateDate, handleEarningsOnBlur, getAllDates, earningsRegex, dateOnBlur, countDays, countWorkDays, convertToDateFormat, isInsideSTEBool, isOutsideLTEBool, calculateBackpay, isInsideLTEBool, isCurrentFinancialYear, getFinancialYears } = functions;
 import { DateInput, WorkPatternSelector, EarningsInput, DHBResult, NonDHBResult } from '../../components';
 
 const BackPayments = () => {
@@ -306,32 +306,32 @@ const calculateApportionBackPay = () => {
 
     let tempObject;
     if(isDHB && isAllFilled && tempInsideLTE && tempOutSideLTE && tempInsideSTE ){ 
-      tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+      tempObject = calculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
       setAllNeededObjects(tempObject);
       scrollToBottom();
     }
     else if(isDHB && isAllFilled && tempInsideSTE && !tempOutSideLTE && tempInsideLTE){
-      tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: false, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+      tempObject = calculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: false, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
       setAllNeededObjects(tempObject);
       scrollToBottom(); 
     }
     else if(isDHB && isAllFilled && !tempInsideSTE && !tempOutSideLTE && tempInsideLTE ){ 
 
-      tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: false, isInsideSTE: false, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+      tempObject = calculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: false, isInsideSTE: false, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
       setAllNeededObjects(tempObject);
       scrollToBottom();
     }
     else if(isDHB && isAllFilled && !tempInsideSTE && tempOutSideLTE && tempInsideLTE ){
-      tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+      tempObject = calculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
       setAllNeededObjects(tempObject);
       scrollToBottom();
       
     } else if(isDHB && isAllFilled && tempInsideSTE && tempOutSideLTE && !tempInsideLTE ){
-      tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+      tempObject = calculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
       setAllNeededObjects(tempObject);
       scrollToBottom();
     } else if(isDHB && isAllFilled && !tempInsideSTE && tempOutSideLTE && !tempInsideLTE){
-      tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+      tempObject = calculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
       setAllNeededObjects(tempObject);
       scrollToBottom();
     }
@@ -346,7 +346,7 @@ const calculateApportionBackPay = () => {
         isOutsideLTE: tempOutSideLTE });
 
       if(!isDHB && isAllFilled){
-        tempObject = caculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
+        tempObject = calculateBackpay({ isDHB, dateObjects: {...dateObjects}, isOutsideLTE: tempOutSideLTE, isInsideSTE: tempInsideSTE, isInsideLTE: tempInsideLTE, backPayStartDateRelateTo: backPaymentPeriodStartDate, backPayEndDateRelateTo: backPaymentPeriodEndDate, workPattern: workPattern, backPayEarnings: backPayment, backPayPaidStartDate: backPaymentStartDate, backPayPaidEndDate: backPaymentEndDate, isDofi: incapacity.dofi ? true : false })
         if(tempObject?.nonDHBResults?.financialYearDates){
           let tempObj = tempObject?.nonDHBResults?.financialYearDates;
           setFinancialDates(tempObj)

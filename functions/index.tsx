@@ -1599,7 +1599,7 @@ const getCountedWorkDays = (startDate: string, endDate: string, workPattern: Pat
   return count;
 }
 
-const caculateBackpay = ({ isDHB, dateObjects , isOutsideLTE, isInsideSTE, isInsideLTE, backPayStartDateRelateTo, backPayEndDateRelateTo, workPattern, backPayEarnings, backPayPaidStartDate, backPayPaidEndDate, isDofi }: CalculateBackPay ): ResultType | null => {
+const calculateBackpay = ({ isDHB, dateObjects , isOutsideLTE, isInsideSTE, isInsideLTE, backPayStartDateRelateTo, backPayEndDateRelateTo, workPattern, backPayEarnings, backPayPaidStartDate, backPayPaidEndDate, isDofi }: CalculateBackPay ): ResultType | null => {
 
     let selected = isAtLeastOneDaySelected(workPattern);
     const { startDateLTE, endDateLTE, startDateSTE, endDateSTE, beforeSTEStartDate, beforeLTEStartDate, financialStartDates, financialEndDates } = dateObjects;
@@ -1694,7 +1694,7 @@ const isFirefox = (): boolean => {
     isInsideSTEBool,
     isOutsideLTEBool,
     isInsideLTEBool,
-    caculateBackpay,
+    calculateBackpay,
     convertStringToNumber,
     formatNumberWithCommas,
     validateDateAndCompleted,

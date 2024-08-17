@@ -216,6 +216,7 @@ const page = () => {
     totalGrossForPeriodReduction,
     singleDayGrossWP
   }
+
   return (
     <div className="flex flex-1 flex-col max-width justify-center mb-12">
       <p className='text-2xl font-bold italic mb-5'>PWC Apportioning</p>
@@ -288,10 +289,10 @@ const page = () => {
             onChange={(e) => onChange(e, setGrossEarnings, earningsRef, setGrossEarningsInputError)}
             onBlur={() => handleEarningsOnBlur(grossEarnings,setGrossEarnings,setGrossEarningsInputError, setIsGrossEarningCompleted)}
             onFocus={handleGrossEarningsFocus}
-            className={`w-full border rounded py-2 px-3 text-black-900$ {grossEarningsInputError ? 'border-red-500' : ''}`}
+            className={`w-full font-bold border rounded py-2 px-3 text-black-900$ {grossEarningsInputError ? 'border-red-500' : ''}`}
             style={{ maxWidth: "300px" }}
             name={`grossEarnings`}
-            placeholder='400.98'
+            placeholder='4,500.98'
             autoComplete='off'
           />
         </form>

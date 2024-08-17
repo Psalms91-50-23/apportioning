@@ -4,6 +4,7 @@ import functions from '@/functions';
 const { formatStringNumberWithCommas } = functions;
 
 const Output = ({ grossEarnings, grossEarningsStartDate, grossEarningsEndDate, daysCounted,workPatternDaysCounted, pwcStartDate, pwcEndDate, start, end, countDaysOverlapWithPWC, totalGrossForPeriodReduction, singleDayGrossWP }: Result ) => {
+
   return (
     <div className="">
         <div className="">
@@ -55,6 +56,14 @@ const Output = ({ grossEarnings, grossEarningsStartDate, grossEarningsEndDate, d
                     ${formatStringNumberWithCommas(totalGrossForPeriodReduction)}
                 </span>
             </p>
+        </div>
+        <div className="">
+            <div className="">
+                <p className='font-bold'>Copy below to add in contacts to  remove</p>
+            </div>
+            <div className="">
+                <p className='font-bold italic'>{grossEarningsStartDate} — {grossEarningsEndDate} ${formatStringNumberWithCommas(grossEarnings)} / {workPatternDaysCounted} = ${formatStringNumberWithCommas(singleDayGrossWP)} * {countDaysOverlapWithPWC} wp days = ${formatStringNumberWithCommas(totalGrossForPeriodReduction)}</p>
+            </div>
         </div>
     </div>
   )
