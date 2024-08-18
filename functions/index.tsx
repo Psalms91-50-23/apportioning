@@ -487,7 +487,10 @@ const convertStringToNumber = (inputString: string): Number | null => {
 };
 
 const handleEarningsOnBlur = (earnings: string, setEarnings: Function,   setEarningsError: Function, setCompleted: Function, setDisplayAll?: Function): void => {
-  
+    // If the input starts with a dot, prepend a '0'
+    if (earnings.startsWith('.')) {
+      earnings = '0' + earnings;
+    }
   validateAndSetGrossEarnings(earnings, setEarnings, setEarningsError, 
     // setEarningsStartDateError
     );

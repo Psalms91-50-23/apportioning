@@ -57,14 +57,17 @@ const Output = ({ grossEarnings, grossEarningsStartDate, grossEarningsEndDate, d
                 </span>
             </p>
         </div>
-        <div className="">
+        {Number(countDaysOverlapWithPWC) >= 1 && (
             <div className="">
-                <p className='font-bold'>Copy below to add in contacts to  remove</p>
+                <div className="">
+                    <p className='font-bold'>Copy below to add in contacts to  remove</p>
+                </div>
+                <div className="">
+                    <p className='font-bold italic'>{grossEarningsStartDate} — {grossEarningsEndDate} ${(grossEarnings)} / {workPatternDaysCounted} = ${formatStringNumberWithCommas(singleDayGrossWP)} * {countDaysOverlapWithPWC} wp days = ${formatStringNumberWithCommas(totalGrossForPeriodReduction)}</p>
+                </div>
             </div>
-            <div className="">
-                <p className='font-bold italic'>{grossEarningsStartDate} — {grossEarningsEndDate} ${formatStringNumberWithCommas(grossEarnings)} / {workPatternDaysCounted} = ${formatStringNumberWithCommas(singleDayGrossWP)} * {countDaysOverlapWithPWC} wp days = ${formatStringNumberWithCommas(totalGrossForPeriodReduction)}</p>
-            </div>
-        </div>
+        )
+        }
     </div>
   )
 }

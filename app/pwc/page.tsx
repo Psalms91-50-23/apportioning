@@ -112,9 +112,9 @@ const page = () => {
     const onChange = (e: ChangeEvent<HTMLInputElement>, setValue: Function, inputRef: RefObject<HTMLInputElement>, setError: Function, setCompleted?: Function) => {
       let inputValue = e.target.value;
       if(inputRef.current === earningsRef.current){
-        if(inputValue === ""){
-          inputValue = "0.00";
-        }
+        // if(inputValue === ""){
+        //   inputValue = "0.00";
+        // }
         setError(false);
         setValue(inputValue);
       }
@@ -292,7 +292,7 @@ const page = () => {
             className={`w-full font-bold border rounded py-2 px-3 text-black-900$ {grossEarningsInputError ? 'border-red-500' : ''}`}
             style={{ maxWidth: "300px" }}
             name={`grossEarnings`}
-            placeholder='4,500.98'
+            placeholder='2,500.98'
             autoComplete='off'
           />
         </form>
