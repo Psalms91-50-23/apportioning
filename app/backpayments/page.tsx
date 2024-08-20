@@ -27,8 +27,8 @@ const BackPayments = () => {
   })
 
   const [allNeededObjects, setAllNeededObjects] = useState<ResultType | null>();
-  const [isDHB, setIsDHB] = useState<boolean>(true);
-  const [incapacity, setIncapacity] = useState<IncapacityType>({ dofi: true, dosi: false });
+  const [isDHB, setIsDHB] = useState<boolean>(false);
+  const [incapacity, setIncapacity] = useState<IncapacityType>({ dofi: false, dosi: false });
   const [incapacityError, setIncapacityError] = useState<boolean>(true);
   const [incapacityCompleted, setIncapacityCompleted] = useState<boolean>(false);
 
@@ -411,7 +411,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
           <div className="flex w-full flex-col space-y-2">
             <p className='font-bold text-lg'>Non-DHB Back Payment stays in the financial period it is paid, it does not apportion pass financial periods.
             </p>
-            <p className='font-bold text-lg'>DHB disregards financial years and gets apportioned to the financial period it relates to.</p>
+            <p className='font-bold text-lg'>DHB disregards financial periods and gets apportioned to the financial periods it relates to.</p>
           </div>
         }
       </div>
@@ -446,7 +446,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
             </div>
           </div>
           <div className="">
-            <p className='italic text-s font-bold'>If your DOSI requires you to put in STE values as it overlaps with DOFI STE periods rate paid to client (5 weeks including 7 days stand down), tick the DOFI checkbox</p>
+            <p className='italic text-s font-bold'>If your DOSI requires you to put in STE values as it overlaps with DOFI STE rates paid to client (within 5 weeks which includes 7 days stand down), tick the DOFI checkbox.</p>
           </div>
         </div>
         { incapacityError && (
