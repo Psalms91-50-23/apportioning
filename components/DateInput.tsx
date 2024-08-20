@@ -89,7 +89,7 @@ useEffect(() => {
           }
         </div>
         { text && (
-          <p className='pt-2' >{text}</p>
+          <p className='pt-2'>{text}</p>
         )
         }
       </div>

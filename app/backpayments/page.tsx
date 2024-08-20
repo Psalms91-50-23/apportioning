@@ -8,7 +8,7 @@ import { DateInput, WorkPatternSelector, EarningsInput, DHBResult, NonDHBResult 
 const BackPayments = () => {
 
   const [displayAll, setDisplayAll] = useState<boolean>(false);
-  const [isDHBError, setIsDHBError] = useState<boolean>(false);
+  // const [isDHBError, setIsDHBError] = useState<boolean>(false);
   const [isPaidInCurrentFinancialYear, setIsPaidInCurrentFinancialYear] = useState<boolean>(false)
   const [onHover, setOnHover] = useState<boolean>(false);
   const [financialDates, setFinancialDates] = useState<FinancialDateTypes>({
@@ -27,43 +27,43 @@ const BackPayments = () => {
   })
 
   const [allNeededObjects, setAllNeededObjects] = useState<ResultType | null>();
-  const [isDHB, setIsDHB] = useState<boolean>(false);
-  const [incapacity, setIncapacity] = useState<IncapacityType>({ dofi: false, dosi: false });
+  const [isDHB, setIsDHB] = useState<boolean>(true);
+  const [incapacity, setIncapacity] = useState<IncapacityType>({ dofi: true, dosi: false });
   const [incapacityError, setIncapacityError] = useState<boolean>(true);
   const [incapacityCompleted, setIncapacityCompleted] = useState<boolean>(false);
 
-  const [backPayment, setBackPayment] = useState<string>("");
+  const [backPayment, setBackPayment] = useState<string>("4,343.71");
   const [backPaymentError, setBackPaymentError] = useState<boolean>(false);
   //backpay date it was paid
-  const [backPaymentStartDate, setBackPaymentStartDate] = useState<string>("");
+  const [backPaymentStartDate, setBackPaymentStartDate] = useState<string>("11/09/2023");
   const [backPaymentStartDateError, setBackPaymentStartDateError] = useState<boolean>(false);
   const [backPaymentStartDateCompleted, setBackPaymentStartDateCompleted] = useState<boolean>(false);
   
-  const [backPaymentEndDate, setBackPaymentEndDate] = useState<string>("");
+  const [backPaymentEndDate, setBackPaymentEndDate] = useState<string>("24/09/2023");
   const [backPaymentEndDateError, setBackPaymentEndDateError] = useState<boolean>(false);
   const [backPaymentEndDateCompleted, setBackPaymentEndDateCompleted] = useState<boolean>(false);
   //period back pay it relates to
-  const [backPaymentPeriodStartDate, setBackPaymentPeriodStartDate] = useState<string>("");
+  const [backPaymentPeriodStartDate, setBackPaymentPeriodStartDate] = useState<string>("01/04/2023");
   const [backPaymentPeriodStartDateError, setBackPaymentPeriodStartDateError] = useState<boolean>(false);
   const [backPaymentPeriodStartDateCompleted, setBackPaymentPeriodStartDateCompleted] = useState<boolean>(false);
   
-  const [backPaymentPeriodEndDate, setBackPaymentPeriodEndDate] = useState<string>("");
+  const [backPaymentPeriodEndDate, setBackPaymentPeriodEndDate] = useState<string>("10/09/2023");
   const [backPaymentPeriodEndDateError, setBackPaymentPeriodEndDateError] = useState<boolean>(false);
   const [backPaymentPeriodEndDateCompleted, setBackPaymentPeriodEndDateCompleted] = useState<boolean>(false);
 
-  const [startDateSTE, setStartDateSTE] = useState<string>("");
+  const [startDateSTE, setStartDateSTE] = useState<string>("01/07/2024");
   const [startDateSTE_Error, setStartDateSTE_Error] = useState<boolean>(false);
   const [startDateSTECompleted, setStartDateSTECompleted] = useState<boolean>(false);
   
-  const [endDateSTE, setEndDateSTE] = useState<string>("");
+  const [endDateSTE, setEndDateSTE] = useState<string>("28/07/2024");
   const [endDateSTE_Error, setEndDateSTE_Error] = useState<boolean>(false);
   const [endDateSTECompleted, setEndDateSTECompleted] = useState<boolean>(false);
 
-  const [startDateLTE, setStartDateLTE] = useState<string>("");
+  const [startDateLTE, setStartDateLTE] = useState<string>("31/07/2023");
   const [startDateLTE_Error, setStartDateLTE_Error] = useState<boolean>(false);
   const [startDateLTECompleted, setStartDateLTECompleted] = useState<boolean>(false);
   
-  const [endDateLTE, setEndDateLTE] = useState<string>("");
+  const [endDateLTE, setEndDateLTE] = useState<string>("28/07/2024");
   const [endDateLTE_Error, setEndDateLTE_Error] = useState<boolean>(false);
   const [endDateLTECompleted, setEndDateLTECompleted] = useState<boolean>(false);
 
@@ -72,13 +72,13 @@ const BackPayments = () => {
   const [allFilled, setAllFilled] = useState<boolean>(false);
 
   const initialWorkPattern: PatternOfWork = {
-    sunday: false,
+    sunday: true,
     monday: true,
     tuesday: true,
     wednesday: true,
     thursday: true,
     friday: true,
-    saturday: false,
+    saturday: true,
   };
 
 const [workPattern, setWorkPattern] = useState<PatternOfWork>(initialWorkPattern);
@@ -446,7 +446,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
             </div>
           </div>
           <div className="">
-            <p className='italic text-s font-bold'>If your DOSI requires you to put in STE values as it overlaps with DOFI STE periods, tick the DOFI checkbox</p>
+            <p className='italic text-s font-bold'>If your DOSI requires you to put in STE values as it overlaps with DOFI STE periods rate paid to client (5 weeks including 7 days stand down), tick the DOFI checkbox</p>
           </div>
         </div>
         { incapacityError && (
