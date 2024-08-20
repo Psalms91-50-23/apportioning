@@ -32,38 +32,38 @@ const BackPayments = () => {
   const [incapacityError, setIncapacityError] = useState<boolean>(true);
   const [incapacityCompleted, setIncapacityCompleted] = useState<boolean>(false);
 
-  const [backPayment, setBackPayment] = useState<string>("4,343.71");
+  const [backPayment, setBackPayment] = useState<string>("");
   const [backPaymentError, setBackPaymentError] = useState<boolean>(false);
   //backpay date it was paid
-  const [backPaymentStartDate, setBackPaymentStartDate] = useState<string>("11/09/2023");
+  const [backPaymentStartDate, setBackPaymentStartDate] = useState<string>("");
   const [backPaymentStartDateError, setBackPaymentStartDateError] = useState<boolean>(false);
   const [backPaymentStartDateCompleted, setBackPaymentStartDateCompleted] = useState<boolean>(false);
   
-  const [backPaymentEndDate, setBackPaymentEndDate] = useState<string>("24/09/2023");
+  const [backPaymentEndDate, setBackPaymentEndDate] = useState<string>("");
   const [backPaymentEndDateError, setBackPaymentEndDateError] = useState<boolean>(false);
   const [backPaymentEndDateCompleted, setBackPaymentEndDateCompleted] = useState<boolean>(false);
   //period back pay it relates to
-  const [backPaymentPeriodStartDate, setBackPaymentPeriodStartDate] = useState<string>("01/04/2023");
+  const [backPaymentPeriodStartDate, setBackPaymentPeriodStartDate] = useState<string>("");
   const [backPaymentPeriodStartDateError, setBackPaymentPeriodStartDateError] = useState<boolean>(false);
   const [backPaymentPeriodStartDateCompleted, setBackPaymentPeriodStartDateCompleted] = useState<boolean>(false);
   
-  const [backPaymentPeriodEndDate, setBackPaymentPeriodEndDate] = useState<string>("10/09/2023");
+  const [backPaymentPeriodEndDate, setBackPaymentPeriodEndDate] = useState<string>("");
   const [backPaymentPeriodEndDateError, setBackPaymentPeriodEndDateError] = useState<boolean>(false);
   const [backPaymentPeriodEndDateCompleted, setBackPaymentPeriodEndDateCompleted] = useState<boolean>(false);
 
-  const [startDateSTE, setStartDateSTE] = useState<string>("01/07/2024");
+  const [startDateSTE, setStartDateSTE] = useState<string>("");
   const [startDateSTE_Error, setStartDateSTE_Error] = useState<boolean>(false);
   const [startDateSTECompleted, setStartDateSTECompleted] = useState<boolean>(false);
   
-  const [endDateSTE, setEndDateSTE] = useState<string>("28/07/2024");
+  const [endDateSTE, setEndDateSTE] = useState<string>("");
   const [endDateSTE_Error, setEndDateSTE_Error] = useState<boolean>(false);
   const [endDateSTECompleted, setEndDateSTECompleted] = useState<boolean>(false);
 
-  const [startDateLTE, setStartDateLTE] = useState<string>("31/07/2023");
+  const [startDateLTE, setStartDateLTE] = useState<string>("");
   const [startDateLTE_Error, setStartDateLTE_Error] = useState<boolean>(false);
   const [startDateLTECompleted, setStartDateLTECompleted] = useState<boolean>(false);
   
-  const [endDateLTE, setEndDateLTE] = useState<string>("28/07/2024");
+  const [endDateLTE, setEndDateLTE] = useState<string>("");
   const [endDateLTE_Error, setEndDateLTE_Error] = useState<boolean>(false);
   const [endDateLTECompleted, setEndDateLTECompleted] = useState<boolean>(false);
 
@@ -72,13 +72,13 @@ const BackPayments = () => {
   const [allFilled, setAllFilled] = useState<boolean>(false);
 
   const initialWorkPattern: PatternOfWork = {
-    sunday: true,
+    sunday: false,
     monday: true,
     tuesday: true,
     wednesday: true,
     thursday: true,
     friday: true,
-    saturday: true,
+    saturday: false,
   };
 
 const [workPattern, setWorkPattern] = useState<PatternOfWork>(initialWorkPattern);
