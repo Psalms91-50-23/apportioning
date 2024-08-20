@@ -669,10 +669,13 @@ const countWorkDaysNew = (startDate: Date | string, endDate: Date | string, work
 const countDays = (startDateString: string, endDateString: string): number => {
   let tempStartDate = createDateFormat(startDateString) ?? new Date(startDateString) ;
   let tempEndDate = createDateFormat(endDateString) ?? new Date(endDateString);
+  let count = 0;
   if(tempEndDate instanceof Date && tempStartDate instanceof Date){
-
-    let daysCounted: number = (differenceInDays(tempEndDate, tempStartDate))+includeLastDay;
-    return daysCounted;
+    while (tempStartDate <= tempEndDate) {
+      count++;
+      tempStartDate.setDate(tempStartDate.getDate() + 1);
+    }
+    return count;
   }
   return 0;
 }; 
