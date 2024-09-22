@@ -518,7 +518,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
               onChange={(e) => onChange(e, setBackPayment, backpayRef, setBackPaymentError)}
               onBlur={() => handleEarningsOnBlur(backPayment, setBackPayment, setBackPaymentError, setBackPaymentCompleted, setBackPayHasFocus )}
               onFocus={handleGrossEarningsFocus}
-              className={`w-full border-0 rounded outline-none py-2 px-3 text-black-900 
+              className={`w-full border-0 rounded outline-none font-bold py-2 px-3 text-black-900 
                 `}
                 // ${grossEarningsInputError ? 'border-red-500' : ''}
                 style={{ maxWidth: "300px" }}

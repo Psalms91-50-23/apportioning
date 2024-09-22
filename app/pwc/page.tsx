@@ -308,7 +308,7 @@ const page = () => {
               onChange={(e) => onChange(e, setGrossEarnings, earningsRef, setGrossEarningsInputError)}
               onBlur={() => handleEarningsOnBlur(grossEarnings, setGrossEarnings, setGrossEarningsInputError, setIsGrossEarningCompleted, setEarningHasFocus)}
               onFocus={handleGrossEarningsFocus}
-              className={`w-full border-transparent border-4 rounded outline-none py-2 px-3 text-black-900 focus:border-transparent`}
+              className={`w-full border-transparent border-4 rounded outline-none font-bold py-2 px-3 text-black-900 focus:border-transparent`}
                 // ${grossEarningsInputError ? 'border-red-500' : ''}
                 style={{ maxWidth: "300px" }}
               placeholder="3,450.90"
