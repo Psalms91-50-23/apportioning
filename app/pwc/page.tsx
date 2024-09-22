@@ -6,6 +6,7 @@ import { PatternOfWorkInput } from "../../types";
 import { DateInput, Output, DayToggle } from '../../components';
 
 const page = () => {
+    const [clickCounter, setClickCounter] = useState<number>(0)
     const [grossEarnings, setGrossEarnings] = useState<string>("");
     const earningsRef = useRef<HTMLInputElement>(null);
     const [hover, setHover] = useState<boolean>(false);
@@ -69,6 +70,7 @@ const page = () => {
     const onClick = () => {
       if(setGrossEarnings){
         setGrossEarnings("");
+        setClickCounter(prev => prev+1);
       }
     }
     
@@ -211,12 +213,12 @@ const page = () => {
   }, [workPattern]);
 
   useEffect(() => {
-    if(grossEarnings === ""){
+    if(grossEarnings === "" && clickCounter >= 1){
       if(earningsRef?.current){
         earningsRef.current.focus();
       }
     }
-  }, [grossEarnings, earningsRef])
+  }, [grossEarnings, earningsRef, clickCounter ])
 
   const { start, end } = dateRangeWithPWC;
   const tempObject = {
@@ -233,7 +235,7 @@ const page = () => {
     totalGrossForPeriodReduction,
     singleDayGrossWP
   }
-console.log({earningHasFocus});
+
   return (
     <div className="flex flex-1 flex-col max-width justify-center mb-12">
       <p className='text-2xl font-bold italic mb-5'>PWC Apportioning</p>
@@ -297,7 +299,7 @@ console.log({earningHasFocus});
           <label htmlFor="grossEarnings" className="block text-black-900 text-sm font-bold mb-2">
             Gross Earnings
           </label>
-          <div className={`flex flex-row bg-white border-2 ${earningHasFocus ? 'border-black rounded' : 'rounded'}`} style={{ maxWidth: "240px" }}>
+          <div className={`flex flex-row bg-white ${earningHasFocus ? 'border-4 border-black rounded-md' : 'border-transparent border-4 rounded-md'}`} style={{ maxWidth: "240px" }}>
             <input
               type="text"
               id={`grossEarnings`}
@@ -306,8 +308,7 @@ console.log({earningHasFocus});
               onChange={(e) => onChange(e, setGrossEarnings, earningsRef, setGrossEarningsInputError)}
               onBlur={() => handleEarningsOnBlur(grossEarnings, setGrossEarnings, setGrossEarningsInputError, setIsGrossEarningCompleted, setEarningHasFocus)}
               onFocus={handleGrossEarningsFocus}
-              className={`w-full border-0 rounded outline-none py-2 px-3 text-black-900 
-                `}
+              className={`w-full border-transparent border-4 rounded outline-none py-2 px-3 text-black-900 focus:border-transparent`}
                 // ${grossEarningsInputError ? 'border-red-500' : ''}
                 style={{ maxWidth: "300px" }}
               placeholder="3,450.90"

@@ -4,10 +4,12 @@ import { PatternOfWork, ResultType, IncapacityType, FinancialDateTypes, ValueSTE
 import functions from "../../functions";
 const { validateDate, handleEarningsOnBlur, getAllDates, earningsRegex, dateOnBlur, countDays, countWorkDays, convertToDateFormat, isInsideSTEBool, isOutsideLTEBool, calculateBackpay, isInsideLTEBool, isCurrentFinancialYear, getFinancialYears } = functions;
 import { DateInput, WorkPatternSelector, EarningsInput, DHBResult, NonDHBResult } from '../../components';
+import { set } from 'date-fns';
 
 const BackPayments = () => {
 
   const [displayAll, setDisplayAll] = useState<boolean>(false);
+  const [clickCounter, setClickCounter] = useState<number>(0)
   // const [isDHBError, setIsDHBError] = useState<boolean>(false);
   const [isPaidInCurrentFinancialYear, setIsPaidInCurrentFinancialYear] = useState<boolean>(false)
   const [onHover, setOnHover] = useState<boolean>(false);
@@ -34,6 +36,7 @@ const BackPayments = () => {
   const [incapacityCompleted, setIncapacityCompleted] = useState<boolean>(false);
 
   const [backPayment, setBackPayment] = useState<string>("");
+  const [backPaymentCompleted, setBackPaymentCompleted] = useState<boolean>(false);
   const [backPayHasFocus, setBackPayHasFocus] = useState<boolean>(false);
   const [backPaymentError, setBackPaymentError] = useState<boolean>(false);
   //backpay date it was paid
@@ -104,7 +107,9 @@ const scrollToBottom = () => {
 const onClick = () => {
   if(setBackPayment){
     setBackPayment("");
+    setClickCounter(prev => prev+1);
   }
+  
 }
 
 const scrollToTop= () => {
@@ -402,12 +407,13 @@ useEffect(() => {
 }, [workPattern]);
 
 useEffect(() => {
-  if( backPayment === ""){
+  if( backPayment === "" && clickCounter >=1 ){
     if(backpayRef?.current){
       backpayRef.current.focus();
     }
   }
-}, [backPayment, backpayRef])
+}, [backPayment, backpayRef, clickCounter])
+
 
 const { dofi, dosi } = incapacity;
 const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPeriod,
@@ -501,16 +507,16 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
       <div className="flex flex-col">
         <div className="flex flex-col w-full mb-4" style={{ maxWidth: "300px" }}>
           <label htmlFor="grossEarnings" className="block text-black-900 text-sm font-bold mb-2">
-            Gross Earnings
+            Backpayment Gross Earnings
           </label>
-          <div className={`flex flex-row bg-white border-2 ${backPayHasFocus ? 'border-black rounded' : 'rounded'}`} style={{ maxWidth: "240px" }}>
+          <div className={`flex flex-row bg-white ${backPayHasFocus ? 'border-4 border-black rounded' : 'border-transparent border-4 rounded '}`} style={{ maxWidth: "240px" }}>
             <input
               type="text"
               id={`grossEarnings`}
               ref={backpayRef}
               value={backPayment}
               onChange={(e) => onChange(e, setBackPayment, backpayRef, setBackPaymentError)}
-              onBlur={() => handleEarningsOnBlur(backPayment, setBackPayment, setBackPaymentError, setBackPayHasFocus)}
+              onBlur={() => handleEarningsOnBlur(backPayment, setBackPayment, setBackPaymentError, setBackPaymentCompleted, setBackPayHasFocus )}
               onFocus={handleGrossEarningsFocus}
               className={`w-full border-0 rounded outline-none py-2 px-3 text-black-900 
                 `}
