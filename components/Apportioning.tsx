@@ -296,8 +296,8 @@ const EzyApportioning = () => {
             ref={earningsRef}
             value={grossEarnings}
             onChange={(e) => onChange(e, setGrossEarnings, earningsRef, setGrossEarningsInputError)}
-            onBlur={() => handleEarningsOnBlur(grossEarnings,setGrossEarnings,setGrossEarningsInputError, setIsGrossEarningCompleted)}
-            onFocus={handleGrossEarningsFocus}
+            // onBlur={() => handleEarningsOnBlur(grossEarnings,setGrossEarnings,setGrossEarningsInputError, setIsGrossEarningCompleted)}
+            // onFocus={handleGrossEarningsFocus}
             className={`w-full border rounded py-2 px-3 text-black-900$ {grossEarningsInputError ? 'border-red-500' : ''}`}
             style={{ maxWidth: "300px" }}
           />
