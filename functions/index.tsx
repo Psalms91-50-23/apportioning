@@ -486,57 +486,119 @@ const convertStringToNumber = (inputString: string): Number | null => {
   setBackPaymentError(false);
 };
 
-const handleEarningsOnBlur = (earnings: string, setEarnings: Function,   setEarningsError: Function, setCompleted: Function, setDisplayAll?: Function): void => {
-    // If the input starts with a dot, prepend a '0'
-    if (earnings.startsWith('.')) {
-      earnings = '0' + earnings;
+const handleEarningsOnBlur = (earnings: string, setEarnings: Function, setEarningsError: Function, setCompleted: Function, setEarningHasFocus?: Function): void => {
+  // If earnings is empty, return early to avoid formatting
+  if (earnings.trim() === "") {
+    setEarnings("");  // Set the empty value
+    setEarningsError(false);  // No error
+    setCompleted(false);  // Mark as incomplete
+    if (setEarningHasFocus) {
+      setEarningHasFocus(false);  // Remove focus
     }
-  validateAndSetGrossEarnings(earnings, setEarnings, setEarningsError, 
-    // setEarningsStartDateError
-    );
-  let formattedInput = earnings.trim(); // Trim leading/trailing whitespaces
-  formattedInput = grossEarningInputValueConverted(formattedInput);
-  if (!formattedInput || !earningsRegex.test(formattedInput)){
-      // If input is empty, set default value
-      formattedInput = '0.00';
-      setEarnings(formattedInput);
-      setCompleted(false);
-      return;
+    return;
   }
-  else {
-      // Add a dot with two zeros if there is no dot in the input
-      if (!formattedInput.includes('.')) {
-          formattedInput += '.00';
-      }
-      // Handle decimal part
-      const decimalIndex = formattedInput.indexOf('.');
-      const digitsAfterDecimal = formattedInput.length - decimalIndex - 1;
 
-      if (digitsAfterDecimal === 0) {
-          // Add '00' if there are no digits after the decimal point
-          formattedInput += '00';
-      } else if (digitsAfterDecimal === 1) {
-          // Add '0' if there is only one digit after the decimal point
-          formattedInput += '0';
-      } else if (digitsAfterDecimal > 2) {
-          // Round the number to two decimal places if more than 2 digits after the decimal point
-          formattedInput = `${(+formattedInput).toFixed(2)}`;
-      }
-      // Add the new condition to remove leading zeros for specific cases
-      if (/^0+\d[1-9]\.\d$/.test(formattedInput)) {
-          formattedInput = formattedInput.replace(/^0+/, ''); // Remove leading zeros
-      }
+  // Existing logic to validate and format earnings
+  validateAndSetGrossEarnings(earnings, setEarnings, setEarningsError);
+
+  if (setEarningHasFocus) {
+    setEarningHasFocus(false);  // Remove focus
   }
-  //removing unwanted $ sign
-  let santizedGrossInputs = sanitizeInput(formattedInput);
-  //adding commas to make it separate for each 1,000
-  formattedInput = grossEarningInputValueConverted(santizedGrossInputs);
+
+  let formattedInput = earnings.trim(); // Trim leading/trailing whitespaces
+  formattedInput = grossEarningInputValueConverted(formattedInput);  // Format input
+
+  if (!formattedInput || !earningsRegex.test(formattedInput)) {
+    // If input is invalid, set default value
+    formattedInput = "0.00";
+    setEarnings(formattedInput);
+    setCompleted(false);
+    return;
+  }
+
+  // If no decimal is present, append .00
+  if (!formattedInput.includes(".")) {
+    formattedInput += ".00";
+  }
+
+  // Handle decimal places
+  const decimalIndex = formattedInput.indexOf(".");
+  const digitsAfterDecimal = formattedInput.length - decimalIndex - 1;
+
+  if (digitsAfterDecimal === 0) {
+    formattedInput += "00";
+  } else if (digitsAfterDecimal === 1) {
+    formattedInput += "0";
+  } else if (digitsAfterDecimal > 2) {
+    formattedInput = `${(+formattedInput).toFixed(2)}`;
+  }
+
+  // Remove leading zeros
+  if (/^0+\d[1-9]\.\d$/.test(formattedInput)) {
+    formattedInput = formattedInput.replace(/^0+/, "");
+  }
+
+  // Sanitize and format input
+  let sanitizedGrossInputs = sanitizeInput(formattedInput);
+  formattedInput = grossEarningInputValueConverted(sanitizedGrossInputs);
+
   // Update state
   setEarningsError(false);
   setEarnings(formattedInput);
   setCompleted(true);
-
 };
+
+// const handleEarningsOnBlur = (earnings: string, setEarnings: Function,   setEarningsError: Function, setCompleted: Function, setEarningHasFocus: Function): void => {
+//     // If the input starts with a dot, prepend a '0'
+//     if (earnings.startsWith('.')) {
+//       earnings = '0' + earnings;
+//     }
+//   validateAndSetGrossEarnings(earnings, setEarnings, setEarningsError, 
+//     // setEarningsStartDateError
+//     );
+//   let formattedInput = earnings.trim(); // Trim leading/trailing whitespaces
+//   formattedInput = grossEarningInputValueConverted(formattedInput);
+//   if (!formattedInput || !earningsRegex.test(formattedInput)){
+//       // If input is empty, set default value
+//       formattedInput = '';
+//       setEarnings(formattedInput);
+//       setCompleted(false);
+//       return;
+//   }
+//   else {
+//       // Add a dot with two zeros if there is no dot in the input
+//       if (!formattedInput.includes('.')) {
+//           formattedInput += '.00';
+//       }
+//       // Handle decimal part
+//       const decimalIndex = formattedInput.indexOf('.');
+//       const digitsAfterDecimal = formattedInput.length - decimalIndex - 1;
+
+//       if (digitsAfterDecimal === 0) {
+//           // Add '00' if there are no digits after the decimal point
+//           formattedInput += '00';
+//       } else if (digitsAfterDecimal === 1) {
+//           // Add '0' if there is only one digit after the decimal point
+//           formattedInput += '0';
+//       } else if (digitsAfterDecimal > 2) {
+//           // Round the number to two decimal places if more than 2 digits after the decimal point
+//           formattedInput = `${(+formattedInput).toFixed(2)}`;
+//       }
+//       // Add the new condition to remove leading zeros for specific cases
+//       if (/^0+\d[1-9]\.\d$/.test(formattedInput)) {
+//           formattedInput = formattedInput.replace(/^0+/, ''); // Remove leading zeros
+//       }
+//   }
+//   //removing unwanted $ sign
+//   let santizedGrossInputs = sanitizeInput(formattedInput);
+//   //adding commas to make it separate for each 1,000
+//   formattedInput = grossEarningInputValueConverted(santizedGrossInputs);
+//   // Update state
+//   setEarningsError(false);
+//   setEarnings(formattedInput);
+//   setCompleted(true);
+
+// };
 
 const beyondLTE_EndDate = (relatedStartDate: string, relatedEndDate: string, endDateLTE: string):boolean => {
   let tempRelatedStartDate = createDateFormat(relatedStartDate);

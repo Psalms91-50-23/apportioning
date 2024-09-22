@@ -177,6 +177,7 @@ export interface EarningsInputProp {
   title: string;
   id: string;
   value: string;
+  setValue: (value: string) => void,
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: () => void;
   onFocus?: () => void;

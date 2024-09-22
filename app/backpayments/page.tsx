@@ -11,6 +11,7 @@ const BackPayments = () => {
   // const [isDHBError, setIsDHBError] = useState<boolean>(false);
   const [isPaidInCurrentFinancialYear, setIsPaidInCurrentFinancialYear] = useState<boolean>(false)
   const [onHover, setOnHover] = useState<boolean>(false);
+  const [hover, setHover] = useState<boolean>(false);
   const [financialDates, setFinancialDates] = useState<FinancialDateTypes>({
     currentFinancialYearStart: "",
     currentFinancialYearEnd: "",
@@ -33,6 +34,7 @@ const BackPayments = () => {
   const [incapacityCompleted, setIncapacityCompleted] = useState<boolean>(false);
 
   const [backPayment, setBackPayment] = useState<string>("");
+  const [backPayHasFocus, setBackPayHasFocus] = useState<boolean>(false);
   const [backPaymentError, setBackPaymentError] = useState<boolean>(false);
   //backpay date it was paid
   const [backPaymentStartDate, setBackPaymentStartDate] = useState<string>("");
@@ -99,6 +101,12 @@ const scrollToBottom = () => {
   }, 50);
 };
 
+const onClick = () => {
+  if(setBackPayment){
+    setBackPayment("");
+  }
+}
+
 const scrollToTop= () => {
   setTimeout(() => {
     window.scrollTo({
@@ -144,6 +152,7 @@ const handleCheckboxChange = (type: keyof IncapacityType) => {
 const handleGrossEarningsFocus = (): void => {
   setIsAllFieldEntered(false);
   setBackPaymentError(false);
+  setBackPayHasFocus(true);
   // Clear the input if the value is '0.00'
   if (backPayment === '0.00' ||  backPayment === "NaN" || backPayment === "NaN.00" || backPayment === ".00" || backPayment.length === 0 ) {
     setBackPayment('');
@@ -160,7 +169,7 @@ const onChange = (e: ChangeEvent<HTMLInputElement>, setValue: Function, inputRef
   let inputValue = e.target.value;
   if(inputRef.current === backpayRef.current){
     if(inputValue === ""){
-      inputValue = "0.00";
+      inputValue = "";
     }
     setError(false);
     setValue(inputValue);
@@ -195,7 +204,7 @@ if (!isValid) {
 }
   let hasError = false;
   // Check backPayment conditions
-  if (!earningsRegex.test(backPayment) || backPayment === "0.00") {
+  if (!earningsRegex.test(backPayment) || backPayment === "0.00" || backPayment === "") {
     setBackPaymentStartDateError(true);
     hasError = true;
   }
@@ -392,6 +401,14 @@ useEffect(() => {
 
 }, [workPattern]);
 
+useEffect(() => {
+  if( backPayment === ""){
+    if(backpayRef?.current){
+      backpayRef.current.focus();
+    }
+  }
+}, [backPayment, backpayRef])
+
 const { dofi, dosi } = incapacity;
 const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPeriod,
   previousFinancialYearStart, previousFinancialYearEnd, previousFinancialPeriod
@@ -481,18 +498,48 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
         setDisplayAll={setDisplayAll}
         setIsClicked={setIsClicked}
       />
-      <EarningsInput 
-        title="Back Payment Amount"
-        id="BackPay"
-        value={backPayment}
-        inputRef={backpayRef}
-        onChange={(e:  ChangeEvent<HTMLInputElement>) => onChange(e, setBackPayment, backpayRef, setBackPaymentError)}
-        onBlur={() => handleEarningsOnBlur(backPayment, setBackPayment, setBackPaymentError, setBackPaymentStartDateCompleted, setDisplayAll)}
-        onFocus={handleGrossEarningsFocus}
-        error={backPaymentError}
-        setDisplayAll={setDisplayAll}
-        setIsClicked={setIsClicked}
-      />
+      <div className="flex flex-col">
+        <div className="flex flex-col w-full mb-4" style={{ maxWidth: "300px" }}>
+          <label htmlFor="grossEarnings" className="block text-black-900 text-sm font-bold mb-2">
+            Gross Earnings
+          </label>
+          <div className={`flex flex-row bg-white border-2 ${backPayHasFocus ? 'border-black rounded' : 'rounded'}`} style={{ maxWidth: "240px" }}>
+            <input
+              type="text"
+              id={`grossEarnings`}
+              ref={backpayRef}
+              value={backPayment}
+              onChange={(e) => onChange(e, setBackPayment, backpayRef, setBackPaymentError)}
+              onBlur={() => handleEarningsOnBlur(backPayment, setBackPayment, setBackPaymentError, setBackPayHasFocus)}
+              onFocus={handleGrossEarningsFocus}
+              className={`w-full border-0 rounded outline-none py-2 px-3 text-black-900 
+                `}
+                // ${grossEarningsInputError ? 'border-red-500' : ''}
+                style={{ maxWidth: "300px" }}
+              placeholder="3,450.90"
+              autoComplete='off'
+            />
+            {backPayment.length > 0 && (
+              <img
+                draggable="false"
+                className={`rounded ${hover && 'big-size'}`}
+                src={hover ? `/crossTransparent.svg` : `/crossTransparentStatic.svg`}
+                alt="Cross Icon"
+                width={35}
+                height={30}
+                onClick={onClick}
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
+              />
+            )}
+          </div>
+        </div>   
+        {backPaymentError &&(
+          <div className="my-3">
+            <p className="text-red-700 font-bold text-xs italic">Please add a value</p>
+          </div>
+        )}
+      </div>
       <div className="flex flex-col">
         <div className="mb-2">
           <p className='text-lg font-bold mb-2'>Acceptable date formats for input field</p>

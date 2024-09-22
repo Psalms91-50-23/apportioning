@@ -1,13 +1,15 @@
 'use client';
 import React, { useState,useEffect, ChangeEvent, useRef, RefObject } from 'react';
 import functions from "../../functions";
-const { createDateFormat, replaceCommas, overlapDateRangeString,  convertToInitialDateFormat, dateOnBlur, handleEarningsOnBlur, earningsRegex, includeLastDay, countDays, countWorkDaysNew, countDaysNew, isFirefox } = functions;
+const { createDateFormat, replaceCommas, overlapDateRangeString,  convertToInitialDateFormat, dateOnBlur, handleEarningsOnBlur, earningsRegex, countDays, countWorkDaysNew, countDaysNew, isFirefox } = functions;
 import { PatternOfWorkInput } from "../../types";
 import { DateInput, Output, DayToggle } from '../../components';
 
 const page = () => {
     const [grossEarnings, setGrossEarnings] = useState<string>("");
     const earningsRef = useRef<HTMLInputElement>(null);
+    const [hover, setHover] = useState<boolean>(false);
+    const [earningHasFocus, setEarningHasFocus] = useState<boolean>(false);
     const grossStartDateRef = useRef<HTMLInputElement>(null);
     const grossEndDateRef = useRef<HTMLInputElement>(null);
     const pwcStartDateRef = useRef<HTMLInputElement>(null);
@@ -64,6 +66,12 @@ const page = () => {
         }));
     };
 
+    const onClick = () => {
+      if(setGrossEarnings){
+        setGrossEarnings("");
+      }
+    }
+    
     const scrollToBottom = () => {
       setTimeout(() => {
         window.scrollTo({
@@ -97,6 +105,7 @@ const page = () => {
         setIsAllFieldEntered(false);
         setGrossEarningsInputError(false);
         setDisplayAll(false);
+        setEarningHasFocus(true);
         // Clear the input if the value 
         if (grossEarnings === '0.00' ||  grossEarnings === "NaN" || grossEarnings === "NaN.00" || grossEarnings === ".00"  || grossEarnings.length === 0) {
             setGrossEarnings('');
@@ -201,6 +210,14 @@ const page = () => {
     }
   }, [workPattern]);
 
+  useEffect(() => {
+    if(grossEarnings === ""){
+      if(earningsRef?.current){
+        earningsRef.current.focus();
+      }
+    }
+  }, [grossEarnings, earningsRef])
+
   const { start, end } = dateRangeWithPWC;
   const tempObject = {
     grossEarnings,
@@ -216,7 +233,7 @@ const page = () => {
     totalGrossForPeriodReduction,
     singleDayGrossWP
   }
-
+console.log({earningHasFocus});
   return (
     <div className="flex flex-1 flex-col max-width justify-center mb-12">
       <p className='text-2xl font-bold italic mb-5'>PWC Apportioning</p>
@@ -275,28 +292,43 @@ const page = () => {
         )
         }
       </div>
-      <div className="flex flex-col w-full mb-4 space-x-4" 
-      >
-        <form className="">
+      <div className="flex flex-col">
+        <div className="flex flex-col w-full mb-4" style={{ maxWidth: "300px" }}>
           <label htmlFor="grossEarnings" className="block text-black-900 text-sm font-bold mb-2">
             Gross Earnings
           </label>
-          <input
-            type="text"
-            id={`grossEarnings`}
-            ref={earningsRef}
-            value={grossEarnings}
-            onChange={(e) => onChange(e, setGrossEarnings, earningsRef, setGrossEarningsInputError)}
-            onBlur={() => handleEarningsOnBlur(grossEarnings,setGrossEarnings,setGrossEarningsInputError, setIsGrossEarningCompleted)}
-            onFocus={handleGrossEarningsFocus}
-            className={`w-full font-bold border rounded py-2 px-3 text-black-900$ {grossEarningsInputError ? 'border-red-500' : ''}`}
-            style={{ maxWidth: "300px" }}
-            name={`grossEarnings`}
-            placeholder='2,500.98'
-            autoComplete='off'
-          />
-        </form>
-        {grossEarningsInputError && (
+          <div className={`flex flex-row bg-white border-2 ${earningHasFocus ? 'border-black rounded' : 'rounded'}`} style={{ maxWidth: "240px" }}>
+            <input
+              type="text"
+              id={`grossEarnings`}
+              ref={earningsRef}
+              value={grossEarnings}
+              onChange={(e) => onChange(e, setGrossEarnings, earningsRef, setGrossEarningsInputError)}
+              onBlur={() => handleEarningsOnBlur(grossEarnings, setGrossEarnings, setGrossEarningsInputError, setIsGrossEarningCompleted, setEarningHasFocus)}
+              onFocus={handleGrossEarningsFocus}
+              className={`w-full border-0 rounded outline-none py-2 px-3 text-black-900 
+                `}
+                // ${grossEarningsInputError ? 'border-red-500' : ''}
+                style={{ maxWidth: "300px" }}
+              placeholder="3,450.90"
+              autoComplete='off'
+            />
+            {grossEarnings.length > 0 && (
+              <img
+                draggable="false"
+                className={`rounded ${hover && 'big-size'}`}
+                src={hover ? `/crossTransparent.svg` : `/crossTransparentStatic.svg`}
+                alt="Cross Icon"
+                width={35}
+                height={30}
+                onClick={onClick}
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
+              />
+            )}
+          </div>
+        </div>   
+        {grossEarningsInputError &&(
           <div className="my-3">
             <p className="text-red-700 font-bold text-xs italic">Please add a value</p>
           </div>
