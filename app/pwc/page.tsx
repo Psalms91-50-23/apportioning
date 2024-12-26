@@ -15,26 +15,26 @@ const page = () => {
     const grossEndDateRef = useRef<HTMLInputElement>(null);
     const pwcStartDateRef = useRef<HTMLInputElement>(null);
     const pwcEndDateRef = useRef<HTMLInputElement>(null);
-    //input dates gross earnings
+
     const [grossEarningsStartDate, setGrossEarningsStartDate] = useState<string>('');
     const [grossEarningsEndDate, setGrossEarningsEndDate] = useState<string>('');
     const [isGrossEarningCompleted, setIsGrossEarningCompleted] = useState<boolean>(false);
-    //gross input date errors
+
     const [grossEarningsInputError, setGrossEarningsInputError] = useState<boolean>(false);
     const [grossStartDateError, setGrossStartDateError] = useState<boolean>(false)
     const [grossEndDateError, setGrossEndDateError] = useState<boolean>(false);
-    //gross completed boolean
+
     const [isGrossStartDateCompleted, setIsGrossStartDateCompleted] = useState<boolean>(false);
     const [isGrossEndDateCompleted, setIsGrossEndDateCompleted] = useState<boolean>(false);
-    //pwc input dates
+
     const [pwcStartDate, setPwcStartDate] = useState<string>('');
     const [pwcEndDate, setPwcEndDate] = useState<string>('');
-    //pwc error input dates
+
     const [pwcStartError, setPwcStartError] = useState<boolean>(false)
     const [pwcEndError, setPwcEndError] = useState<boolean>(false)
     const [pwcStartCompleted, setPwcStartCompleted] = useState<boolean>(false);
     const [pwcEndCompleted, setPwcEndCompleted] = useState<boolean>(false);
-    //counted days for work pattern 
+
     const [singleDayGrossWP, setSingleDayGrossWP] = useState<string>("0");
     const [totalGrossForPeriodReduction, setTotalGrossForPeriodReduction] = useState<string>("0");
     const [daysCounted, setDaysCounted] = useState<string>("0");
@@ -108,14 +108,11 @@ const page = () => {
         setGrossEarningsInputError(false);
         setDisplayAll(false);
         setEarningHasFocus(true);
-        // Clear the input if the value 
         if (grossEarnings === '0.00' ||  grossEarnings === "NaN" || grossEarnings === "NaN.00" || grossEarnings === ".00"  || grossEarnings.length === 0) {
             setGrossEarnings('');
         } else if (grossEarnings.includes('.') && grossEarnings.endsWith('.00')) {
-            // Remove '.00' if the decimal part is '00'
             setGrossEarnings(grossEarnings.split('.')[0]);
         } else if (!grossEarnings.includes('.')) {
-            // Add '.00' if no dot and decimal places are present
             setGrossEarnings(`${grossEarnings}.00`);
         }
     };
@@ -123,9 +120,6 @@ const page = () => {
     const onChange = (e: ChangeEvent<HTMLInputElement>, setValue: Function, inputRef: RefObject<HTMLInputElement>, setError: Function, setCompleted?: Function) => {
       let inputValue = e.target.value;
       if(inputRef.current === earningsRef.current){
-        // if(inputValue === ""){
-        //   inputValue = "0.00";
-        // }
         setError(false);
         setValue(inputValue);
       }
@@ -309,7 +303,6 @@ const page = () => {
               onBlur={() => handleEarningsOnBlur(grossEarnings, setGrossEarnings, setGrossEarningsInputError, setIsGrossEarningCompleted, setEarningHasFocus)}
               onFocus={handleGrossEarningsFocus}
               className={`w-full border-transparent border-4 rounded outline-none font-bold py-2 px-3 text-black-900 focus:border-transparent`}
-                // ${grossEarningsInputError ? 'border-red-500' : ''}
                 style={{ maxWidth: "300px" }}
               placeholder="3,450.90"
               autoComplete='off'

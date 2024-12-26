@@ -250,21 +250,6 @@ export interface CalculateBackPayNew {
   backPayPaidEndDate: string;
 }
 
-//original bottom
-// export interface CalculateBackPay {
-//   isDHB: boolean;
-//   dateObjects: DateObject;
-//   isOutsideLTE: boolean;
-//   isInsideSTE: boolean;
-//   isInsideLTE: boolean,
-//   backPayStartDateRelateTo: string;
-//   backPayEndDateRelateTo: string;
-//   workPattern: PatternOfWork;
-//   backPayEarnings: string;
-//   backPayPaidStartDate: string;
-//   backPayPaidEndDate: string;
-//   incapacity: IncapacityType;
-// }
 
 export interface TotalBackPayPeriodOverlapDateSTE {
   startDateSTE: string;

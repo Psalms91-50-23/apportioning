@@ -10,7 +10,6 @@ const BackPayments = () => {
 
   const [displayAll, setDisplayAll] = useState<boolean>(false);
   const [clickCounter, setClickCounter] = useState<number>(0)
-  // const [isDHBError, setIsDHBError] = useState<boolean>(false);
   const [isPaidInCurrentFinancialYear, setIsPaidInCurrentFinancialYear] = useState<boolean>(false)
   const [onHover, setOnHover] = useState<boolean>(false);
   const [hover, setHover] = useState<boolean>(false);
@@ -39,7 +38,7 @@ const BackPayments = () => {
   const [backPaymentCompleted, setBackPaymentCompleted] = useState<boolean>(false);
   const [backPayHasFocus, setBackPayHasFocus] = useState<boolean>(false);
   const [backPaymentError, setBackPaymentError] = useState<boolean>(false);
-  //backpay date it was paid
+
   const [backPaymentStartDate, setBackPaymentStartDate] = useState<string>("");
   const [backPaymentStartDateError, setBackPaymentStartDateError] = useState<boolean>(false);
   const [backPaymentStartDateCompleted, setBackPaymentStartDateCompleted] = useState<boolean>(false);
@@ -47,7 +46,7 @@ const BackPayments = () => {
   const [backPaymentEndDate, setBackPaymentEndDate] = useState<string>("");
   const [backPaymentEndDateError, setBackPaymentEndDateError] = useState<boolean>(false);
   const [backPaymentEndDateCompleted, setBackPaymentEndDateCompleted] = useState<boolean>(false);
-  //period back pay it relates to
+
   const [backPaymentPeriodStartDate, setBackPaymentPeriodStartDate] = useState<string>("");
   const [backPaymentPeriodStartDateError, setBackPaymentPeriodStartDateError] = useState<boolean>(false);
   const [backPaymentPeriodStartDateCompleted, setBackPaymentPeriodStartDateCompleted] = useState<boolean>(false);
@@ -136,15 +135,15 @@ const handleCheckboxChange = (type: keyof IncapacityType) => {
   const newIncapacity = { ...incapacity, [type]: !incapacity[type] };
   setDisplayAll(false);
   setIsClicked(false);
-  // Ensuring only one is true at a time
+
   if (type === 'dofi' && newIncapacity.dofi) {
     newIncapacity.dosi = false;
   } else if (type === 'dosi' && newIncapacity.dosi) {
     newIncapacity.dofi = false;
   }
-  // Updating state
+
   setIncapacity(newIncapacity);
-  // Check if neither is ticked to set error state
+  
   if (!newIncapacity.dofi && !newIncapacity.dosi) {
     setIncapacityError(true);
     setIncapacityCompleted(false);
@@ -158,14 +157,14 @@ const handleGrossEarningsFocus = (): void => {
   setIsAllFieldEntered(false);
   setBackPaymentError(false);
   setBackPayHasFocus(true);
-  // Clear the input if the value is '0.00'
+  
   if (backPayment === '0.00' ||  backPayment === "NaN" || backPayment === "NaN.00" || backPayment === ".00" || backPayment.length === 0 ) {
     setBackPayment('');
   } else if (backPayment.includes('.') && backPayment.endsWith('.00')) {
-      // Remove '.00' if the decimal part is '00'
+     
       setBackPayment(backPayment.split('.')[0]);
   } else if (!backPayment.includes('.')) {
-      // Add '.00' if no dot and decimal places are present
+     
       setBackPayment(`${backPayment}.00`);
   }
 };
@@ -208,13 +207,13 @@ if (!isValid) {
   return false;
 }
   let hasError = false;
-  // Check backPayment conditions
+ 
   if (!earningsRegex.test(backPayment) || backPayment === "0.00" || backPayment === "") {
     setBackPaymentStartDateError(true);
     hasError = true;
   }
 
-  // Check date completion flags
+  
   if (!backPaymentStartDateCompleted) {
     setBackPaymentStartDateError(true);
     hasError = true;
@@ -248,7 +247,7 @@ if (!isValid) {
     hasError = true;
   }
 
-  // Check incapacity errors
+
   if (!incapacity.dofi && !incapacity.dosi) {
     setIncapacityError(true);
     hasError = true;
@@ -256,7 +255,7 @@ if (!isValid) {
     setIncapacityError(false);
   }
 
-  return !hasError; // Return true if no errors, false if there are errors
+  return !hasError;
 };
 
 const allValidFormats = (): boolean => {
@@ -520,7 +519,6 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
               onFocus={handleGrossEarningsFocus}
               className={`w-full border-0 rounded outline-none font-bold py-2 px-3 text-black-900 
                 `}
-                // ${grossEarningsInputError ? 'border-red-500' : ''}
                 style={{ maxWidth: "300px" }}
               placeholder="3,450.90"
               autoComplete='off'

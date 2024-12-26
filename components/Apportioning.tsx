@@ -73,24 +73,15 @@ const EzyApportioning = () => {
           top: document.documentElement.scrollHeight,
           behavior: 'smooth'
         });
-      }, 50); // 200 milliseconds delay
+      }, 50); 
     };
 
     const inputStyle: React.CSSProperties = {
-      color: isFirefoxBrowser ? 'black' : '', // Set text color to black if isFirefoxBrowser is true
-      maxWidth: "500px", // Example maxWidth, adjust as needed
+      color: isFirefoxBrowser ? 'black' : '', 
+      maxWidth: "500px", 
       fontWeight: "600"
     };
     
-    //original
-    // const [workPattern, setWorkPattern] = useState<PatternOfWork>(initialWorkPattern);
-    // const handleWorkPatternChange = (day: keyof PatternOfWork): void => {
-    //   setWorkPattern((prevWorkPattern) => ({
-    //     ...prevWorkPattern,
-    //     [day]: !prevWorkPattern[day],
-    //   }));
-    // };
-
     const isAllFieldCompleted = ():boolean => {
       if(isGrossStartDateCompleted && isGrossEndDateCompleted && pwcStartCompleted && pwcEndCompleted && isWPSelected && grossEarnings !== "0.00"){
         setDisplayAll(true);
@@ -109,14 +100,11 @@ const EzyApportioning = () => {
         setIsAllFieldEntered(false);
         setGrossEarningsInputError(false);
         setDisplayAll(false);
-        // Clear the input if the value 
         if (grossEarnings === '0.00' ||  grossEarnings === "NaN" || grossEarnings === "NaN.00" || grossEarnings === ".00" ) {
             setGrossEarnings('');
         } else if (grossEarnings.includes('.') && grossEarnings.endsWith('.00')) {
-            // Remove '.00' if the decimal part is '00'
             setGrossEarnings(grossEarnings.split('.')[0]);
         } else if (!grossEarnings.includes('.')) {
-            // Add '.00' if no dot and decimal places are present
             setGrossEarnings(`${grossEarnings}.00`);
         }
     };
@@ -296,8 +284,6 @@ const EzyApportioning = () => {
             ref={earningsRef}
             value={grossEarnings}
             onChange={(e) => onChange(e, setGrossEarnings, earningsRef, setGrossEarningsInputError)}
-            // onBlur={() => handleEarningsOnBlur(grossEarnings,setGrossEarnings,setGrossEarningsInputError, setIsGrossEarningCompleted)}
-            // onFocus={handleGrossEarningsFocus}
             className={`w-full border rounded py-2 px-3 text-black-900$ {grossEarningsInputError ? 'border-red-500' : ''}`}
             style={{ maxWidth: "300px" }}
           />

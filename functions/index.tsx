@@ -10,7 +10,7 @@ const differenceInDays = (date1: Date, date2: Date): number => {
   return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 };
 
-//can be used for paid end date or related to end date
+
 const isCurrentFinancialYear = (backPayEndDateRelateTo: Date, currentFinancialYear: Date, backPaymentPaidEndDate: Date): boolean => {
   return backPaymentPaidEndDate >= currentFinancialYear && backPayEndDateRelateTo >= currentFinancialYear ? true : backPaymentPaidEndDate >= currentFinancialYear ? true : false;
 }
@@ -103,14 +103,13 @@ const formatDate = (input: string, setError: Function) => {
   
 const validateDate = (input: string): boolean => {
   const exludeThisRegexFormat = /^(\d{1,2})\/(\d{1,2}|\d)\/(\d{3})$/;
-  // Check if input matches any of the excluded formats
+
   if (exludeThisRegexFormat.test(input)) {
       return false;
   }
   // Regular expression to match various valid date formats
   const dateRegex = /^(?:(\d{2})(\d{2})(\d{2}))|(?:(\d{2})(\d{2})(\d{4}))|(?:(\d{1,2})\/(\d{1,2})\/(\d{2}))|(?:(\d{2})\/(\d{2})\/(\d{2}))|(?:(\d{2})\/(\d{2})\/(\d{4}))|(?:(\d{1,2})\/(\d{2})\/(\d{4}))$/;
 
-  // Test if the input matches any of the specified date formats
   if (dateRegex.test(input)) {
     return true;
   }
@@ -123,9 +122,8 @@ const validateDateAndDisplay = (input: string, setDisplayAll: Function): boolean
   // Regular expression to match various date formats
   const dateRegex = /^((\d{2})(\d{2})(\d{2}))|((\d{2})(\d{2})(\d{4}))|((\d{1,2})\/(\d{1,2})\/(\d{2}))|((\d{2})\/(\d{2})\/(\d{2}))|((\d{2})\/(\d{2})\/(\d{4}))|((\d{1,2})\/(\d{2})\/(\d{4}))$/;
   
-  // Test if the input matches any of the specified date formats
   if (dateRegex.test(input)) {
-    return true; // Return true if the input is a valid date format
+    return true; 
   }else {
     setDisplayAll(false);
     return false;
@@ -196,12 +194,6 @@ const getFinDates_ = (startDateLTE: string, endDateLTE: string): { newFinancialY
     previousFinancialYearEnd = new Date(endYear - 1, 2, 31); // March 31st of the previous year
   }
 
-  // const formatDate = (date: Date): string => {
-  //   const dd = String(date.getDate()).padStart(2, '0');
-  //   const mm = String(date.getMonth() + 1).padStart(2, '0'); // January is 0!
-  //   const yyyy = date.getFullYear();
-  //   return `${dd}/${mm}/${yyyy}`;
-  // };
 
   const startPeriodDate = new Date(startYear, startMonth - 1, startDay);
   const previousFinancialYearEndDate = new Date(previousFinancialYearEnd);
@@ -219,7 +211,7 @@ const getFinDates_ = (startDateLTE: string, endDateLTE: string): { newFinancialY
   }
   
 }
-//should use start date LTE 
+
 const dateLessThanPreviousYear = (date: string): boolean => {
   const [day, month, year] = date.split("/").map(Number);
   const tempStartDateLTEDate = new Date(year, month - 1, day);
@@ -246,16 +238,12 @@ const getLesserDate = (date1:Date, date2: Date) => {
 }
 
 const replaceCommas = (value: string | null | undefined): string => {
-  // Check if value is a string
   if (typeof value === "string") {
-      // Replace all commas with an empty string
       return value.replace(/,/g, "");
   }
-  // Handle other cases, e.g., return an empty string or handle differently
+
   return "";
 };
-
-// Helper function to format date as dd/mm/yyyy
 
 const formatNumberWithCommas = (number: number): string => {
   return number.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -267,13 +255,10 @@ const formatResult = (num: number): string => {
 };
 
 const formatIntoNumber = (inputString: string): number | null => {
-  // Remove commas from the input string and convert to a floating-point number
   const numberValue = parseFloat(inputString.replace(/,/g, ''));
-  // Check if the conversion was successful
   if (isNaN(numberValue)) {
-    return null; // or you can return some default value or handle the error in your specific way
+    return null; 
   }
-  // Format the number with 2 decimal places
   const roundedNumber = Math.round(numberValue * 100) / 100;
   return roundedNumber;
 };
@@ -282,9 +267,8 @@ const numberWithCommas = (value: string): string => {
   const parts = value.split('.');
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
-  // If there is a decimal part, format it separately
   if (parts[1]) {
-    parts[1] = parts[1].slice(0, 2); // Limit decimal part to two digits
+    parts[1] = parts[1].slice(0, 2);
     return parts.join('.');
   }
 
@@ -378,23 +362,20 @@ const overlapDateRangeString = (grossStartDate: string, grossEndDate: string, pw
     tempObj = {
       start: formatDate(greater),
       end: formatDate(lesser)
-      // start: tempStringDateStart,
-      // end: tempStringDateEnd
+
     }
     return tempObj;
   }
   return tempObj;
 }
 
-//converts string numbers to Numbers and also removes commas
+
 const convertStringToNumber = (inputString: string): Number | null => {
-    // Remove all characters except digits and dot
+
   const stringWithoutNonDigits = inputString.replace(/[^\d.]/g, '');
-  // Use the Number() constructor to convert the string to a number
   const result = Number(stringWithoutNonDigits);
-  // Check if the conversion was successful
   if (isNaN(result)) {
-    return null; // or you can return some default value or handle the error in your specific way
+    return null; 
   }
 
   return result;
@@ -404,7 +385,7 @@ const convertStringToNumber = (inputString: string): Number | null => {
   const formatNumber = (input: string): string => {
     // Remove all non-digit characters
     const numericInput = input.replace(/\D/g, '');
-    // If the input is empty or non-numeric, return an empty string
+
     if (!numericInput) {
       return '';
     }
@@ -419,33 +400,25 @@ const convertStringToNumber = (inputString: string): Number | null => {
     return `${formattedNumber}.${decimalPart}`;
   };
   
-//This function is designed to format numeric input values. It removes existing commas, handles the case where there is a dot with one or two digits after it, and adds a dot with two zeros if there is no dot. It also adds commas for thousands separators.
+
   const formatInputValue = (inputValue: string):string => {
-    // Remove any existing commas from the value
+  
     inputValue = inputValue.replace(/,/g, '');
-    // Check if the value has a dot and handle accordingly
     if (inputValue.includes('.')) {
-        // If there is one digit after the dot, add a zero
         inputValue = inputValue.replace(/\.(\d)$/, '.$10');
-        // If there are two digits after the dot, keep it as is
         inputValue = inputValue.replace(/\.(\d{2})$/, '.$1');
-        // If there is no dot, add a dot and two zeros
     } else {
         inputValue += '.00';
     }
     // Add commas for thousands separator
     inputValue = inputValue.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-    // Return the formatted value
     return inputValue;
   }
 
   //This function is quite similar to formatInputValue. It sanitizes the input by removing non-numeric characters, removes existing commas, and handles the case where there is a dot with one or two digits after it. It adds a dot with two zeros if there are no digits after the dot. It also adds commas for thousands separators.
   const grossEarningInputValueConverted = (input: string):string => {
-    // Replace all characters except commas, dots, and numbers with an empty string
     const sanitizedInput = input.replace(/[^\d.,]/g, "");
-    // Remove any existing commas from the sanitized value
     let formattedValue = sanitizedInput.replace(/,/g, '');
-    // If input is ".00", replace with "0.00"
     if (formattedValue === '.00') {
         return '0.00';
     }
@@ -466,62 +439,53 @@ const convertStringToNumber = (inputString: string): Number | null => {
  };
 
  const validateAndSetGrossEarnings = (inputValue: string, setBackPayment: Function, setBackPaymentError: Function, 
-  // setBackPaymentStartDateError: Function
   ): void => {
-  // Only show an error if there is an input
   if (inputValue.trim().length > 0) {
-    // Assume you want to allow only numbers with a maximum of two decimal places
     const regex = /^\d+(\.\d{1,})?$/;
 
     if (!regex.test(inputValue)) {
       setBackPayment('');
       setBackPaymentError(true);
-      // setBackPaymentStartDateError(false);
-      // setGrossEarningsFormat(false);
       return;
     }
   }      
-  // Update state only if there is no error
   setBackPayment(inputValue);
   setBackPaymentError(false);
 };
 
 const handleEarningsOnBlur = (earnings: string, setEarnings: Function, setEarningsError: Function, setCompleted: Function, setEarningHasFocus: Function): void => {
-  // If earnings is empty, return early to avoid formatting
+
   if (earnings.trim() === "") {
-    setEarnings("");  // Set the empty value
-    setEarningsError(false);  // No error
-    setCompleted(false);  // Mark as incomplete
-    setEarningHasFocus(false);  // Remove focus
-    // if (setEarningHasFocus) {
-    // }
+    setEarnings("");  
+    setEarningsError(false);  
+    setCompleted(false); 
+    setEarningHasFocus(false);  
+
     return;
   }
 
-  // Existing logic to validate and format earnings
+
   validateAndSetGrossEarnings(earnings, setEarnings, setEarningsError);
 
   if (setEarningHasFocus) {
-    setEarningHasFocus(false);  // Remove focus
+    setEarningHasFocus(false); 
   }
 
-  let formattedInput = earnings.trim(); // Trim leading/trailing whitespaces
-  formattedInput = grossEarningInputValueConverted(formattedInput);  // Format input
+  let formattedInput = earnings.trim(); 
+  formattedInput = grossEarningInputValueConverted(formattedInput);  
 
   if (!formattedInput || !earningsRegex.test(formattedInput)) {
-    // If input is invalid, set default value
+    
     formattedInput = "";
     setEarnings(formattedInput);
     setCompleted(false);
     return;
   }
 
-  // If no decimal is present, append .00
   if (!formattedInput.includes(".")) {
     formattedInput += ".00";
   }
 
-  // Handle decimal places
   const decimalIndex = formattedInput.indexOf(".");
   const digitsAfterDecimal = formattedInput.length - decimalIndex - 1;
 
@@ -533,16 +497,13 @@ const handleEarningsOnBlur = (earnings: string, setEarnings: Function, setEarnin
     formattedInput = `${(+formattedInput).toFixed(2)}`;
   }
 
-  // Remove leading zeros
   if (/^0+\d[1-9]\.\d$/.test(formattedInput)) {
     formattedInput = formattedInput.replace(/^0+/, "");
   }
 
-  // Sanitize and format input
   let sanitizedGrossInputs = sanitizeInput(formattedInput);
   formattedInput = grossEarningInputValueConverted(sanitizedGrossInputs);
 
-  // Update state
   setEarningsError(false);
   setEarnings(formattedInput);
   setCompleted(true);
@@ -559,7 +520,7 @@ const beyondLTE_EndDate = (relatedStartDate: string, relatedEndDate: string, end
 const dateOnBlur = ({ dateValue, setDateValue, setDateError, setDateCompleted, setDisplayAll }: OnBlurDate) => {
   let isDateValid = validateDate(dateValue);
   if (!isDateValid) {
-    // If date is not valid, set error and prevent further display actions
+   
     setDateError(true);
     if(setDisplayAll){
       setDisplayAll(false);
@@ -575,18 +536,14 @@ const dateOnBlur = ({ dateValue, setDateValue, setDateError, setDateCompleted, s
     return;
   }
 
-  // Remove whitespaces and format the input
   const formattedInput = dateValue.replace(/\s/g, '');
   let dateFormatted = formatDate(formattedInput, setDateCompleted);
 
-  // Test if the input matches any of the specified formats
   if (dateRegex.test(dateFormatted)) {
-    // If it matches, set isComplete to true and update the input state
     setDateCompleted(true);
     setDateValue(dateFormatted);
     setDateError(false);
   } else {
-    // If it doesn't match, set error and prevent further display actions
     setDateCompleted(false);
     setDateError(true);
     if(setDisplayAll){
@@ -667,7 +624,6 @@ const countWorkDaysNew = (startDate: Date | string, endDate: Date | string, work
       } else if (workPattern[dayKey] === 'half') {
         count += 0.5;
       }
-      // Increment the date by one day
       currentDate.setDate(currentDate.getDate() + 1);
     }
     return count;
@@ -704,7 +660,6 @@ const countWorkDays = (startDate: Date | string, endDate: Date | string, workPat
       if (workPattern[dayKey]) {
         count++;
       }
-      // Increment the date by one day
       currentDate.setDate(currentDate.getDate() + 1);
     }
     return count;
@@ -713,9 +668,7 @@ const countWorkDays = (startDate: Date | string, endDate: Date | string, workPat
 };
 
 
-//tested all conditions is fine
 const isInsideSTEBool = (backPayRelateToEndDate: string | Date, startDateSTE: string | Date): boolean => {
-  // let day, month, year, daySTE, monthSTE, yearSTE, backPayDate, steDate;
   let backPayDate, steDate;
   if(typeof backPayRelateToEndDate === "string" && typeof startDateSTE === "string"){
     const [days, months, years] = backPayRelateToEndDate.split('/').map((part) => part.padStart(2, '0'));
@@ -737,9 +690,8 @@ const isInsideSTEBool = (backPayRelateToEndDate: string | Date, startDateSTE: st
     }
   }
 }
-//tested all conditions is fine
+
 const isOutsideLTEBool = (backPayRelateToStartDate: string | Date, startDateLTE: string | Date): boolean => {
-  // let day, month, year, daySTE, monthSTE, yearSTE, backPayDate, steDate;
   let backPayStartDate, lteDate;
   if(typeof backPayRelateToStartDate === "string" && typeof startDateLTE === "string"){
     const [days, months, years] = backPayRelateToStartDate.split('/').map((part) => part.padStart(2, '0'));
@@ -836,7 +788,7 @@ const convertToOriginalFormat = (date: string | Date): string => {
 
   if (date instanceof Date) {
     const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Months are zero-based
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); 
     const year = date.getFullYear().toString();
     return `${day}/${month}/${year}`;
   }
@@ -864,7 +816,7 @@ const convertToOriginalFormat = (date: string | Date): string => {
     }
   }
 };
-//gets financial end dates at start date so can put it to the date it relates to
+
 const getFinancialDates = (startDate: string, endDate: string): { financialStart: string; financialEnd: string } | null  => {
   const matchStart = startDate.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
   const matchEnd = endDate.match(/(\d{1,2})\/(\d{1,2})\/(\d{4})/);
@@ -935,7 +887,7 @@ const isAtLeastOneDaySelectedNew = (pattern: PatternOfWorkInput): boolean => {
   return Object.values(pattern).some((value) => value === 'full' || value === 'half');
 };
 
-//started off at the else at the bottom for isDHB outside and inside LTE and STE
+
 const getNeededObjects = (isDHB: boolean, workPattern: PatternOfWork, backPayEarnings: string, isOutsideLTE: boolean, isInsideLTE: boolean, isInsideSTE: boolean, startDateLTE: string, endDateLTE: string, startDateSTE: string, endDateSTE: string, beforeLTEStartDate: string, beforeSTEStartDate: string, backPayStartDateRelateTo: string, backPayEndDateRelateTo: string,  backPayPaidStartDate:string, backPayPaidEndDate: string, isDofi: boolean
 ): ResultType | null => {
 
@@ -948,11 +900,8 @@ const getNeededObjects = (isDHB: boolean, workPattern: PatternOfWork, backPayEar
   tempStartDateRelatedTo = createDateFormat(backPayStartDateRelateTo);
   tempEndDateRelatedTo = createDateFormat(backPayEndDateRelateTo);
 
-  // let tempSteDateStart = new Date(createDateFormat(startDateSTE));
-  // let tempSteDateEnd = new Date(createDateFormat(endDateSTE));
   let tempLteDateStart = new Date(createDateFormat(startDateLTE)); 
-  // let tempLteDateEnd = new Date(createDateFormat(endDateLTE)); 
-  // let tempSRT = new Date(tempEndDateRelatedTo);
+
 
   tempBackPayAmount = Number(backPayEarnings);
 
@@ -1070,7 +1019,6 @@ const getNeededObjects = (isDHB: boolean, workPattern: PatternOfWork, backPayEar
       finalOutsideLTECalculations = !isInsideSTE && outsideLTEDayCountsWP ? `${backPayStartDateRelateTo} — ${beforeLTEStartDate} ${outsideLTEDayCountsWP} days work pattern => ${outsideLTEDayCountsWP} x ${singleDayBackPay} = ${formatResult(Number(outsideLTEAmount.toFixed(2)))}` : "";
 
       finalOutsideLTECalculationsPartial = !isInsideSTE && outsideLTEDayCountsWP ? `${backPayStartDateRelateTo} — ${beforeLTEStartDate} ${outsideLTEDayCountsWP} days work pattern => ${outsideLTEDayCountsWP} x ${singleDayBackPay} = ` : "";
-      // insideSTE = {...insideSTE, insideSTEDayCountsWP, insideSTEDayCount,finalInsideSTECalculations, insideSTEAmount };
       insideLTE = {...insideLTE, beforeSTEStartDate, backPayEndDateRelateTo, insideLTEAmount, finalInsideLTECalculationsPartial,
         finalInsideLTECalculations, insideLTEDayCounts, insideLTEDayCountsWP };
       outsideLTE = {...outsideLTE, beforeLTEStartDate, outsideLTEDayCountsWP, outsideLTEDayCounts, finalOutsideLTECalculations, finalOutsideLTECalculationsPartial, outsideLTEAmount, backPayStartDateRelateTo, backPayEndDateRelateTo };
@@ -1355,7 +1303,6 @@ const getNeededObjects = (isDHB: boolean, workPattern: PatternOfWork, backPayEar
 
                 }
                 else if(!isInsideSTE && isInsideLTE && !isOutsideLTE){
-                  // completed
                   insideLTE = {...insideLTE, beforeSTEStartDate, backPayEndDateRelateTo, insideLTEAmount, finalInsideLTECalculations, insideLTEDayCounts, insideLTEDayCountsWP 
                   };
 
@@ -1363,7 +1310,7 @@ const getNeededObjects = (isDHB: boolean, workPattern: PatternOfWork, backPayEar
           
               }
               else if(!isDofi){
-                // inside LTE DOSI current financial year, not needed
+
               }
             
             }
@@ -1376,7 +1323,6 @@ const getNeededObjects = (isDHB: boolean, workPattern: PatternOfWork, backPayEar
                   countedDays = countDays(backPayStartDateRelateTo, backPayEndDateRelateTo);
                   countedWorkDays = countWorkDays(backPayStartDateRelateTo, backPayEndDateRelateTo, workPattern);
 
-                //here currently 22/7/2024 completed this part
                   tempInsideLTEPreviousFinancialYear = {...tempInsideLTEPreviousFinancialYear, insideLTEPrevFinYearCalculations: `${backPayStartDateRelateTo} — ${backPayEndDateRelateTo} ${countedWorkDays} work pattern days => $${singleDayBackPay} / ${countedWorkDays} = ${formatResult(Number(backPayNumber.toFixed(2)))}`,
                     insideLTEPrevFinYearCalculationsPartial: `${backPayStartDateRelateTo} — ${backPayEndDateRelateTo} ${countedWorkDays} work pattern days => $${singleDayBackPay} / ${countedWorkDays} = `,
                     insideLTEPrevFinYearDayCounts: countedDays,
@@ -1399,7 +1345,6 @@ const getNeededObjects = (isDHB: boolean, workPattern: PatternOfWork, backPayEar
                   amountInsideLTE = singleDayBackPay * countedWorkDays;
                   amountOutsideLTE = singleDayBackPay * outsideLTEWPDayCount;
 
-                //here currently 22/7/2024
                   tempInsideLTEPreviousFinancialYear = {...tempInsideLTEPreviousFinancialYear, insideLTEPrevFinYearCalculations: `${startDateLTE} — ${backPayEndDateRelateTo} ${countedWorkDays} work pattern days => $${singleDayBackPay} / ${countedWorkDays} = ${formatResult(Number(backPayNumber.toFixed(2)))}`,
                     insideLTEPrevFinYearCalculationsPartial: `${startDateLTE} — ${backPayEndDateRelateTo} ${countedWorkDays} work pattern days => $${singleDayBackPay} / ${countedWorkDays} = `,
                     insideLTEPrevFinYearDayCounts: countedDays,
@@ -1425,8 +1370,6 @@ const getNeededObjects = (isDHB: boolean, workPattern: PatternOfWork, backPayEar
   
                 }
                 else if( !isInsideLTE && isOutsideLTE ){
-                  //KHT not coming to this part
-                  // not in lTE only outsideLTE
                
                   countedDays = countDays(startDateLTE, backPayEndDateRelateTo);
                   countedWorkDays = countWorkDays(startDateLTE, backPayEndDateRelateTo, workPattern);
@@ -1673,7 +1616,7 @@ const getFinDates = (inputDate: string): { newFinancialYearStart: string, previo
     previousFinancialYearEnd: formatDate(previousFinancialYearEnd)
   };
 }
-//test to see if there is firefox
+
 const isFirefox = (): boolean => {
   return typeof navigator !== 'undefined' && navigator.userAgent.toLowerCase().indexOf('firefox') > -1;
 };
@@ -1706,7 +1649,6 @@ const isFirefox = (): boolean => {
     convertToOriginalFormat,
     getBeforeDate,
     getDateFormats,
-    // calculateDHB,
     isInsideSTEBool,
     isOutsideLTEBool,
     isInsideLTEBool,
@@ -1730,10 +1672,8 @@ const isFirefox = (): boolean => {
     formatFinancialDate,
     countDaysNew,
     countWorkDaysNew,
-    // getNeededObjectsNew,
     isAtLeastOneDaySelectedNew,
     differenceInDays,
-    // caculateBackpayNew,
     getCountedWorkDays,
     isCurrentFinancialYear
   }

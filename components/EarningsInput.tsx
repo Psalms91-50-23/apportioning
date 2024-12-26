@@ -31,7 +31,6 @@ const EarningsInput = ({
       setIsClicked(false);
     }
 
-// Conditionally define text color based on isFirefoxBrowser
   const inputStyle: React.CSSProperties = {
     color: isFirefoxBrowser ? 'black' : '', 
     maxWidth: "300px", 
