@@ -4,7 +4,6 @@ import { PatternOfWork, ResultType, IncapacityType, FinancialDateTypes, ValueSTE
 import functions from "../../functions";
 const { validateDate, handleEarningsOnBlur, getAllDates, earningsRegex, dateOnBlur, countDays, countWorkDays, convertToDateFormat, isInsideSTEBool, isOutsideLTEBool, calculateBackpay, isInsideLTEBool, isCurrentFinancialYear, getFinancialYears } = functions;
 import { DateInput, WorkPatternSelector, EarningsInput, DHBResult, NonDHBResult } from '../../components';
-import { set } from 'date-fns';
 
 const BackPayments = () => {
 
@@ -418,6 +417,8 @@ const { dofi, dosi } = incapacity;
 const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPeriod,
   previousFinancialYearStart, previousFinancialYearEnd, previousFinancialPeriod
  } = financialDates;
+
+
  const dates = { startDateSTE, endDateSTE, startDateLTE,endDateLTE };
   return (
     <div className='flex flex-col flex-1 min-h-screen max-width mb-10 relative'>
@@ -505,7 +506,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
       />
       <div className="flex flex-col">
         <div className="flex flex-col w-full mb-4" style={{ maxWidth: "300px" }}>
-          <label htmlFor="grossEarnings" className="block text-black-900 text-sm font-bold mb-2">
+          <label htmlFor="grossEarnings" className="block text-black-900 text-md font-bold mb-2">
             Backpayment Gross Earnings
           </label>
           <div className={`flex flex-row bg-white ${backPayHasFocus ? 'border-4 border-black rounded' : 'border-transparent border-4 rounded '}`} style={{ maxWidth: "240px" }}>
@@ -728,7 +729,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
           </div>
         </div>    
       </div>
-      <div className='flex mb-5 py-2 max-width-container'>
+      <div className='flex mb-5 py-2 pr-5 max-width-container'>
         <button 
           className="font-bold italic text-lg w-full p-3 rounded-md bg-green-500 hover:bg-green-700 hover:text-white"
           onClick={calculateApportionBackPay}

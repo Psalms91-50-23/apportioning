@@ -138,7 +138,6 @@ const formatFinancialDate = (date: Date): string => {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
-
 const getFinancialYears = (dateString: string): FinancialDateTypes  => {
   const [day, month, year] = dateString.split('/').map(Number);
   // const inputDate = new Date(year, month - 1, day);
@@ -149,19 +148,22 @@ const getFinancialYears = (dateString: string): FinancialDateTypes  => {
   let previousFinancialYearEnd: Date;
 
   if (month < 4) { // For dates in January, February, and March
-    currentFinancialYearStart = new Date(year - 1, 3, 1); // 01/04/yyyy-1
+
+    currentFinancialYearStart = new Date(year - 1 , 3, 1); // 01/04/yyyy-1
     currentFinancialYearEnd = new Date(year, 2, 31); // 31/03/yyyy
     previousFinancialYearStart = new Date(year - 2, 3, 1); // 01/04/yyyy-2
     previousFinancialYearEnd = new Date(year - 1, 2, 31); // 31/03/yyyy-1
   } else { // For dates in April and later
-    currentFinancialYearStart = new Date(year, 3, 1); // 01/04/yyyy
-    currentFinancialYearEnd = new Date(year + 1, 2, 31); // 31/03/yyyy+1
-    previousFinancialYearStart = new Date(year - 1, 3, 1); // 01/04/yyyy-1
-    previousFinancialYearEnd = new Date(year, 2, 31); // 31/03/yyyy
+
+    currentFinancialYearStart = new Date(year - 1, 3, 1); // 01/04/yyyy
+    currentFinancialYearEnd = new Date(year, 2, 31); // 31/03/yyyy+1
+    previousFinancialYearStart = new Date(year - 2, 3, 1); // 01/04/yyyy-1
+    previousFinancialYearEnd = new Date(year - 1, 2, 31); // 31/03/yyyy
   }
 
-  const currentFinancialPeriod = currentFinancialYearStart.getFullYear().toString();
-  const previousFinancialPeriod = previousFinancialYearStart.getFullYear().toString();
+
+  const currentFinancialPeriod = currentFinancialYearEnd.getFullYear().toString();
+  const previousFinancialPeriod = previousFinancialYearEnd.getFullYear().toString();
 
   return {
     currentFinancialYearStart: formatFinancialDate(currentFinancialYearStart),

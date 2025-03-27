@@ -290,7 +290,7 @@ const page = () => {
       </div>
       <div className="flex flex-col">
         <div className="flex flex-col w-full mb-4" style={{ maxWidth: "300px" }}>
-          <label htmlFor="grossEarnings" className="block text-black-900 text-sm font-bold mb-2">
+          <label htmlFor="grossEarnings" className="block text-black-900 text-md font-bold mb-2">
             Gross Earnings
           </label>
           <div className={`flex flex-row bg-white ${earningHasFocus ? 'border-4 border-black rounded-md' : 'border-transparent border-4 rounded-md'}`} style={{ maxWidth: "240px" }}>
