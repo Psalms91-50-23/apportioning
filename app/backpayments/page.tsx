@@ -422,7 +422,8 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
  const dates = { startDateSTE, endDateSTE, startDateLTE,endDateLTE };
   return (
     <div className='flex flex-col flex-1 min-h-screen max-width mb-10 relative'>
-      <p className='text-2xl font-bold italic mb-5'>Back Payment Apportioning</p>
+      <p className='text-2xl font-bold italic mb-5'>Back Payment/Bonuses Apportioning</p>
+      <p className='font-bold text-lg'>This also works for Bonuses, but choose <span className='font-bold text-lg underline'>Non-DHB</span> as the calculation is the same type and swap backpay text for Bonuses where applicable in the text if copying directly 😁</p>
       <div className="flex flex-col">
         <div className="flex flex-col space-x-5">
         </div>
@@ -729,7 +730,7 @@ const { currentFinancialYearStart,currentFinancialYearEnd, currentFinancialPerio
           </div>
         </div>    
       </div>
-      <div className='flex mb-5 py-2 pr-5 max-width-container'>
+      <div className='flex mb-5 py-2 max-width-container'>
         <button 
           className="font-bold italic text-lg w-full p-3 rounded-md bg-green-500 hover:bg-green-700 hover:text-white"
           onClick={calculateApportionBackPay}
